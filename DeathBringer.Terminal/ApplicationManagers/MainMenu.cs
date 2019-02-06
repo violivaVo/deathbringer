@@ -11,7 +11,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             //segue quello che voglio fare con ciò
 
             //visualizzo a terminale l'elenco delle funzione del mio programma
-            Console.WriteLine("*****");
+            Console.WriteLine("******");
             Console.WriteLine("*DeathBringer - Menu Principale *");
             Console.WriteLine("*********************************");
             Console.WriteLine();

@@ -61,53 +61,91 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void ModificaCategoria()
         {
+            Console.WriteLine("[ ---------------------------- ]");
+            Console.WriteLine("[ Modifica categoria esistente ]");
 
+            Console.Write("Inserisci id categoria da modificare: ");
+            Categoria categoriaDaProcessare = ReadCategoriaFromConsole();
+
+            //Se non esiste, non faccio null
+            if (categoriaDaProcessare == null)
+            {
+                return;
+            }
+            else
+            {
+                //Richiedo il nuovo nomoe
+                Console.Write(" => nuovo nome: ");
+                var nuovoNome = Console.ReadLine();
+                Console.Write(" => nuova desc: ");
+                var nuovaDesc = Console.ReadLine();
+
+                //Assegnamento ad oggetto esistente
+                categoriaDaProcessare.Nome = nuovoNome;
+                categoriaDaProcessare.Descrizione = nuovaDesc;
+
+                Console.WriteLine("La modifica è stata fatta!");
+            }
         }
+
 
 
         private static void EliminaCategoria()
         {
-            Console.WriteLine("[Elimina categoria esistente]");
+            Console.WriteLine("[ ---------------------------- ]");
+            Console.WriteLine("[ Elimina categoria esistente ]");
 
             Console.Write("Inserisci id categoria da eliminare: ");
-            var id = Console.ReadLine();
+            Categoria categoriaDaProcessare = ReadCategoriaFromConsole();
 
-            //non ti puoi fidare del'utente, potrebbe mette qualcosa che non va bene(ma molto molto non bene)
-
-            //predispongo una variabile per il valore intero
-            int idIntero;
-            //tento di convertire la stringa a intero e se possibile inserisco il valore intero in idIntero
-            //se la conversione riesce ottengo "true" dalla funz TryParse, altrimenti false
-            if (!int.TryParse(id, out idIntero)) //questo tryparse cerca di capire cosa stia nell'int, quindi dà true o false a seconda che trovi idIntero o meno
+            //Rimozione della categoria dalla lista
+            if (categoriaDaProcessare == null)
             {
-                //mostro messaggio utente
-                Console.Write("Il valore inserito non è valido!");
-                return;    //quindi non posso andare avanti
+                return;
             }
-
             else
             {
-                Categoria categoriaEsistente = ApplicationStorage.Categorie
-                .SingleOrDefault(e => e.Id == idIntero);
+                ApplicationStorage.Categorie.Remove(categoriaDaProcessare);
+                Console.WriteLine("L'elemento è stato cancellato!!!");
+            }
+        }
 
-                //se il numero è valido ma non ho trovato l'elemento
+        private static Categoria ReadCategoriaFromConsole()
+        {
+            //Richiedo id da console
+            var id = Console.ReadLine();
+
+            //Predispongo una variabile per il valore intero
+            int idIntero;
+
+            //Tento di convertire la stringa a intero e, se possibile
+            //inserisco il valore intero in "idIntero". Se la conversione
+            //riesce, ottengo "true" dalla funzione "TryParse", altrimenti false
+            if (!int.TryParse(id, out idIntero))
+            {
+                //Mostro messaggio utente
+                Console.WriteLine("Il valore inserito non è valido!");
+                return null;
+            }
+            else
+            {
+                //Cerco l'elemento in elenco
+                Categoria categoriaEsistente = ApplicationStorage.Categorie
+                    .SingleOrDefault(categoriaCorrente => categoriaCorrente.Id == idIntero);
+
                 if (categoriaEsistente == null)
                 {
-                    Console.Write("Nessun elemento trovato");
-                    return;
+                    Console.WriteLine("L'elemento richiesto non è stato trovato!");
+                    return null;
                 }
                 else
                 {
-                    ApplicationStorage.Categorie.Remove(categoriaEsistente);  //il Remove prende come argomento un tipo Categoria
-                    Console.Write("L'elemento è stato cancellato!");
+                    Console.WriteLine("L'elemento richiesto esiste!");
+                    return categoriaEsistente;
                 }
             }
         }
 
-        private static void CancellaCategoria()
-        {
-            throw new NotImplementedException();
-        }
 
 
         private static void ElencoCategorie()   //lo definisce private, perché a priori non è necessario che sia public o internal, viene richiamato solo qui sopra

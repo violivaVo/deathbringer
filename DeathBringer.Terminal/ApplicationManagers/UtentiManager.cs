@@ -1,7 +1,17 @@
 ﻿using DeathBringer.Terminal.Data;
+<<<<<<< HEAD
 using DeathBringer.Terminal.Entities;
 using System;
 using System.Linq;
+=======
+<<<<<<< HEAD
+=======
+using DeathBringer.Terminal.Entities;
+>>>>>>> ca94fb95179ee032f8aeea94e4af9ff38c19873a
+using System;
+using System.Collections.Generic;
+using System.Text;
+>>>>>>> 1b4163aedf76d34105d8b5a7a6814fa5cd361ce1
 
 namespace DeathBringer.Terminal.ApplicationManagers
 {
@@ -59,13 +69,83 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void Login()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("---- Inserisce il tuo username :");
+            String UserNameIn = Console.ReadLine();
+            Console.WriteLine("---- Inserisce il tuo password :");
+            String PasswordIn = Console.ReadLine();
+            if ((UserNameIn == null) || (PasswordIn == null))
+            {
+                Console.WriteLine("Dati entrati non validi");
+            }else
+            {
+                for(int i = 0; i < ApplicationStorage.Utenti.Count; i++)
+                {
+                    if((ApplicationStorage.Utenti[i].Username == UserNameIn) && (ApplicationStorage.Utenti[i].Password == PasswordIn))
+                    {
+                        Console.WriteLine("*** successo dell'autenticazione *****");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("!!!!!! errore di autenticazione : verifica i tue dati!!!!");
+                        Console.ReadLine();
+                    }
+                }
+            }
+            Console.WriteLine();
+
         }
 
         private static void CreaUtente()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Creazione nuovo utente");
+            Console.WriteLine(" => Nome : ");
+            var nome = Console.ReadLine();
+            Console.WriteLine(" => Cognome : ");
+            var cognome = Console.ReadLine();
+
+           
+            Utente cat = new Utente //invece di mettere parentesi tonde, metto parentesi graffe e ad ogni variabile assegno quello che voglio, separate da virgole, e 
+                                           //; dopo la graffa
+            {
+                Id = GeneraNuovoUtente(), //metodo per poter richiamarlo quando modifico
+                Nome = nome,
+                Cognome = cognome
+            };
+
+            ApplicationStorage.Utenti.Add(cat);
+
+            Console.WriteLine($"Inserito nuovo utente {cat.Nome}!"); //oppure concateni, ya know, ma conviene questo modo moderno
+            Console.ReadLine();
         }
+
+        private static int GeneraNuovoUtente()
+        {
+            //verifico quanti ce ne sono in archivio
+            var elementiEsistenti = ApplicationStorage.Utenti.Count;
+            //se non ne ho, il valore base è 1
+            if (elementiEsistenti == 0)
+            {
+                return 1;
+            }
+            else
+            {   //devo cercare l'elemento con Id maggiore
+                int idMaggiore = 0;
+                for (var i = 0; i < ApplicationStorage.Utenti.Count; i++)
+                {
+                    if (ApplicationStorage.Utenti[i].Id > idMaggiore)
+                    {
+                        idMaggiore = ApplicationStorage.Utenti[i].Id;
+                    }
+
+                }
+
+                return idMaggiore + 1;
+                // al posto del for qui sopra avrei potuto mette -> idMaggiore = ApplicationStorage.Categorie.Max(elementiEsistenti e => e.Id); (AVENDO MESSO SYSTEM LINQ)
+                //questa cosa usa LINQ (??)
+            }
+        }
+    
 
         private static void ModificaUtente()
         {

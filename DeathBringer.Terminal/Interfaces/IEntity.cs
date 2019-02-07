@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DeathBringer.Terminal.Interfaces
 {
-    interface IEntity // per convenzione si mette una I maiuscola iniziale; inoltre non entità perché accentati no
+    public interface IEntity // per convenzione si mette una I maiuscola iniziale; inoltre non entità perché accentati no
     {
         int Id { get; set; }
         DateTime DataCreazioneRecord { get; set; }

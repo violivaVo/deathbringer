@@ -1,12 +1,10 @@
 ﻿using DeathBringer.Terminal.Data;
-<<<<<<< HEAD
-=======
 using DeathBringer.Terminal.Entities;
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
->>>>>>> 1b4163aedf76d34105d8b5a7a6814fa5cd361ce1
 
 namespace DeathBringer.Terminal.ApplicationManagers
 {

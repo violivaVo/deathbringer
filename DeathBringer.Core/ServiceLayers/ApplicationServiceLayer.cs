@@ -11,6 +11,10 @@ namespace DeathBringer.Core.ServiceLayers
 {
     public class ApplicationServiceLayer
     {
+        /// <summary>
+        /// Recupera lista delle categorie
+        /// </summary>
+        /// <returns></returns>
         public IList<Categoria> FetchCategorie()
         {
             //Ritorno semplicemente il contenuto dell'archivio
@@ -20,6 +24,11 @@ namespace DeathBringer.Core.ServiceLayers
                 .ToList();
         }
 
+        /// <summary>
+        /// Recupera una singla categoria per id
+        /// </summary>
+        /// <param name="id">Id categoria</param>
+        /// <returns>Ritorna la categoria o null</returns>
         public Categoria GetCategoria(int id)
         {
             //Validazione argomento
@@ -31,6 +40,12 @@ namespace DeathBringer.Core.ServiceLayers
                 .SingleOrDefault(e => e.Id == id);
         }
 
+        /// <summary>
+        /// Inserisce una categoria e ritorna le validazioni
+        /// </summary>
+        /// <param name="name">Nome</param>
+        /// <param name="description">Descrizione</param>
+        /// <returns>Ritorna lista di validazioni</returns>
         public IList<ValidationResult> InsertCategoria(string name, string description)
         {
             //Preparo la lista vuota che è simbolo di successo dell'operazione
@@ -47,7 +62,7 @@ namespace DeathBringer.Core.ServiceLayers
             //Creazione dell'oggetto (classe)
             var nuovaCategoria = new Categoria
             {
-                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Utente), 
+                Id = GeneratoreId.GeneraNuovoIdentificatore(ApplicationStorage.Utente), 
                 Nome = name, 
                 Descrizione = description, 
                 DataCreazioneRecord = DateTime.Now, 
@@ -63,15 +78,50 @@ namespace DeathBringer.Core.ServiceLayers
             return validations;
         }
 
+        /// <summary>
+        /// Modifica una categoria esistente e ritorna le validazioni
+        /// </summary>
+        /// <param name="id">Id categoria</param>
+        /// <param name="name">Nome</param>
+        /// <param name="description">Descrizione</param>
+        /// <returns>Ritorna lista di validazioni</returns>
         public IList<ValidationResult> UpdateCategoria(int id, string name, string description)
         {
-            //Quando cerco non ho nulla
+            //Preparo la lista vuota che è simbolo di successo dell'operazione
+            IList<ValidationResult> validations = new List<ValidationResult>();
 
-            //Se i campi richiesti non sono compilati
+            //Recupero della categoria esistente
+            var categoriaEsistente = GetCategoria(id);
 
-            throw new NotImplementedException();
+            //Se non esiste, messaggio
+            if (categoriaEsistente == null)
+            {
+                //Aggiungo il messaggio con la spiegazione ed esco
+                validations.Add(new ValidationResult($"La categoria {id} non esiste"));
+                return validations;
+            }
+
+            //Se il nome (che è OBBLIGATORIO) è vuoto o nullo, esco
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                //Aggiungo il messaggio con la spiegazione ed esco
+                validations.Add(new ValidationResult($"Il nome è obbligatorio"));
+                return validations;
+            }
+
+            //Aggiornamento entità
+            categoriaEsistente.Nome = name;
+            categoriaEsistente.Descrizione = description;
+
+            //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
+            return validations;
         }
 
+        /// <summary>
+        /// Cancella una categoria esistente e ritorna le validazioni
+        /// </summary>
+        /// <param name="id">Id della categoria</param>
+        /// <returns>Ritorna lista di validazioni</returns>
         public IList<ValidationResult> DeleteCategoria(int id)
         {
             //Cerco l'elemento in archivio

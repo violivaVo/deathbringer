@@ -1,6 +1,5 @@
 ﻿using DeathBringer.Terminal.Data;
 using DeathBringer.Terminal.Entities;
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -231,8 +230,27 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void EliminaUtente()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("[ ---------------------------- ]");
+            Console.WriteLine("[ Elimina utente esistente ]");
+
+            Console.Write("Inserisci id utente da eliminare: ");
+            Utente utenteDaProcessare = ReadUtenteFromConsole();
+
+            //Rimozione della categoria dalla lista
+            if (utenteDaProcessare == null)
+            {
+                return;
+            }
+            else
+            {
+                ApplicationStorage.Utenti.Remove(utenteDaProcessare);
+                Console.WriteLine("L'utente è stato cancellato!!!");
+            }
         }
+
+        
+
+       
 
         private static void ElencoUtenti()
         {

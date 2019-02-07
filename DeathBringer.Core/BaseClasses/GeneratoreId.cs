@@ -1,4 +1,5 @@
 ﻿using DeathBringer.Terminal.Data;
+using DeathBringer.Terminal.Entities;
 using DeathBringer.Terminal.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -36,5 +37,7 @@ namespace DeathBringer.Terminal.BaseClasses
                 //questa cosa usa LINQ (??)
             }
         }
+
+        
     }
 }

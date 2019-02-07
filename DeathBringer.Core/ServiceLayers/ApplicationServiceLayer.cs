@@ -25,7 +25,7 @@ namespace DeathBringer.Core.ServiceLayers
         }
 
         /// <summary>
-        /// Recupera una singla categoria per id
+        /// Recupera una singola categoria per id
         /// </summary>
         /// <param name="id">Id categoria</param>
         /// <returns>Ritorna la categoria o null</returns>

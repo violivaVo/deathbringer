@@ -58,8 +58,27 @@ namespace DeathBringer.Core.ServiceLayers
 
         public IList<ValidationResult> UpdateProdotto(int id, string name, string description)
         {
-            throw new NotImplementedException();
+            IList<ValidationResult> validations = new List<ValidationResult>();
+
+            var Prodotto = GetProdotto(id);
+
+            if (Prodotto == null)
+            {
+                validations.Add(new ValidationResult("Il codice del prodotto inserito non è valido !"));
+                return validations;
+            }
+            else if (string.IsNullOrWhiteSpace(name))
+            {
+                validations.Add(new ValidationResult("Il nome non è valido !"));
+                return validations;
+            }
+
+            Prodotto.Nome = name;
+            Prodotto.Descrizione = description;
+
+            return validations;
         }
+
 
         public IList<ValidationResult> DeleteProdotto(int id)
         {

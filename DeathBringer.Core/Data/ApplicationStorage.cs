@@ -12,4 +12,9 @@ namespace DeathBringer.Terminal.Data
         public static IList<Prodotto> Prodotti = new List<Prodotto>();
         public static IList<Utente> Utenti = new List<Utente>();
     }
-}
+   
+       
+    }
+
+  
+

@@ -1,9 +1,8 @@
-﻿using DeathBringer.Terminal.BaseClasses;
-using DeathBringer.Terminal.Data;
+﻿using DeathBringer.Terminal.Data;
 using DeathBringer.Terminal.Entities;
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 namespace DeathBringer.Terminal.ApplicationManagers
@@ -96,23 +95,12 @@ namespace DeathBringer.Terminal.ApplicationManagers
             var nome = Console.ReadLine();
             Console.WriteLine(" => Cognome : ");
             var cognome = Console.ReadLine();
-            Console.WriteLine("Email");
-            var email = Console.ReadLine();
-            Console.WriteLine("Indirizzo");
-            var indirizzo = Console.ReadLine();
-            Console.WriteLine("Civico");
-            var civico = Console.ReadLine();
-            Console.WriteLine("Cap");
-            var cap = Console.ReadLine();
-            Console.WriteLine("Citta");
-            var Citta = Console.ReadLine();
-           
 
+           
             Utente cat = new Utente //invece di mettere parentesi tonde, metto parentesi graffe e ad ogni variabile assegno quello che voglio, separate da virgole, e 
-                                    //; dopo la graffa
+                                           //; dopo la graffa
             {
-                //Id = GeneraNuovoUtente(), //metodo per poter richiamarlo quando modifico
-                Id = GeneratoreId.GeneraNuovoIdentificatore<Utente>(ApplicationStorage.Utenti),
+                Id = GeneraNuovoUtente(), //metodo per poter richiamarlo quando modifico
                 Nome = nome,
                 Cognome = cognome
             };
@@ -123,32 +111,32 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.ReadLine();
         }
 
-        //private static int GeneraNuovoUtente()
-        //{
-        //    //verifico quanti ce ne sono in archivio
-        //    var elementiEsistenti = ApplicationStorage.Utenti.Count;
-        //    //se non ne ho, il valore base è 1
-        //    if (elementiEsistenti == 0)
-        //    {
-        //        return 1;
-        //    }
-        //    else
-        //    {   //devo cercare l'elemento con Id maggiore
-        //        int idMaggiore = 0;
-        //        for (var i = 0; i < ApplicationStorage.Utenti.Count; i++)
-        //        {
-        //            if (ApplicationStorage.Utenti[i].Id > idMaggiore)
-        //            {
-        //                idMaggiore = ApplicationStorage.Utenti[i].Id;
-        //            }
+        private static int GeneraNuovoUtente()
+        {
+            //verifico quanti ce ne sono in archivio
+            var elementiEsistenti = ApplicationStorage.Utenti.Count;
+            //se non ne ho, il valore base è 1
+            if (elementiEsistenti == 0)
+            {
+                return 1;
+            }
+            else
+            {   //devo cercare l'elemento con Id maggiore
+                int idMaggiore = 0;
+                for (var i = 0; i < ApplicationStorage.Utenti.Count; i++)
+                {
+                    if (ApplicationStorage.Utenti[i].Id > idMaggiore)
+                    {
+                        idMaggiore = ApplicationStorage.Utenti[i].Id;
+                    }
 
-        //        }
+                }
 
-        //        return idMaggiore + 1;
-        //        // al posto del for qui sopra avrei potuto mette -> idMaggiore = ApplicationStorage.Categorie.Max(elementiEsistenti e => e.Id); (AVENDO MESSO SYSTEM LINQ)
-        //        //questa cosa usa LINQ (??)
-        //    }
-        //}
+                return idMaggiore + 1;
+                // al posto del for qui sopra avrei potuto mette -> idMaggiore = ApplicationStorage.Categorie.Max(elementiEsistenti e => e.Id); (AVENDO MESSO SYSTEM LINQ)
+                //questa cosa usa LINQ (??)
+            }
+        }
     
 
         private static void ModificaUtente()
@@ -269,8 +257,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
                     $"Indirizzo: {UtentiRecuperatiDallaMemoria[i].Indirizzo}, " +
                     $"Civico: {UtentiRecuperatiDallaMemoria[i].Civico}, " +
                     $"Citta: {UtentiRecuperatiDallaMemoria[i].Citta}, " +
-                    $"Cap: {UtentiRecuperatiDallaMemoria[i].Cap}, " +
-                    $"id->{UtentiRecuperatiDallaMemoria[i].Id}"
+                    $"Cap: {UtentiRecuperatiDallaMemoria[i].Cap}, "
                     );
             }
         // visualizza i nomi, Cognome, Email, Indirizzo, Civico, Citta e Cap 

@@ -17,6 +17,9 @@ namespace DeathBringer.Core.ServiceLayers
         /// <returns></returns>
         public IList<Categoria> FetchCategorie()
         {
+            //Carico dal disco
+            ApplicationStorage.LoadCategorie();
+
             //Ritorno semplicemente il contenuto dell'archivio
             return ApplicationStorage.Categorie
                 .OrderBy(e => e.Nome)
@@ -34,6 +37,9 @@ namespace DeathBringer.Core.ServiceLayers
             //Validazione argomento
             if (id <= 0)
                 return null;
+
+            //Carico dal disco
+            ApplicationStorage.LoadCategorie();
 
             //Prendo l'unico elemento con id specificato
             return ApplicationStorage.Categorie
@@ -59,6 +65,9 @@ namespace DeathBringer.Core.ServiceLayers
                 return validations;
             }
 
+            //Carico dal disco
+            ApplicationStorage.LoadCategorie();
+
             //Creazione dell'oggetto (classe)
             var nuovaCategoria = new Categoria
             {
@@ -73,6 +82,9 @@ namespace DeathBringer.Core.ServiceLayers
 
             //Aggiunta nella lista generale
             ApplicationStorage.Categorie.Add(nuovaCategoria);
+
+            //Salvo sul disco
+            ApplicationStorage.SaveCategorie();
 
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;
@@ -89,6 +101,9 @@ namespace DeathBringer.Core.ServiceLayers
         {
             //Preparo la lista vuota che è simbolo di successo dell'operazione
             IList<ValidationResult> validations = new List<ValidationResult>();
+
+            //Carico dal disco
+            ApplicationStorage.LoadCategorie();
 
             //Recupero della categoria esistente
             var categoriaEsistente = GetCategoria(id);
@@ -113,6 +128,9 @@ namespace DeathBringer.Core.ServiceLayers
             categoriaEsistente.Nome = name;
             categoriaEsistente.Descrizione = description;
 
+            //Salvo sul disco
+            ApplicationStorage.SaveCategorie();
+
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;
         }
@@ -124,6 +142,9 @@ namespace DeathBringer.Core.ServiceLayers
         /// <returns>Ritorna lista di validazioni</returns>
         public IList<ValidationResult> DeleteCategoria(int id)
         {
+            //Carico dal disco
+            ApplicationStorage.LoadCategorie();
+
             //Cerco l'elemento in archivio
             var categoriaEsistente = GetCategoria(id);
 
@@ -140,6 +161,9 @@ namespace DeathBringer.Core.ServiceLayers
 
             //Rimozione della categoria dallo storage
             ApplicationStorage.Categorie.Remove(categoriaEsistente);
+
+            //Salvo sul disco
+            ApplicationStorage.SaveCategorie();
 
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;

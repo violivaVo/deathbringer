@@ -1,4 +1,5 @@
-﻿using DeathBringer.Terminal.BaseClasses;
+﻿using DeathBringer.Core.ServiceLayers;
+using DeathBringer.Terminal.BaseClasses;
 using DeathBringer.Terminal.Data;
 using DeathBringer.Terminal.Entities;
 using System;
@@ -177,20 +178,25 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.WriteLine(" => descrizione : ");
             var descr = Console.ReadLine();
 
+            //Istanzio il layer di lavoro
+            ApplicationServiceLayer layer = new ApplicationServiceLayer();
 
-            //creazione categoria
-            Categoria cat = new Categoria  //invece di mettere parentesi tonde, metto parentesi graffe e ad ogni variabile assegno quello che voglio, separate da virgole, e 
-                                           //; dopo la graffa
+            //Creazione categorie
+            var validazioni = layer.InsertCategoria(nome, descr);
 
+            //Se non ho errori, confermo
+            if (validazioni.Count == 0)
             {
-                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Categorie), //metodo per poter richiamarlo quando modifico
-                Nome = nome,
-                Descrizione = descr
-            };
+                //Visualizza conferma
+                Console.WriteLine($"Creata categoria {nome}!");
+                return;
+            }
 
-            ApplicationStorage.Categorie.Add(cat);
+            //Itero i messaggi di errore
+            foreach (var current in validazioni)
+                Console.WriteLine($"Errore: {current.ErrorMessage}");
 
-            Console.WriteLine($"Creata categoria {cat.Nome}!"); //oppure concateni, ya know, ma conviene questo modo moderno
+            //Resto in attesa
             Console.ReadLine();
         }
     }

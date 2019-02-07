@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DeathBringer.Terminal.Data;
+using DeathBringer.Terminal.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -63,8 +65,54 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void CreaUtente()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Creazione nuovo utente");
+            Console.WriteLine(" => Nome : ");
+            var nome = Console.ReadLine();
+            Console.WriteLine(" => Cognome : ");
+            var cognome = Console.ReadLine();
+
+           
+            Utente cat = new Utente //invece di mettere parentesi tonde, metto parentesi graffe e ad ogni variabile assegno quello che voglio, separate da virgole, e 
+                                           //; dopo la graffa
+            {
+                Id = GeneraNuovoUtente(), //metodo per poter richiamarlo quando modifico
+                Nome = nome,
+                Cognome = cognome
+            };
+
+            ApplicationStorage.Utenti.Add(cat);
+
+            Console.WriteLine($"Inserito nuovo utente {cat.Nome}!"); //oppure concateni, ya know, ma conviene questo modo moderno
+            Console.ReadLine();
         }
+
+        private static int GeneraNuovoUtente()
+        {
+            //verifico quanti ce ne sono in archivio
+            var elementiEsistenti = ApplicationStorage.Utenti.Count;
+            //se non ne ho, il valore base è 1
+            if (elementiEsistenti == 0)
+            {
+                return 1;
+            }
+            else
+            {   //devo cercare l'elemento con Id maggiore
+                int idMaggiore = 0;
+                for (var i = 0; i < ApplicationStorage.Utenti.Count; i++)
+                {
+                    if (ApplicationStorage.Utenti[i].Id > idMaggiore)
+                    {
+                        idMaggiore = ApplicationStorage.Utenti[i].Id;
+                    }
+
+                }
+
+                return idMaggiore + 1;
+                // al posto del for qui sopra avrei potuto mette -> idMaggiore = ApplicationStorage.Categorie.Max(elementiEsistenti e => e.Id); (AVENDO MESSO SYSTEM LINQ)
+                //questa cosa usa LINQ (??)
+            }
+        }
+    
 
         private static void ModificaUtente()
         {

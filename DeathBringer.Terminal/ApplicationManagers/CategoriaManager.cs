@@ -106,7 +106,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             }
             else
             {
-                ApplicationStorage.Categorie.Remove(categoriaDaProcessare);
+                ApplicationStorage.Utente.Remove(categoriaDaProcessare);
                 Console.WriteLine("L'elemento è stato cancellato!!!");
             }
         }
@@ -131,7 +131,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             else
             {
                 //Cerco l'elemento in elenco
-                Categoria categoriaEsistente = ApplicationStorage.Categorie
+                Categoria categoriaEsistente = ApplicationStorage.Utente
                     .SingleOrDefault(categoriaCorrente => categoriaCorrente.Id == idIntero);
 
                 if (categoriaEsistente == null)
@@ -152,7 +152,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
         private static void ElencoCategorie()   //lo definisce private, perché a priori non è necessario che sia public o internal, viene richiamato solo qui sopra
         {
             //recupera quelle in memoria
-            var categorieRecuperateDallaMemoria = ApplicationStorage.Categorie;
+            var categorieRecuperateDallaMemoria = ApplicationStorage.Utente;
 
 
             // cicla sulle categorie in memoria
@@ -183,12 +183,12 @@ namespace DeathBringer.Terminal.ApplicationManagers
                                            //; dopo la graffa
  
             {
-                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Categorie), //metodo per poter richiamarlo quando modifico
+                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Utente), //metodo per poter richiamarlo quando modifico
                 Nome = nome,
                 Descrizione = descr
             };
 
-            ApplicationStorage.Categorie.Add(cat);
+            ApplicationStorage.Utente.Add(cat);
 
             Console.WriteLine($"Creata categoria {cat.Nome}!"); //oppure concateni, ya know, ma conviene questo modo moderno
             Console.ReadLine();

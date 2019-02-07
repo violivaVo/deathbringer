@@ -1,4 +1,5 @@
-﻿using DeathBringer.Terminal.Data;
+﻿using DeathBringer.Terminal.BaseClasses;
+using DeathBringer.Terminal.Data;
 using DeathBringer.Terminal.Entities;
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace DeathBringer.Core.ServiceLayers
 {
     class UtenteServiceLayer
     {
+        
 
         public IList<ValidationResult> InsertUtente(string name, string surname)
         {
@@ -28,16 +30,21 @@ namespace DeathBringer.Core.ServiceLayers
             }
 
             //Creazione dell'oggetto (classe)
-            var nuovaCategoria = new Categoria
+            var nuovoUtente = new Utente
             {
-                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Categorie),
+                Id = GeneratoreId.GeneraNuovoIdentificatore<Utente>(ApplicationStorage.Utenti),
                 Nome = name,
-                Descrizione = surname,
+                Cognome = surname,
                 DataCreazioneRecord = DateTime.Now,
                 DataUltimaModifica = DateTime.Now,
                 UtenteCreazioneRecord = "anonymous",
                 UtenteUltimaModificaRecord = "anonymous"
             };
+            //Aggiunta nella lista generale
+            ApplicationStorage.Utenti.Add(nuovoUtente);
+
+            //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
+            return validations;
         }
 
         public IList<Utente> FetchUtenti()

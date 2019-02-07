@@ -38,9 +38,6 @@ namespace DeathBringer.Terminal.BaseClasses
             }
         }
 
-        internal static object GeneraNuovoIdentificatore<T>(IList<Categoria> categorie)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

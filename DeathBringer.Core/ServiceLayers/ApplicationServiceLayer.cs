@@ -14,7 +14,7 @@ namespace DeathBringer.Core.ServiceLayers
         public IList<Categoria> FetchCategorie()
         {
             //Ritorno semplicemente il contenuto dell'archivio
-            return ApplicationStorage.Categorie
+            return ApplicationStorage.Utente
                 .OrderBy(e => e.Nome)
                 .ThenBy(e => e.Descrizione)
                 .ToList();
@@ -27,7 +27,7 @@ namespace DeathBringer.Core.ServiceLayers
                 return null;
 
             //Prendo l'unico elemento con id specificato
-            return ApplicationStorage.Categorie                
+            return ApplicationStorage.Utente                
                 .SingleOrDefault(e => e.Id == id);
         }
 
@@ -47,7 +47,7 @@ namespace DeathBringer.Core.ServiceLayers
             //Creazione dell'oggetto (classe)
             var nuovaCategoria = new Categoria
             {
-                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Categorie), 
+                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Utente), 
                 Nome = name, 
                 Descrizione = description, 
                 DataCreazioneRecord = DateTime.Now, 
@@ -57,7 +57,7 @@ namespace DeathBringer.Core.ServiceLayers
             };
 
             //Aggiunta nella lista generale
-            ApplicationStorage.Categorie.Add(nuovaCategoria);
+            ApplicationStorage.Utente.Add(nuovaCategoria);
 
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;
@@ -89,7 +89,7 @@ namespace DeathBringer.Core.ServiceLayers
             }
 
             //Rimozione della categoria dallo storage
-            ApplicationStorage.Categorie.Remove(categoriaEsistente);
+            ApplicationStorage.Utente.Remove(categoriaEsistente);
 
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;

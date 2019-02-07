@@ -62,7 +62,16 @@ namespace DeathBringer.Core.ServiceLayers
 
         public IList<ValidationResult> DeleteProdotto(int id)
         {
-            throw new NotImplementedException();
+            List<ValidationResult> validations = new List<ValidationResult>();
+            var prodottoEsistente = GetProdotto(id);
+            if (prodottoEsistente==null)
+            {
+                validations.Add(new ValidationResult("id non trovato"));
+                return validations;
+            }
+            ApplicationStorage.Prodotti.Remove(prodottoEsistente);
+            return validations;
+            throw new NotImplementedException();//da rimuovere quando il metodo GetProdotto sarà completato
         }
     }
 }

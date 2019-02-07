@@ -96,17 +96,16 @@ namespace DeathBringer.Terminal.ApplicationManagers
             var nome = Console.ReadLine();
             Console.WriteLine(" => Cognome : ");
             var cognome = Console.ReadLine();
-            Console.ReadLine();
             Console.WriteLine("Email");
-            Console.ReadLine();
+            var email = Console.ReadLine();
             Console.WriteLine("Indirizzo");
-            Console.ReadLine();
+            var indirizzo = Console.ReadLine();
             Console.WriteLine("Civico");
-            Console.ReadLine();
+            var civico = Console.ReadLine();
             Console.WriteLine("Cap");
-            Console.ReadLine();
+            var cap = Console.ReadLine();
             Console.WriteLine("Citta");
-            Console.ReadLine();
+            var Citta = Console.ReadLine();
            
 
             Utente cat = new Utente //invece di mettere parentesi tonde, metto parentesi graffe e ad ogni variabile assegno quello che voglio, separate da virgole, e 

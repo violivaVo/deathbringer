@@ -72,7 +72,7 @@ namespace DeathBringer.Core.ServiceLayers
 
             //Preparo la lista vuota che è simbolo di successo dell'operazione
             IList<ValidationResult> validations = new List<ValidationResult>();
-            
+
             //Non ho trovato nulla
             if (utenteEsistente == null)
             {
@@ -85,7 +85,7 @@ namespace DeathBringer.Core.ServiceLayers
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(nome)
                 || string.IsNullOrWhiteSpace(cognome) || string.IsNullOrWhiteSpace(email) ||
                 string.IsNullOrWhiteSpace(citta) || string.IsNullOrWhiteSpace(indirizzo) ||
-                string.IsNullOrWhiteSpace(civico) || cap<=0 || cap>=100000)
+                string.IsNullOrWhiteSpace(civico) || cap <= 0 || cap >= 100000)
             {
                 //Aggiungo il messaggio con la spiegazione ed esco
                 validations.Add(new ValidationResult("Hai mancato un campo di inserimento "));
@@ -100,34 +100,34 @@ namespace DeathBringer.Core.ServiceLayers
             utenteEsistente.Cap = cap;
             utenteEsistente.Indirizzo = indirizzo;
             utenteEsistente.Civico = civico;
-                            
-                //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
+
+            //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;
 
         }
 
         public IList<ValidationResult> DeleteUtente(int id)
+        {
+            //Cerco l'elemento in archivio
+            var utenteEsistente = GetUtente(id);
+
+            //Preparo la lista vuota che è simbolo di successo dell'operazione
+            IList<ValidationResult> validations = new List<ValidationResult>();
+
+            //Non ho trovato nulla
+            if (utenteEsistente == null)
             {
-                //Cerco l'elemento in archivio
-                var utenteEsistente = GetUtente(id);
-
-                //Preparo la lista vuota che è simbolo di successo dell'operazione
-                IList<ValidationResult> validations = new List<ValidationResult>();
-
-                //Non ho trovato nulla
-                if (utenteEsistente == null)
-                {
-                    //Aggiungo il messaggio con la spiegazione ed esco
-                    validations.Add(new ValidationResult($"La categoria {id} non esiste"));
-                    return validations;
-                }
-
-                //Rimozione della categoria dallo storage
-                ApplicationStorage.Utenti.Remove(utenteEsistente);
-
-                //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
+                //Aggiungo il messaggio con la spiegazione ed esco
+                validations.Add(new ValidationResult($"La categoria {id} non esiste"));
                 return validations;
-        }       
+            }
+
+            //Rimozione della categoria dallo storage
+            ApplicationStorage.Utenti.Remove(utenteEsistente);
+
+            //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
+            return validations;
+        }
     }
 
 }

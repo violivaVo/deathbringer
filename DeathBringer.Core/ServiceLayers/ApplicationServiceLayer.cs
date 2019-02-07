@@ -36,7 +36,7 @@ namespace DeathBringer.Core.ServiceLayers
                 return null;
 
             //Prendo l'unico elemento con id specificato
-            return ApplicationStorage.Categorie                
+            return ApplicationStorage.Categorie
                 .SingleOrDefault(e => e.Id == id);
         }
 
@@ -62,12 +62,12 @@ namespace DeathBringer.Core.ServiceLayers
             //Creazione dell'oggetto (classe)
             var nuovaCategoria = new Categoria
             {
-                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Categorie), 
-                Nome = name, 
-                Descrizione = description, 
-                DataCreazioneRecord = DateTime.Now, 
-                DataUltimaModifica = DateTime.Now, 
-                UtenteCreazioneRecord = "anonymous", 
+                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Categorie),
+                Nome = name,
+                Descrizione = description,
+                DataCreazioneRecord = DateTime.Now,
+                DataUltimaModifica = DateTime.Now,
+                UtenteCreazioneRecord = "anonymous",
                 UtenteUltimaModificaRecord = "anonymous"
             };
 
@@ -145,6 +145,6 @@ namespace DeathBringer.Core.ServiceLayers
             return validations;
         }
 
-        
+
     }
 }

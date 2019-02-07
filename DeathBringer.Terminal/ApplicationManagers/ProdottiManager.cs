@@ -6,38 +6,44 @@ namespace DeathBringer.Terminal.ApplicationManagers
 {
     public class ProdottiManager
     {
-        internal static void Indice()
+        public static void Indice()
         {
             string selection = null;
-            while (selection != "exit");
-        
+
             Console.WriteLine("**********************");
-            Console.WriteLine(" Categoria Manager ");
+            Console.WriteLine("  Menu Prodotti ");
             Console.WriteLine("**********************");
             Console.WriteLine();
-            Console.WriteLine("A - Crea Categoria");
-            Console.WriteLine("B - Modifica Categoria");
-            Console.WriteLine("C - Cancella Categoria");
-            Console.WriteLine("D - Elenco Categorie");
+            Console.WriteLine("A - Inserimento Prodotto");
+            Console.WriteLine("B - Lista Prodotti");
+            Console.WriteLine("C - Rimuovi Prodotto");
+            Console.WriteLine("D - Modifica Prodotto");
             Console.WriteLine("exit => uscita");
             Console.WriteLine();
             Console.Write(" selezione: ");
+            selection = Console.ReadLine();
 
-            switch (selection)
+            while (selection != "exit")
             {
-                case "A":
-                    InserimentoProdotto();
-                    break;
-                case "B":
-                    ListaProdotti();
-                    break;
-                case "C":
-                    RimuoviProdotto();
-                    break;
-                case "D":
-                    ModificaProdotto();
-                    break; 
-
+                                
+                switch (selection)
+                {
+                    case "A":
+                        InserimentoProdotto();
+                        break;
+                    case "B":
+                        ListaProdotti();
+                        break;
+                    case "C":
+                        RimuoviProdotto();
+                        break;
+                    case "D":
+                        ModificaProdotto();
+                        break;
+                    default:
+                        Console.WriteLine("Selezone non valida!");
+                        break;
+                }
             }
         }
 

@@ -19,6 +19,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.WriteLine("2 - Inserimento Prodotto");
             Console.WriteLine("3 - Gestione Categorie");
             Console.WriteLine("4 - Gestione Utenti");
+            Console.WriteLine("5 - Gestione Prodotti");
             Console.WriteLine("Premere un tasto per terminare");
 
             // permetto all'utente di scegliiere una funzione (un numero)
@@ -40,22 +41,31 @@ namespace DeathBringer.Terminal.ApplicationManagers
                     SampleCreazioneDati.CreaDatiEsempio();
                 }
 
-                if (numeroSelezioneUtente == "3")
+                else if (numeroSelezioneUtente == "3")
                 {
                     CategoriaManager.VisualizzaMenu();
                 }
 
 
-                if (numeroSelezioneUtente == "4")
+                else if (numeroSelezioneUtente == "4")
                 {
                     UtentiManager.VisualizzaMenu();
                 }
 
                 else
                 {
-                    throw new InvalidOperationException("La selezione fatta non è gestita!");
-                    
+                    if (numeroSelezioneUtente == "5")
+                    {
+                        ProdottiManager.Indice();
+                    }
+
+                    else
+                    {
+                        throw new InvalidOperationException("La selezione fatta non è gestita!");
+                    }
+
                 }
+
             }
 
         }

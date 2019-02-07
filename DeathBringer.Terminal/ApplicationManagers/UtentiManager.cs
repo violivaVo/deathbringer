@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeathBringer.Terminal.Data;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -58,7 +59,31 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void Login()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("---- Inserisce il tuo username :");
+            String UserNameIn = Console.ReadLine();
+            Console.WriteLine("---- Inserisce il tuo password :");
+            String PasswordIn = Console.ReadLine();
+            if ((UserNameIn == null) || (PasswordIn == null))
+            {
+                Console.WriteLine("Dati entrati non validi");
+            }else
+            {
+                for(int i = 0; i < ApplicationStorage.Utenti.Count; i++)
+                {
+                    if((ApplicationStorage.Utenti[i].Username == UserNameIn) && (ApplicationStorage.Utenti[i].Password == PasswordIn))
+                    {
+                        Console.WriteLine("*** successo dell'autenticazione *****");
+                        Console.ReadLine();
+                    }
+                    else
+                    {
+                        Console.WriteLine("!!!!!! errore di autenticazione : verifica i tue dati!!!!");
+                        Console.ReadLine();
+                    }
+                }
+            }
+            Console.WriteLine();
+
         }
 
         private static void CreaUtente()

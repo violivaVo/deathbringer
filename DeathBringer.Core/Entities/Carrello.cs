@@ -16,8 +16,5 @@ namespace DeathBringer.Terminal.BaseClasses
         public DateTime DataSpedizione { get; set; }
         public DateTime DataConsegna { get; set; }
         public DateTime DataAnnullamento { get; set; }
-
-
-
-            }
+    }
 }

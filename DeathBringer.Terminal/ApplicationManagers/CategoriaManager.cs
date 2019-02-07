@@ -205,7 +205,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             else
             {   //devo cercare l'elemento con Id maggiore
                 int idMaggiore = 0;
-                for (var i = 0; 1 < ApplicationStorage.Categorie.Count; i++)
+                for (var i = 0; i < ApplicationStorage.Categorie.Count; i++)
                 {
                     if (ApplicationStorage.Categorie[i].Id > idMaggiore)
                     {

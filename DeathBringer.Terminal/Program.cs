@@ -28,8 +28,8 @@ namespace DeathBringer.Terminal
             //Console.WriteLine("Modifica nome prodotto: ");
             //string nomeProdDaModificare = Console.ReadLine();
             //Console.WriteLine("Il nuovo nome del prodotto è ");
-            //string nomeProdModificato = Console.ReadLine();
-
+            //string nomeProdModificato = Console.ReadLine(); 
+            
         }
 
         public static void InserisciCategoria()

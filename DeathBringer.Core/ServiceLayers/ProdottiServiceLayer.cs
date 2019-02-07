@@ -3,6 +3,7 @@ using DeathBringer.Terminal.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
 
 namespace DeathBringer.Core.ServiceLayers
@@ -16,7 +17,8 @@ namespace DeathBringer.Core.ServiceLayers
 
         public Prodotto GetProdotto(int id)
         {
-            throw new NotImplementedException();
+            if (id <= 0) return null;
+            return ApplicationStorage.Prodotti.SingleOrDefault(n => n.Id == id);
         }
 
         public IList<ValidationResult> InsertProdotto(string name, string description)

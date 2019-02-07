@@ -10,17 +10,17 @@ namespace DeathBringer.Core.ServiceLayers
     {
         public IList<Prodotto> FetchProdotti()
         {
-
+            throw new NotImplementedException();
         }
 
         public Prodotto GetProdotto(int id)
         {
-
+            throw new NotImplementedException();
         }
 
         public IList<ValidationResult> InsertProdotto(string name, string description)
         {
-
+            throw new NotImplementedException();
         }
 
 
@@ -29,12 +29,12 @@ namespace DeathBringer.Core.ServiceLayers
 
         public IList<ValidationResult> UpdateProdotto(int id, string name, string description)
         {
-
+            throw new NotImplementedException();
         }
 
         public IList<ValidationResult> DeleteProdotto(int id)
         {
-
+            throw new NotImplementedException();
         }
     }
 }

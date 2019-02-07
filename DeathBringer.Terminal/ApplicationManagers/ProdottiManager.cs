@@ -9,9 +9,6 @@ namespace DeathBringer.Terminal.ApplicationManagers
         internal static void Indice()
         {
             string selection = null;
-
-            while (selection != "exit")
-            {
                 Console.WriteLine("*********************");
                 Console.WriteLine("Gestione dei Prodotti");
                 Console.WriteLine("*********************");
@@ -23,12 +20,18 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 Console.WriteLine("Inserire 'exit' per chiudere il programma.");
                 Console.WriteLine();
                 Console.Write(" Opzione selezionata: ");
+                selection = Console.ReadLine();
+
+            while (selection != "exit")
+            {
+                
 
             }
            
             switch(selection)
             {
                 case "1":
+
                     InserimentoProdotto();
                     break;
                 case "2":

@@ -9,46 +9,44 @@ namespace DeathBringer.Terminal.ApplicationManagers
         internal static void Indice()
         {
             string selection = null;
-                Console.WriteLine("*********************");
-                Console.WriteLine("Gestione dei Prodotti");
-                Console.WriteLine("*********************");
-                Console.WriteLine();
-                Console.WriteLine("1 - Inserimento prodotto");
-                Console.WriteLine("2 - Elenco prodotti");
-                Console.WriteLine("3 - Elimina prodotto");
-                Console.WriteLine("4 - Modifica prodotti");
-                Console.WriteLine("Inserire 'exit' per chiudere il programma.");
-                Console.WriteLine();
-                Console.Write(" Opzione selezionata: ");
-                selection = Console.ReadLine();
+            Console.WriteLine("*********************");
+            Console.WriteLine("Gestione dei Prodotti");
+            Console.WriteLine("*********************");
+            Console.WriteLine();
+            Console.WriteLine("1 - Inserimento prodotto");
+            Console.WriteLine("2 - Elenco prodotti");
+            Console.WriteLine("3 - Elimina prodotto");
+            Console.WriteLine("4 - Modifica prodotti");
+            Console.WriteLine("Inserire 'exit' per chiudere il programma.");
+            Console.WriteLine();
+            Console.Write(" Opzione selezionata: ");
+            selection = Console.ReadLine();
 
             while (selection != "exit")
             {
-                
+                switch (selection)
+                {
+                    case "1":
+                        InserimentoProdotto();
+                        break;
+                    case "2":
+                        ElencoProdotti();
+                        break;
+                    case "3":
+                        EliminaProdotto();
+                        break;
+                    case "4":
+                        ModificaProdotto();
+                        break;
+                    default:
+                        Console.WriteLine("Scelta non valida !");
+                        break;
+
+                }
 
             }
-           
-            switch(selection)
-            {
-                case "1":
-
-                    InserimentoProdotto();
-                    break;
-                case "2":
-                    ElencoProdotti();
-                    break;
-                case "3":
-                    EliminaProdotto();
-                    break;
-                case "4":
-                    ModificaProdotto();
-                    break;
-                default:
-                    Console.WriteLine("Scelta non valida !");
-                    break;
 
 
-            }
 
         }
         internal static void InserimentoProdotto()
@@ -69,3 +67,5 @@ namespace DeathBringer.Terminal.ApplicationManagers
         }
     }
 }
+
+

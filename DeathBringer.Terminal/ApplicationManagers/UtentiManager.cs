@@ -1,14 +1,16 @@
 ﻿using DeathBringer.Terminal.Data;
-
+<<<<<<< HEAD
+=======
 using DeathBringer.Terminal.Entities;
 
 using System;
 using System.Collections.Generic;
 using System.Text;
+>>>>>>> 1b4163aedf76d34105d8b5a7a6814fa5cd361ce1
 
 namespace DeathBringer.Terminal.ApplicationManagers
 {
-   public class UtentiManager
+    public class UtentiManager
     {
         static string selezioneU = null;
         public static void VisualizzaMenu()
@@ -142,7 +144,81 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void ModificaUtente()
         {
-            throw new NotImplementedException();
+
+            Console.WriteLine("[ ---------------------------- ]");
+            Console.WriteLine("[ Modifica utente esistente ]");
+
+            Console.Write("Inserisci id Utente da modificare: ");
+            Utente utenteDaProcessare = ReadUtenteFromConsole();
+
+            if (utenteDaProcessare == null)
+            {
+                return;
+            }
+            else
+            {
+                //Richiedo il nuovo nome
+                Console.Write(" => nuovo username: ");
+                var nuovoUsername = Console.ReadLine();
+                Console.Write(" => nuovo nome: ");
+                var nuovoNome = Console.ReadLine();
+                Console.Write(" => nuovo cognome: ");
+                var nuovoCognome = Console.ReadLine();
+                Console.Write(" => nuova email: ");
+                var nuovaEmail = Console.ReadLine();
+                Console.Write(" => nuovo indirizzo: ");
+                var nuovoIndirizzo = Console.ReadLine();
+                Console.Write(" => nuovo civico: ");
+                var nuovoCivico = Console.ReadLine();
+                Console.Write(" => nuovo cap: ");
+                var nuovoCap = Console.ReadLine();
+                Console.Write(" => nuova città: ");
+                var nuovaCitta = Console.ReadLine();
+                Console.Write(" => nuova password: ");
+                var nuovaPassword = Console.ReadLine();
+
+                //Assegnamento ad oggetto esistente
+                utenteDaProcessare.Username = nuovoUsername;
+                utenteDaProcessare.Nome = nuovoNome;
+                utenteDaProcessare.Cognome = nuovoCognome;
+                utenteDaProcessare.Email = nuovaEmail;
+                utenteDaProcessare.Indirizzo = nuovoIndirizzo;
+                utenteDaProcessare.Civico = nuovoCivico;
+              
+
+
+                Console.WriteLine("La modifica è stata completata!");
+            }
+        }
+
+        private static Utente ReadUtenteFromConsole()
+        {
+            var id = Console.ReadLine();
+            int idIntero;
+
+            if (!int.TryParse(id, out idIntero))
+            {
+                Console.WriteLine("Il valore inserito non è valido!");
+                return null;
+            }
+
+            else
+            {  //trovo l'utente che voglio modificare
+                Utente utenteEsistente = ApplicationStorage.Utenti
+                    .SingleOrDefault(utenteCorrente => utenteCorrente.Id == idIntero);
+
+                if (utenteEsistente == null)
+                {
+                    Console.WriteLine("L'utente selezionato non esiste!");
+                    return null;
+                }
+                else
+                {
+                    Console.WriteLine("L'utente selezionato esiste!");
+                    return utenteEsistente;
+                }
+            }
+
         }
 
         private static void EliminaUtente()

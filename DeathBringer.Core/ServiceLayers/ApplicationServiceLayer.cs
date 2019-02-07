@@ -94,7 +94,5 @@ namespace DeathBringer.Core.ServiceLayers
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;
         }
-
-        
     }
 }

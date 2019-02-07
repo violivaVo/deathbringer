@@ -1,12 +1,19 @@
-﻿using System;
+﻿using DeathBringer.Terminal.Data;
+using DeathBringer.Terminal.Entities;
+using System;
 using System.Collections.Generic;
+
 using System.ComponentModel.DataAnnotations;
+
+using System.Linq;
+
 using System.Text;
 
 namespace DeathBringer.Core.ServiceLayers
 {
     class UtenteServiceLayer
     {
+
         public IList<ValidationResult> InsertUtente(string name, string surname)
         {
             //Preparo la lista vuota che è simbolo di successo dell'operazione
@@ -32,4 +39,25 @@ namespace DeathBringer.Core.ServiceLayers
                 UtenteUltimaModificaRecord = "anonymous"
             };
         }
+
+        public IList<Utente> FetchUtenti()
+        {
+            return ApplicationStorage.Utenti
+                .OrderBy(e => e.Nome)
+                .ThenBy(e => e.Indirizzo)
+                .ToList();
+        }
+        public Utente GetUtente(int id)
+        {
+            //Validazione argomento
+            if (id <= 0)
+                return null;
+
+            //Prendo l'unico elemento con id specificato
+            return ApplicationStorage.Utenti
+                .SingleOrDefault(e => e.Id == id);
+        }
+
+    }
+
 }

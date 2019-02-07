@@ -162,9 +162,9 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 //visualizza nomi e descrizioni
                 Console.WriteLine(
                     $"nome: {categorieRecuperateDallaMemoria[i].Nome}, " +    //accedo all'i-esimo elemento della lista, e prendo il suo Nome
-                    $"descr: {categorieRecuperateDallaMemoria[i].Descrizione}, "+ //accedo all'i-esimo elemento della lista, e prendo la sua Descrizione
+                    $"descr: {categorieRecuperateDallaMemoria[i].Descrizione}, " + //accedo all'i-esimo elemento della lista, e prendo la sua Descrizione
                     $"id: {categorieRecuperateDallaMemoria[i].Id}, ");
-        }
+            }
             // visualizza i nomi e le descrizioni
         }
 
@@ -193,10 +193,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.WriteLine($"Creata categoria {cat.Nome}!"); //oppure concateni, ya know, ma conviene questo modo moderno
             Console.ReadLine();
         }
-
-       
     }
-
 }
 
 

@@ -12,10 +12,8 @@ using System.Text;
 
 namespace DeathBringer.Core.ServiceLayers
 {
-    class UtenteServiceLayer
+    public class UtenteServiceLayer
     {
-        
-
         public IList<ValidationResult> InsertUtente(string name, string surname)
         {
             //Preparo la lista vuota che è simbolo di successo dell'operazione
@@ -54,6 +52,7 @@ namespace DeathBringer.Core.ServiceLayers
                 .ThenBy(e => e.Indirizzo)
                 .ToList();
         }
+
         public Utente GetUtente(int id)
         {
             //Validazione argomento
@@ -64,6 +63,7 @@ namespace DeathBringer.Core.ServiceLayers
             return ApplicationStorage.Utenti
                 .SingleOrDefault(e => e.Id == id);
         }
+
         public IList<ValidationResult> UpdateUtente(int id, string username, string password, string nome, string cognome,
             string email, string citta, int cap, string indirizzo, string civico)
         {
@@ -105,6 +105,7 @@ namespace DeathBringer.Core.ServiceLayers
             return validations;
 
         }
+
         public IList<ValidationResult> DeleteUtente(int id)
             {
                 //Cerco l'elemento in archivio
@@ -126,11 +127,7 @@ namespace DeathBringer.Core.ServiceLayers
 
                 //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
                 return validations;
-        }
-        
-
-
-
+        }       
     }
 
 }

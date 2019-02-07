@@ -28,9 +28,9 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.Write("Selezione: ");
             string numeroSelezioneUtente = Console.ReadLine();
             Console.WriteLine(" Selezione eseguita:" + numeroSelezioneUtente);
-           
-              // leggo il numero e avvio la funzione scelta
-           if (numeroSelezioneUtente == "1")
+
+            // leggo il numero e avvio la funzione scelta
+            if (numeroSelezioneUtente == "1")
             {
                 SampleCreazioneDati.CreaDatiEsempio();
             }
@@ -61,7 +61,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
                     else
                     {
-                         throw new InvalidOperationException("La selezione fatta non è gestita!");
+                        throw new InvalidOperationException("La selezione fatta non è gestita!");
                     }
 
                 }

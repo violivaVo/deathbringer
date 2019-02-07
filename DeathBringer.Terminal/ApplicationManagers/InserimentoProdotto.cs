@@ -9,7 +9,7 @@ using System.Text;
 
 namespace DeathBringer.Terminal.ApplicationManagers
 {
-    class CreazioneProdotto
+    public class CreazioneProdotto
     {
         private static Categoria categoriaClasse;
 
@@ -51,7 +51,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.ReadLine();
         }
 
-            private static int GeneraNuovoIdentificatore() //non è void perché questa funz. a diff. delle altre mi ritorna qualcosa, un int
+        private static int GeneraNuovoIdentificatore() //non è void perché questa funz. a diff. delle altre mi ritorna qualcosa, un int
         {
             //verifico quanti ce ne sono in archivio
             var elementiEsistenti = ApplicationStorage.Categorie.Count;
@@ -77,6 +77,5 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 //questa cosa usa LINQ (??)
             }
         }
-
     }
 }

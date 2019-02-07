@@ -169,7 +169,9 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 Console.Write(" => nuovo civico: ");
                 var nuovoCivico = Console.ReadLine();
                 Console.Write(" => nuovo cap: ");
-                var nuovoCap = Console.ReadLine();
+                string nuovoCap1 = Console.ReadLine();
+                int.TryParse(nuovoCap1, out int nuovoCap);
+                
                 Console.Write(" => nuova città: ");
                 var nuovaCitta = Console.ReadLine();
                 Console.Write(" => nuova password: ");

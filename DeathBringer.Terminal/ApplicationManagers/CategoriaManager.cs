@@ -106,7 +106,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             }
             else
             {
-                ApplicationStorage.Utente.Remove(categoriaDaProcessare);
+                ApplicationStorage.Categorie.Remove(categoriaDaProcessare);
                 Console.WriteLine("L'elemento è stato cancellato!!!");
             }
         }
@@ -131,7 +131,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             else
             {
                 //Cerco l'elemento in elenco
-                Categoria categoriaEsistente = ApplicationStorage.Utente
+                Categoria categoriaEsistente = ApplicationStorage.Categorie
                     .SingleOrDefault(categoriaCorrente => categoriaCorrente.Id == idIntero);
 
                 if (categoriaEsistente == null)
@@ -152,7 +152,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
         private static void ElencoCategorie()   //lo definisce private, perché a priori non è necessario che sia public o internal, viene richiamato solo qui sopra
         {
             //recupera quelle in memoria
-            var categorieRecuperateDallaMemoria = ApplicationStorage.Utente;
+            var categorieRecuperateDallaMemoria = ApplicationStorage.Categorie;
 
 
             // cicla sulle categorie in memoria
@@ -168,7 +168,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             // visualizza i nomi e le descrizioni
         }
 
-        private static void CreaCategoria() 
+        private static void CreaCategoria()
         {
             Console.WriteLine("Creazione nuova Categoria");
             // chiediamo il nome della categoria E DESCRIZIONE
@@ -181,14 +181,14 @@ namespace DeathBringer.Terminal.ApplicationManagers
             //creazione categoria
             Categoria cat = new Categoria  //invece di mettere parentesi tonde, metto parentesi graffe e ad ogni variabile assegno quello che voglio, separate da virgole, e 
                                            //; dopo la graffa
- 
+
             {
-                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Utente), //metodo per poter richiamarlo quando modifico
+                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Categorie), //metodo per poter richiamarlo quando modifico
                 Nome = nome,
                 Descrizione = descr
             };
 
-            ApplicationStorage.Utente.Add(cat);
+            ApplicationStorage.Categorie.Add(cat);
 
             Console.WriteLine($"Creata categoria {cat.Nome}!"); //oppure concateni, ya know, ma conviene questo modo moderno
             Console.ReadLine();

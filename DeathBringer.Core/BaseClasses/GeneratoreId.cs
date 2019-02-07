@@ -1,4 +1,5 @@
 ﻿using DeathBringer.Terminal.Data;
+using DeathBringer.Terminal.Entities;
 using DeathBringer.Terminal.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,11 @@ namespace DeathBringer.Terminal.BaseClasses
                 // al posto del for qui sopra avrei potuto mette -> idMaggiore = ApplicationStorage.Categorie.Max(elementiEsistenti e => e.Id); (AVENDO MESSO SYSTEM LINQ)
                 //questa cosa usa LINQ (??)
             }
+        }
+
+        internal static object GeneraNuovoIdentificatore<T>(IList<Categoria> categorie)
+        {
+            throw new NotImplementedException();
         }
     }
 }

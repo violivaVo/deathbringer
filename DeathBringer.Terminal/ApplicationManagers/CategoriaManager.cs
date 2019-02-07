@@ -17,7 +17,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             {
 
                 //visualizzo a terminale l'elenco delle funzione del mio programma
-                Console.WriteLine("*****");
+                Console.WriteLine("******");
                 Console.WriteLine("Categoria Manager");
                 Console.WriteLine("*********************************");
                 Console.WriteLine();

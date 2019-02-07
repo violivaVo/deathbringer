@@ -12,7 +12,7 @@ namespace DeathBringer.Core.ServiceLayers
     {
         public IList<Prodotto> FetchProdotti()
         {
-            throw new Exception();
+            throw new NotImplementedException();
         }
 
         public Prodotto GetProdotto(int id)

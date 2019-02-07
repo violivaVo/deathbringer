@@ -16,6 +16,16 @@ namespace DeathBringer.Core.ServiceLayers
                 .ThenBy(e => e.Indirizzo)
                 .ToList();
         }
-       
+        public Utente GetUtente(int id)
+        {
+            //Validazione argomento
+            if (id <= 0)
+                return null;
+
+            //Prendo l'unico elemento con id specificato
+            return ApplicationStorage.Utenti
+                .SingleOrDefault(e => e.Id == id);
+        }
+
     }
 }

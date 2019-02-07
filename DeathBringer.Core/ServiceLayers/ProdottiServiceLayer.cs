@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DeathBringer.Core.ServiceLayers
 {
-    class ProdottiServiceLayer 
+    class ProdottiServiceLayer
     {
         public IList<Prodotto> FetchProdotti()
         {
@@ -33,7 +33,7 @@ namespace DeathBringer.Core.ServiceLayers
             {
                 Id = GeneratoreId.GeneraNuovoIdentificatore<Prodotto>(ApplicationStorage.Prodotti),
                 Nome = name,
-                Descrizione  = descr
+                Descrizione = descr
             };
             ApplicationStorage.Prodotti.Add(nuovoProdotto);
             return validations;
@@ -52,14 +52,14 @@ namespace DeathBringer.Core.ServiceLayers
         {
             List<ValidationResult> validations = new List<ValidationResult>();
             var prodottoEsistente = GetProdotto(id);
-            if (prodottoEsistente==null)
+            if (prodottoEsistente == null)
             {
                 validations.Add(new ValidationResult("id non trovato"));
                 return validations;
             }
             ApplicationStorage.Prodotti.Remove(prodottoEsistente);
             return validations;
-            
+
         }
     }
 }

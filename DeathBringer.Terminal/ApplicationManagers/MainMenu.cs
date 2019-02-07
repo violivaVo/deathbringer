@@ -18,6 +18,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.WriteLine("1 - Dati Esempio");
             Console.WriteLine("2 - Inserimento Prodotto");
             Console.WriteLine("3 - Gestione Categorie");
+            Console.WriteLine("4 - Gestione Utenti");
             Console.WriteLine("Premere un tasto per terminare");
 
             // permetto all'utente di scegliiere una funzione (un numero)
@@ -42,6 +43,12 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 if (numeroSelezioneUtente == "3")
                 {
                     CategoriaManager.VisualizzaMenu();
+                }
+
+
+                if (numeroSelezioneUtente == "4")
+                {
+                    UtentiManager.VisualizzaMenu();
                 }
 
                 else

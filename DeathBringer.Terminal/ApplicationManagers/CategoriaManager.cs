@@ -1,4 +1,5 @@
-﻿using DeathBringer.Terminal.Data;
+﻿using DeathBringer.Terminal.BaseClasses;
+using DeathBringer.Terminal.Data;
 using DeathBringer.Terminal.Entities;
 using System;
 using System.Collections.Generic;
@@ -182,7 +183,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
                                            //; dopo la graffa
 
             {
-                Id = GeneraNuovoIdentificatore(), //metodo per poter richiamarlo quando modifico
+                Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Categorie), //metodo per poter richiamarlo quando modifico
                 Nome = nome,
                 Descrizione = descr
             };
@@ -193,32 +194,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.ReadLine();
         }
 
-        private static int GeneraNuovoIdentificatore() //non è void perché questa funz. a diff. delle altre mi ritorna qualcosa, un int
-        {
-            //verifico quanti ce ne sono in archivio
-            var elementiEsistenti = ApplicationStorage.Categorie.Count;
-             //se non ne ho, il valore base è 1
-             if (elementiEsistenti == 0)
-            {
-                return 1;
-            }
-            else
-            {   //devo cercare l'elemento con Id maggiore
-                int idMaggiore = 0;
-                for (var i = 0; 1 < ApplicationStorage.Categorie.Count; i++)
-                {
-                    if (ApplicationStorage.Categorie[i].Id > idMaggiore)
-                    {
-                        idMaggiore = ApplicationStorage.Categorie[i].Id;  
-                    }
-
-                }
-
-                return idMaggiore+1 ;
-                // al posto del for qui sopra avrei potuto mette -> idMaggiore = ApplicationStorage.Categorie.Max(elementiEsistenti e => e.Id); (AVENDO MESSO SYSTEM LINQ)
-                //questa cosa usa LINQ (??)
-            }
-        }
+       
     }
 
 }

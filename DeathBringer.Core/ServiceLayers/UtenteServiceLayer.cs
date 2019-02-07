@@ -81,7 +81,7 @@ namespace DeathBringer.Core.ServiceLayers
                 }
 
                 //Rimozione della categoria dallo storage
-                ApplicationStorage.Utenti.Remove(UtenteEsistente);
+                ApplicationStorage.Utenti.Remove(utenteEsistente);
 
                 //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
                 return validations;

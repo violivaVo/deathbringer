@@ -20,12 +20,12 @@ namespace DeathBringer.Terminal.ApplicationManagers
             var nome = Console.ReadLine();
             Console.WriteLine(" => categoria : ");
             var categString = Console.ReadLine();
-            int m = ApplicationStorage.Categorie.Count;
+            int m = ApplicationStorage.Utente.Count;
             for (int i = 0; i < m; i++)
             {
-                string category = ApplicationStorage.Categorie[i].Nome;
+                string category = ApplicationStorage.Utente[i].Nome;
                 Categoria categoriaClasse = new Categoria();
-                if (category == categString) categoriaClasse = ApplicationStorage.Categorie[i];
+                if (category == categString) categoriaClasse = ApplicationStorage.Utente[i];
             };
             Console.WriteLine("Data Produzione: ");
             var dataProduzioneString = Console.ReadLine();
@@ -54,7 +54,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             private static int GeneraNuovoIdentificatore() //non è void perché questa funz. a diff. delle altre mi ritorna qualcosa, un int
         {
             //verifico quanti ce ne sono in archivio
-            var elementiEsistenti = ApplicationStorage.Categorie.Count;
+            var elementiEsistenti = ApplicationStorage.Utente.Count;
             //se non ne ho, il valore base è 1
             if (elementiEsistenti == 0)
             {
@@ -63,11 +63,11 @@ namespace DeathBringer.Terminal.ApplicationManagers
             else
             {   //devo cercare l'elemento con Id maggiore
                 int idMaggiore = 0;
-                for (var i = 0; i < ApplicationStorage.Categorie.Count; i++)
+                for (var i = 0; i < ApplicationStorage.Utente.Count; i++)
                 {
-                    if (ApplicationStorage.Categorie[i].Id > idMaggiore)
+                    if (ApplicationStorage.Utente[i].Id > idMaggiore)
                     {
-                        idMaggiore = ApplicationStorage.Categorie[i].Id;
+                        idMaggiore = ApplicationStorage.Utente[i].Id;
                     }
 
                 }

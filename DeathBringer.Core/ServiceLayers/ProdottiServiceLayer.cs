@@ -35,7 +35,7 @@ namespace DeathBringer.Core.ServiceLayers
             //Creazione dell'oggetto (classe)
             var nuovoProdotto = new Prodotto
             {
-                Id = GeneratoreId.GeneraNuovoIdentificatore<Prodotto>(ApplicationStorage.Prodotto),
+                Id = GeneratoreId.GeneraNuovoIdentificatore<Prodotto>(ApplicationStorage.Prodotti),
                 Nome = name,
                 Descrizione = description,
                 DataCreazioneRecord = DateTime.Now,

@@ -64,6 +64,31 @@ namespace DeathBringer.Core.ServiceLayers
             return ApplicationStorage.Utenti
                 .SingleOrDefault(e => e.Id == id);
         }
+        public IList<ValidationResult> DeleteUtente(int id)
+            {
+                //Cerco l'elemento in archivio
+                var utenteEsistente = GetUtente(id);
+
+                //Preparo la lista vuota che è simbolo di successo dell'operazione
+                IList<ValidationResult> validations = new List<ValidationResult>();
+
+                //Non ho trovato nulla
+                if (utenteEsistente == null)
+                {
+                    //Aggiungo il messaggio con la spiegazione ed esco
+                    validations.Add(new ValidationResult($"La categoria {id} non esiste"));
+                    return validations;
+                }
+
+                //Rimozione della categoria dallo storage
+                ApplicationStorage.Utenti.Remove(utenteEsistente);
+
+                //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
+                return validations;
+        }
+        
+
+
 
     }
 

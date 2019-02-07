@@ -9,5 +9,6 @@ namespace DeathBringer.Terminal.Data
     {
         public static IList<Categoria> Categorie = new List<Categoria>();  //inizialmente è vuota questa lista
         public static IList<Utente> Utenti = new List<Utente>();
+
     }
 }

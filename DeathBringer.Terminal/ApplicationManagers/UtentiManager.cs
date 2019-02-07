@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DeathBringer.Terminal.Data;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -78,7 +79,23 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void ElencoUtenti()
         {
-            throw new NotImplementedException();
-        }
+            //recupera quelli in memoria
+            var UtentiRecuperatiDallaMemoria = ApplicationStorage.Utenti;
+            // cicla sulle categorie in memoria
+            for (int i = 0; i < UtentiRecuperatiDallaMemoria.Count; i++)
+            {
+                // Visualizza dati Utente
+                Console.WriteLine(
+                    $"nome: {UtentiRecuperatiDallaMemoria[i].Nome}, " +    //accedo all'i-esimo elemento della lista, e prendo il suo Nome
+                    $"Cognome: {UtentiRecuperatiDallaMemoria[i].Cognome}, " +
+                    $"Email: {UtentiRecuperatiDallaMemoria[i].Email}, " +
+                    $"Indirizzo: {UtentiRecuperatiDallaMemoria[i].Indirizzo}, " +
+                    $"Civico: {UtentiRecuperatiDallaMemoria[i].Civico}, " +
+                    $"Citta: {UtentiRecuperatiDallaMemoria[i].Citta}, " +
+                    $"Cap: {UtentiRecuperatiDallaMemoria[i].Cap}, "
+                    );
+            }
+        // visualizza i nomi, Cognome, Email, Indirizzo, Civico, Citta e Cap 
+    }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DeathBringer.Terminal.BaseClasses;
+using DeathBringer.Terminal.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,7 @@ namespace DeathBringer.Core.ServiceLayers
     {
         public IList<Prodotto> FetchProdotti()
         {
+            
             throw new NotImplementedException();
         }
 
@@ -34,6 +36,15 @@ namespace DeathBringer.Core.ServiceLayers
 
         public IList<ValidationResult> DeleteProdotto(int id)
         {
+            List<ValidationResult> validations = new List<ValidationResult>();
+            var prodottoEsistente = GetProdotto(id);
+            if (prodottoEsistente==null)
+            {
+                validations.Add(new ValidationResult("id non trovato"));
+                return validations;
+            }
+            ApplicationStorage.Prodotti.Remove(prodottoEsistente);
+            return validations;
             throw new NotImplementedException();
         }
     }

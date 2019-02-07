@@ -6,65 +6,66 @@ namespace DeathBringer.Terminal.ApplicationManagers
 {
     public class ProdottiManager
     {
-        public static void Indice()
+        internal static void Indice()
         {
             string selection = null;
-
-            Console.WriteLine("**********************");
-            Console.WriteLine("  Menu Prodotti ");
-            Console.WriteLine("**********************");
+            Console.WriteLine("*********************");
+            Console.WriteLine("Gestione dei Prodotti");
+            Console.WriteLine("*********************");
             Console.WriteLine();
-            Console.WriteLine("A - Inserimento Prodotto");
-            Console.WriteLine("B - Lista Prodotti");
-            Console.WriteLine("C - Rimuovi Prodotto");
-            Console.WriteLine("D - Modifica Prodotto");
-            Console.WriteLine("exit => uscita");
+            Console.WriteLine("1 - Inserimento prodotto");
+            Console.WriteLine("2 - Elenco prodotti");
+            Console.WriteLine("3 - Elimina prodotto");
+            Console.WriteLine("4 - Modifica prodotti");
+            Console.WriteLine("Inserire 'exit' per chiudere il programma.");
             Console.WriteLine();
-            Console.Write(" selezione: ");
+            Console.Write(" Opzione selezionata: ");
             selection = Console.ReadLine();
 
             while (selection != "exit")
             {
-                                
                 switch (selection)
                 {
-                    case "A":
+                    case "1":
                         InserimentoProdotto();
                         break;
-                    case "B":
-                        ListaProdotti();
+                    case "2":
+                        ElencoProdotti();
                         break;
-                    case "C":
-                        RimuoviProdotto();
+                    case "3":
+                        EliminaProdotto();
                         break;
-                    case "D":
+                    case "4":
                         ModificaProdotto();
                         break;
                     default:
-                        Console.WriteLine("Selezone non valida!");
+                        Console.WriteLine("Scelta non valida !");
                         break;
+
                 }
+
             }
-        }
 
-        private static void InserimentoProdotto()
+
+
+        }
+        internal static void InserimentoProdotto()
         {
 
         }
-
-        private static void ListaProdotti()
+        internal static void ElencoProdotti()
         {
 
         }
-
-        private static void RimuoviProdotto()
+        internal static void EliminaProdotto()
         {
 
         }
-
-        private static void ModificaProdotto()
+        internal static void ModificaProdotto()
         {
 
         }
     }
 }
+
+

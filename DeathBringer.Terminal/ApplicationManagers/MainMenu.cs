@@ -61,7 +61,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
                     else
                     {
-                        throw new InvalidOperationException("La selezione fatta non è gestita!");
+                         throw new InvalidOperationException("La selezione fatta non è gestita!");
                     }
 
                 }

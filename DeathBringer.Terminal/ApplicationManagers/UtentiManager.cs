@@ -1,5 +1,8 @@
-﻿using System;
+﻿using DeathBringer.Terminal.Data;
+using DeathBringer.Terminal.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace DeathBringer.Terminal.ApplicationManagers
@@ -63,7 +66,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void CreaUtente()
         {
-            throw new NotImplementedException();
+           
         }
 
         private static void ModificaUtente()
@@ -73,12 +76,66 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void EliminaUtente()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("[ ---------------------------- ]");
+            Console.WriteLine("[ Elimina utente esistente ]");
+
+            Console.Write("Inserisci id utente da eliminare: ");
+            Utente utenteDaProcessare = ReadUtenteFromConsole();
+
+            //Rimozione della categoria dalla lista
+            if (utenteDaProcessare == null)
+            {
+                return;
+            }
+            else
+            {
+                ApplicationStorage.Utenti.Remove(utenteDaProcessare);
+                Console.WriteLine("L'utente è stato cancellato!!!");
+            }
+        }
+
+        
+
+        private static Utente ReadUtenteFromConsole()
+        {
+            //Richiedo id da console
+            var id = Console.ReadLine();
+
+            //Predispongo una variabile per il valore intero
+            int idIntero;
+
+            //Tento di convertire la stringa a intero e, se possibile
+            //inserisco il valore intero in "idIntero". Se la conversione
+            //riesce, ottengo "true" dalla funzione "TryParse", altrimenti false
+            if (!int.TryParse(id, out idIntero))
+            {
+                //Mostro messaggio utente
+                Console.WriteLine("Il valore inserito non è valido!");
+                return null;
+            }
+            else
+            {
+                //Cerco l'elemento in elenco
+                Utente utenteEsistente = ApplicationStorage.Utenti
+                    .SingleOrDefault(utenteCorrente => utenteCorrente.Id == idIntero);
+
+                if (utenteEsistente == null)
+                {
+                    Console.WriteLine("L'utente richiesto non è stato trovato!");
+                    return null;
+                }
+                else
+                {
+                    Console.WriteLine("L'utente richiesto esiste!");
+                    return utenteEsistente;
+                }
+            }
         }
 
         private static void ElencoUtenti()
         {
             throw new NotImplementedException();
         }
+        
     }
 }

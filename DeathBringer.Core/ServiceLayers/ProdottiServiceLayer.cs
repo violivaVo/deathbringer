@@ -45,7 +45,7 @@ namespace DeathBringer.Core.ServiceLayers
             }
             ApplicationStorage.Prodotti.Remove(prodottoEsistente);
             return validations;
-            throw new NotImplementedException();//da rimuovere quando il metodo GetProdotto sarà completato
+            
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DeathBringer.Core.ServiceLayers
 {
-    class UtenteServiceLayer
+    public class UtenteServiceLayer
     {
         public IList<Utente> FetchUtenti()
         {

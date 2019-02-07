@@ -1,16 +1,22 @@
 ﻿using DeathBringer.Terminal.BaseClasses;
+using DeathBringer.Terminal.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Text;
 
 namespace DeathBringer.Core.ServiceLayers
 {
-    class ProdottiServiceLayer
+    public  class ProdottiServiceLayer
     {
         public IList<Prodotto> FetchProdotti()
         {
-            throw new NotImplementedException();
+            //Ritorno semplicemente il contenuto dell'archivio
+            return ApplicationStorage.Prodotti
+                .OrderBy(e => e.Nome)
+                .ThenBy(e => e.Descrizione)
+                .ToList();
         }
 
         public Prodotto GetProdotto(int id)
@@ -22,10 +28,6 @@ namespace DeathBringer.Core.ServiceLayers
         {
             throw new NotImplementedException();
         }
-
-
-
-
 
         public IList<ValidationResult> UpdateProdotto(int id, string name, string description)
         {

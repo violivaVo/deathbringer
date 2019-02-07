@@ -1,4 +1,7 @@
-﻿using System;
+﻿using DeathBringer.Core.ServiceLayers;
+using DeathBringer.Terminal.BaseClasses;
+using DeathBringer.Terminal.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -51,7 +54,8 @@ namespace DeathBringer.Terminal.ApplicationManagers
         }
         internal static void InserimentoProdotto()
         {
-
+            var Layer = new ProdottiServiceLayer();
+            IList<Prodotto> prodotti = Layer.FetchProdotti();
         }
         internal static void ElencoProdotti()
         {

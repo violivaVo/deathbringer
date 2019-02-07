@@ -16,7 +16,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.WriteLine("*********************************");
             Console.WriteLine();
             Console.WriteLine("1 - Dati Esempio");
-            Console.WriteLine("2 - Inserimento Prodotto");
+            Console.WriteLine("2 - Gestione Prodotti");
             Console.WriteLine("3 - Gestione Categorie");
             Console.WriteLine("Premere un tasto per terminare");
 
@@ -36,7 +36,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             {
                 if (numeroSelezioneUtente == "2")
                 {
-                    SampleCreazioneDati.CreaDatiEsempio();
+                    ProdottiManager.Indice();
                 }
 
                 if (numeroSelezioneUtente == "3")

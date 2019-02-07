@@ -1,8 +1,6 @@
 ﻿using DeathBringer.Terminal.Data;
-<<<<<<< HEAD
-=======
 using DeathBringer.Terminal.Entities;
->>>>>>> ca94fb95179ee032f8aeea94e4af9ff38c19873a
+
 using System;
 using System.Collections.Generic;
 using System.Text;

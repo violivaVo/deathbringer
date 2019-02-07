@@ -10,6 +10,6 @@ namespace DeathBringer.Terminal.Interfaces
         DateTime DataCreazioneRecord { get; set; }
         DateTime DataUltimaModifica { get; set; }
         string UtenteCreazioneRecord { get; set; }
-       string UtenteUltimaModificaRecord { get; set; }
+        string UtenteUltimaModificaRecord { get; set; }
     }
 }

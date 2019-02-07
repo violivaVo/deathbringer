@@ -8,7 +8,8 @@ namespace DeathBringer.Terminal.BaseClasses
 {
     public static class GeneratoreId
     {
-        public static int GeneraNuovoIdentificatore<TEntity>(IList<TEntity> lista) //non è void perché questa funz. a diff. delle altre mi ritorna qualcosa, un int
+        public static int GeneraNuovoIdentificatore<TEntity>(IList<TEntity> lista) 
+            //non è void perché questa funz. a diff. delle altre mi ritorna qualcosa, un int
             where TEntity : IEntity
         {
             //verifico quanti ce ne sono in archivio

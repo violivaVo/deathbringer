@@ -14,21 +14,21 @@ namespace DeathBringer.Terminal
 
             MainMenu.VisualizzaMenuPrincipale();
 
-            Console.Write("Inserisci un nome prodotto: "); //quello che inserisci, dopo l'invio viene assegnato alla variabile qui sotto definita
-            string nomeProdotto = Console.ReadLine();
-            Console.Write("Inserisci una descrizione prodotto: "); //quello che inserisci, dopo l'invio viene assegnato alla variabile qui sotto definita
-            string descrizioneProdotto = Console.ReadLine();
+            //Console.Write("Inserisci un nome prodotto: "); //quello che inserisci, dopo l'invio viene assegnato alla variabile qui sotto definita
+            //string nomeProdotto = Console.ReadLine();
+            //Console.Write("Inserisci una descrizione prodotto: "); //quello che inserisci, dopo l'invio viene assegnato alla variabile qui sotto definita
+            //string descrizioneProdotto = Console.ReadLine();
 
-            Prodotto nuovoProdotto = new Prodotto();
-            nuovoProdotto.Nome = nomeProdotto;
-            nuovoProdotto.Descrizione = descrizioneProdotto;
-            Console.WriteLine("Creato prodotto " + nuovoProdotto.Nome + "!");
-            Console.ReadLine();
+            //Prodotto nuovoProdotto = new Prodotto();
+            //nuovoProdotto.Nome = nomeProdotto;
+            //nuovoProdotto.Descrizione = descrizioneProdotto;
+            //Console.WriteLine("Creato prodotto " + nuovoProdotto.Nome + "!");
+            //Console.ReadLine();
 
-            Console.WriteLine("Modifica nome prodotto: ");
-            string nomeProdDaModificare = Console.ReadLine();
-            Console.WriteLine("Il nuovo nome del prodotto è ");
-            string nomeProdModificato = Console.ReadLine();
+            //Console.WriteLine("Modifica nome prodotto: ");
+            //string nomeProdDaModificare = Console.ReadLine();
+            //Console.WriteLine("Il nuovo nome del prodotto è ");
+            //string nomeProdModificato = Console.ReadLine();
 
         }
 

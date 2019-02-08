@@ -153,6 +153,8 @@ namespace DeathBringer.Terminal.ApplicationManagers
         private static void ElencoCategorie()   //lo definisce private, perché a priori non è necessario che sia public o internal, viene richiamato solo qui sopra
         {
             //recupera quelle in memoria
+            ApplicationServiceLayer layer = new ApplicationServiceLayer();
+            var validazioni = layer.FetchCategorie();
             var categorieRecuperateDallaMemoria = ApplicationStorage.Categorie;
 
 

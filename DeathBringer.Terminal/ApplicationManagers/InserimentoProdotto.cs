@@ -9,7 +9,7 @@ using System.Text;
 
 namespace DeathBringer.Terminal.ApplicationManagers
 {
-    public class CreazioneProdotto
+    class CreazioneProdotto
     {
         private static Categoria categoriaClasse;
 
@@ -19,14 +19,16 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.WriteLine(" => nome : ");
             var nome = Console.ReadLine();
             Console.WriteLine(" => categoria : ");
-            var categString = Console.ReadLine();
-            int m = ApplicationStorage.Categorie.Count;
+            var categoryString = Console.ReadLine();
+            int m = ApplicationStorage.Prodotti.Count;
             for (int i = 0; i < m; i++)
             {
                 string category = ApplicationStorage.Categorie[i].Nome;
                 Categoria categoriaClasse = new Categoria();
-                if (category == categString) categoriaClasse = ApplicationStorage.Categorie[i];
+                if (category == categoryString)
+                    categoriaClasse = ApplicationStorage.Categorie[i];
             };
+
             Console.WriteLine("Data Produzione: ");
             var dataProduzioneString = Console.ReadLine();
             DateTime dataProduzione = Convert.ToDateTime(dataProduzioneString);
@@ -54,7 +56,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
         private static int GeneraNuovoIdentificatore() //non è void perché questa funz. a diff. delle altre mi ritorna qualcosa, un int
         {
             //verifico quanti ce ne sono in archivio
-            var elementiEsistenti = ApplicationStorage.Categorie.Count;
+            var elementiEsistenti = ApplicationStorage.Prodotti.Count;
             //se non ne ho, il valore base è 1
             if (elementiEsistenti == 0)
             {
@@ -63,11 +65,11 @@ namespace DeathBringer.Terminal.ApplicationManagers
             else
             {   //devo cercare l'elemento con Id maggiore
                 int idMaggiore = 0;
-                for (var i = 0; i < ApplicationStorage.Categorie.Count; i++)
+                for (var i = 0; i < ApplicationStorage.Prodotti.Count; i++)
                 {
-                    if (ApplicationStorage.Categorie[i].Id > idMaggiore)
+                    if (ApplicationStorage.Prodotti[i].Id > idMaggiore)
                     {
-                        idMaggiore = ApplicationStorage.Categorie[i].Id;
+                        idMaggiore = ApplicationStorage.Prodotti[i].Id;
                     }
 
                 }
@@ -77,5 +79,6 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 //questa cosa usa LINQ (??)
             }
         }
+
     }
 }

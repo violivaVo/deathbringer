@@ -162,13 +162,13 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 //visualizza nomi e descrizioni
                 Console.WriteLine(
                     $"nome: {categorieRecuperateDallaMemoria[i].Nome}, " +    //accedo all'i-esimo elemento della lista, e prendo il suo Nome
-                    $"descr: {categorieRecuperateDallaMemoria[i].Descrizione}, " + //accedo all'i-esimo elemento della lista, e prendo la sua Descrizione
+                    $"descr: {categorieRecuperateDallaMemoria[i].Descrizione}, "+ //accedo all'i-esimo elemento della lista, e prendo la sua Descrizione
                     $"id: {categorieRecuperateDallaMemoria[i].Id}, ");
-            }
+        }
             // visualizza i nomi e le descrizioni
         }
 
-        private static void CreaCategoria()
+        private static void CreaCategoria() 
         {
             Console.WriteLine("Creazione nuova Categoria");
             // chiediamo il nome della categoria E DESCRIZIONE
@@ -181,7 +181,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             //creazione categoria
             Categoria cat = new Categoria  //invece di mettere parentesi tonde, metto parentesi graffe e ad ogni variabile assegno quello che voglio, separate da virgole, e 
                                            //; dopo la graffa
-
+ 
             {
                 Id = GeneratoreId.GeneraNuovoIdentificatore<Categoria>(ApplicationStorage.Categorie), //metodo per poter richiamarlo quando modifico
                 Nome = nome,
@@ -193,7 +193,10 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.WriteLine($"Creata categoria {cat.Nome}!"); //oppure concateni, ya know, ma conviene questo modo moderno
             Console.ReadLine();
         }
+
+       
     }
+
 }
 
 

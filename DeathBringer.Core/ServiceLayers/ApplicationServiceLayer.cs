@@ -11,10 +11,38 @@ namespace DeathBringer.Core.ServiceLayers
 {
     public class ApplicationServiceLayer
     {
-        /// <summary>
-        /// Recupera lista delle categorie
-        /// </summary>
-        /// <returns></returns>
+        public event EventHandler<string> CategorieSaved;
+        public event EventHandler<string> UtentiSaved;
+        public event EventHandler<string> ProdottiSaved;
+
+        public ApplicationServiceLayer()
+        {
+            //Aggancio il delegato sull'evento
+            ApplicationStorage.DatabaseSaved += OnDatabaseSaved;
+        }
+
+        private void OnDatabaseSaved(object sender, string e)
+        {
+            //Seleziono l'evento da lanciare a seconda della stringa
+            switch (e)
+            {
+                case nameof(Categoria):
+                    if (CategorieSaved != null)
+                        CategorieSaved(this, "Database categorie salvato!");
+                    break;
+                case nameof(Utente):
+                    if (UtentiSaved != null)
+                        UtentiSaved(this, "Salvato utente");
+                    break;
+                case nameof(Prodotto):
+                    if (ProdottiSaved != null)
+                        ProdottiSaved(this, "Salvato prodotto");
+                    break;
+                default:
+                    throw new NotSupportedException($"Valore {e} non supportato");
+            }
+        }
+
         public IList<Categoria> FetchCategorie()
         {
             //Ritorno semplicemente il contenuto dell'archivio
@@ -36,16 +64,10 @@ namespace DeathBringer.Core.ServiceLayers
                 return null;
 
             //Prendo l'unico elemento con id specificato
-            return ApplicationStorage.Categorie                
+            return ApplicationStorage.Categorie              
                 .SingleOrDefault(e => e.Id == id);
         }
 
-        /// <summary>
-        /// Inserisce una categoria e ritorna le validazioni
-        /// </summary>
-        /// <param name="name">Nome</param>
-        /// <param name="description">Descrizione</param>
-        /// <returns>Ritorna lista di validazioni</returns>
         public IList<ValidationResult> InsertCategoria(string name, string description)
         {
             //Preparo la lista vuota che è simbolo di successo dell'operazione
@@ -78,50 +100,15 @@ namespace DeathBringer.Core.ServiceLayers
             return validations;
         }
 
-        /// <summary>
-        /// Modifica una categoria esistente e ritorna le validazioni
-        /// </summary>
-        /// <param name="id">Id categoria</param>
-        /// <param name="name">Nome</param>
-        /// <param name="description">Descrizione</param>
-        /// <returns>Ritorna lista di validazioni</returns>
         public IList<ValidationResult> UpdateCategoria(int id, string name, string description)
         {
-            //Preparo la lista vuota che è simbolo di successo dell'operazione
-            IList<ValidationResult> validations = new List<ValidationResult>();
+            //Quando cerco non ho nulla
 
-            //Recupero della categoria esistente
-            var categoriaEsistente = GetCategoria(id);
+            //Se i campi richiesti non sono compilati
 
-            //Se non esiste, messaggio
-            if (categoriaEsistente == null)
-            {
-                //Aggiungo il messaggio con la spiegazione ed esco
-                validations.Add(new ValidationResult($"La categoria {id} non esiste"));
-                return validations;
-            }
-
-            //Se il nome (che è OBBLIGATORIO) è vuoto o nullo, esco
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                //Aggiungo il messaggio con la spiegazione ed esco
-                validations.Add(new ValidationResult($"Il nome è obbligatorio"));
-                return validations;
-            }
-
-            //Aggiornamento entità
-            categoriaEsistente.Nome = name;
-            categoriaEsistente.Descrizione = description;
-
-            //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
-            return validations;
+            throw new NotImplementedException();
         }
 
-        /// <summary>
-        /// Cancella una categoria esistente e ritorna le validazioni
-        /// </summary>
-        /// <param name="id">Id della categoria</param>
-        /// <returns>Ritorna lista di validazioni</returns>
         public IList<ValidationResult> DeleteCategoria(int id)
         {
             //Cerco l'elemento in archivio
@@ -144,7 +131,5 @@ namespace DeathBringer.Core.ServiceLayers
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;
         }
-
-        
     }
 }

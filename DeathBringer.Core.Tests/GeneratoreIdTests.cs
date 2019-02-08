@@ -62,7 +62,7 @@ namespace DeathBringer.Core.Tests
             var elementoCon17 = sampleCategorie.SingleOrDefault(e => e.Id == 17);
 
             //Assert: se non ho elementi, il test è passato
-            Assert.IsTrue(elementoCon17 == null);
+            Assert.IsTrue(elementoCon17 != null);
         }
 
         [TestMethod]

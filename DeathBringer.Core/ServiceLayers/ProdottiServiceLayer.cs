@@ -10,8 +10,10 @@ namespace DeathBringer.Core.ServiceLayers
 {
     public class ProdottiServiceLayer
     {
+        
         public IList<Prodotto> FetchProdotti()
         {
+            ApplicationStorage.LoadProdotti();
             return ApplicationStorage.Prodotti
                 .OrderBy(e => e.Nome)
                 .ThenBy(e => e.Brand)
@@ -37,8 +39,11 @@ namespace DeathBringer.Core.ServiceLayers
                 return validations;
             }
 
+            //Carico dal disco
+            ApplicationStorage.LoadProdotti();
+
             //Creazione dell'oggetto (classe)
-            var nuovoProdotto = new Prodotto
+            var nuovaProdotto = new Prodotto
             {
                 Id = GeneratoreId.GeneraNuovoIdentificatore<Prodotto>(ApplicationStorage.Prodotti),
                 Nome = name,
@@ -50,7 +55,10 @@ namespace DeathBringer.Core.ServiceLayers
             };
 
             //Aggiunta nella lista generale
-            ApplicationStorage.Prodotti.Add(nuovoProdotto);
+            ApplicationStorage.Prodotti.Add(nuovaProdotto);
+
+            //Salvo sul disco
+            ApplicationStorage.SaveProdotti();
 
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;

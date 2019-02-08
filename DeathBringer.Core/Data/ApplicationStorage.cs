@@ -10,6 +10,7 @@ namespace DeathBringer.Terminal.Data
 {
     public class ApplicationStorage   //creato questa classe per metterci dentro una variabile statica di tipo lista categorie
     {
+        //Creazione dell'evento generale
         public static event EventHandler<string> DatabaseSaved;
 
 

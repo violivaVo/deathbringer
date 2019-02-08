@@ -11,6 +11,38 @@ namespace DeathBringer.Core.ServiceLayers
 {
     public class ApplicationServiceLayer
     {
+        public event EventHandler<string> CategorieSaved;
+        public event EventHandler<string> UtentiSaved;
+        public event EventHandler<string> ProdottiSaved;
+
+        public ApplicationServiceLayer()
+        {
+            //Aggancio il delegato sull'evento
+            ApplicationStorage.DatabaseSaved += OnDatabaseSaved;
+        }
+
+        private void OnDatabaseSaved(object sender, string e)
+        {
+            //Seleziono l'evento da lanciare a seconda della stringa
+            switch (e)
+            {
+                case nameof(Categoria):
+                    if (CategorieSaved != null)
+                        CategorieSaved(this, "Database categorie salvato!");
+                    break;
+                case nameof(Utente):
+                    if (UtentiSaved != null)
+                        UtentiSaved(this, "Salvato utente");
+                    break;
+                case nameof(Prodotto):
+                    if (ProdottiSaved != null)
+                        ProdottiSaved(this, "Salvato prodotto");
+                    break;
+                default:
+                    throw new NotSupportedException($"Valore {e} non supportato");
+            }
+        }
+
         public IList<Categoria> FetchCategorie()
         {
             //Ritorno semplicemente il contenuto dell'archivio

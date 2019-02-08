@@ -19,6 +19,7 @@ namespace DeathBringer.Terminal.Data
         public const string PercorsoFileDatabaseProdotti = "C:\\deathbringer-prodotti.json";
 
         public static object Categorie { get; private set; }
+        public static Action<object, string> DatabaseSaved { get; internal set; }
 
         public static void LoadCategorie()
         {

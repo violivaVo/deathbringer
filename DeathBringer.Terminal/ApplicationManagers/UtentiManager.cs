@@ -1,4 +1,5 @@
-﻿using DeathBringer.Terminal.Data;
+﻿using DeathBringer.Core.ServiceLayers;
+using DeathBringer.Terminal.Data;
 using DeathBringer.Terminal.Entities;
 
 using System;
@@ -29,6 +30,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 Console.WriteLine("exit => uscita");
                 Console.WriteLine();
                 Console.Write(" selezione: ");
+
 
                 //leggo la selezione
                 selezioneU = Console.ReadLine();  //nota (NON PIù, POI L'HO DEF. PRIMA) il tipo var: sta avvenendo un'assegnazione diretta, quindi non è necessario indicare prima il suo tipo ( è un pigliatutto)
@@ -97,18 +99,19 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.WriteLine(" => Cognome : ");
             var cognome = Console.ReadLine();
 
-           
-            Utente cat = new Utente //invece di mettere parentesi tonde, metto parentesi graffe e ad ogni variabile assegno quello che voglio, separate da virgole, e 
-                                           //; dopo la graffa
+            //Istanzio il layer di lavoro
+            UtenteServiceLayer layer = new UtenteServiceLayer();
+            var validazioni = layer.InsertUtente(nome, cognome);
+               
+            if(validazioni.Count == 0)
             {
-                Id = GeneraNuovoUtente(), //metodo per poter richiamarlo quando modifico
-                Nome = nome,
-                Cognome = cognome
-            };
+                //Visualizza conferma
+                Console.WriteLine($"Creato Utente {nome}!");
+                return;
+            }
+            
 
-            ApplicationStorage.Utenti.Add(cat);
-
-            Console.WriteLine($"Inserito nuovo utente {cat.Nome}!"); //oppure concateni, ya know, ma conviene questo modo moderno
+            
             Console.ReadLine();
         }
 

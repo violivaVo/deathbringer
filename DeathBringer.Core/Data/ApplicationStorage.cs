@@ -17,9 +17,9 @@ namespace DeathBringer.Terminal.Data
         public static IList<Prodotto> Prodotti = new List<Prodotto>();
         public static IList<Utente> Utenti = new List<Utente>();
 
-        public const string PercorsoFileDatabaseCategorie = "C:\\deathbringer-categorie.json";
-        public const string PercorsoFileDatabaseUtenti = "C:\\deathbringer-utenti.json";
-        public const string PercorsoFileDatabaseProdotti = "C:\\deathbringer-prodotti.json";
+        public const string PercorsoFileDatabaseCategorie = "C:\\Users\\Guest111\\Desktop\\deathbringer-categorie.json";
+        public const string PercorsoFileDatabaseUtenti = "C:\\Users\\Guest111\\Desktop\\deathbringer-utenti.json";
+        public const string PercorsoFileDatabaseProdotti = "C:\\Users\\Guest111\\Desktop\\deathbringer-prodotti.json";
 
         public static void LoadCategorie()
         {
@@ -67,6 +67,31 @@ namespace DeathBringer.Terminal.Data
 
             //Scrittura del file sul disco
             File.WriteAllText(PercorsoFileDatabaseProdotti, json);
+        }
+        public static void LoadUtenti()
+        {
+            //Verifico che il file esiste
+            if (!File.Exists(PercorsoFileDatabaseUtenti))
+                return;
+
+            //Leggo il contenuto del file
+            var contenuto = File.ReadAllText(PercorsoFileDatabaseUtenti);
+
+            //De-serializzo il contenuto sulla classe corrente
+            Utenti = JsonConvert.DeserializeObject<IList<Utente>>(contenuto);
+        }
+
+        public static void SaveUtenti()
+        {
+            //Serializziamo le categorie in JSON
+            var json = JsonConvert.SerializeObject(Utenti);
+
+            //Scrittura del file sul disco
+            File.WriteAllText(PercorsoFileDatabaseUtenti, json);
+
+            //Se ho un gestore di evento, sollevo l'evento
+            if (DatabaseSaved != null)
+                DatabaseSaved(null, nameof(Utente));
         }
     }
 }

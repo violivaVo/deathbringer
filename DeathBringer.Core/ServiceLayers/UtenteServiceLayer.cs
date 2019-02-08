@@ -18,7 +18,7 @@ namespace DeathBringer.Core.ServiceLayers
         {
             //Preparo la lista vuota che è simbolo di successo dell'operazione
             IList<ValidationResult> validations = new List<ValidationResult>();
-
+            ApplicationStorage.LoadUtenti();
             //Se il nome (che è OBBLIGATORIO) è vuoto o nullo, esco
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -40,13 +40,14 @@ namespace DeathBringer.Core.ServiceLayers
             };
             //Aggiunta nella lista generale
             ApplicationStorage.Utenti.Add(nuovoUtente);
-
+            ApplicationStorage.SaveUtenti();
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;
         }
 
         public IList<Utente> FetchUtenti()
         {
+            ApplicationStorage.LoadUtenti();
             return ApplicationStorage.Utenti
                 .OrderBy(e => e.Nome)
                 .ThenBy(e => e.Indirizzo)
@@ -55,6 +56,7 @@ namespace DeathBringer.Core.ServiceLayers
 
         public Utente GetUtente(int id)
         {
+            ApplicationStorage.LoadUtenti();
             //Validazione argomento
             if (id <= 0)
                 return null;
@@ -69,7 +71,7 @@ namespace DeathBringer.Core.ServiceLayers
         {
             //Cerco l'elemento in archivio
             var utenteEsistente = GetUtente(id);
-
+            ApplicationStorage.LoadUtenti();
             //Preparo la lista vuota che è simbolo di successo dell'operazione
             IList<ValidationResult> validations = new List<ValidationResult>();
 
@@ -89,6 +91,7 @@ namespace DeathBringer.Core.ServiceLayers
             {
                 //Aggiungo il messaggio con la spiegazione ed esco
                 validations.Add(new ValidationResult("Hai mancato un campo di inserimento "));
+                
                 return validations;
             }
             utenteEsistente.Username = username;
@@ -102,6 +105,7 @@ namespace DeathBringer.Core.ServiceLayers
             utenteEsistente.Civico = civico;
 
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
+            ApplicationStorage.SaveUtenti();
             return validations;
 
         }
@@ -110,7 +114,7 @@ namespace DeathBringer.Core.ServiceLayers
         {
             //Cerco l'elemento in archivio
             var utenteEsistente = GetUtente(id);
-
+            ApplicationStorage.LoadUtenti();
             //Preparo la lista vuota che è simbolo di successo dell'operazione
             IList<ValidationResult> validations = new List<ValidationResult>();
 
@@ -124,7 +128,7 @@ namespace DeathBringer.Core.ServiceLayers
 
             //Rimozione della categoria dallo storage
             ApplicationStorage.Utenti.Remove(utenteEsistente);
-
+            ApplicationStorage.SaveUtenti();
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;
         }

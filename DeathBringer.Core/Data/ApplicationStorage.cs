@@ -2,6 +2,7 @@
 using DeathBringer.Terminal.BaseClasses;
 using DeathBringer.Terminal.Entities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +14,11 @@ namespace DeathBringer.Terminal.Data
     {
         //Creazione dell'evento generale
         public static event EventHandler<string> DatabaseSaved;
+
+        private static JsonSerializerSettings settings = new JsonSerializerSettings
+        {
+            ContractResolver = new CamelCasePropertyNamesContractResolver()
+        };
 
 
         public static IList<Categoria> Categorie = new List<Categoria>();  //inizialmente è vuota questa lista
@@ -33,13 +39,13 @@ namespace DeathBringer.Terminal.Data
             var contenuto = File.ReadAllText(FileUtils.ComposeFileName<Categoria>());
 
             //De-serializzo il contenuto sulla classe corrente
-            Categorie = JsonConvert.DeserializeObject<IList<Categoria>>(contenuto);
+            Categorie = JsonConvert.DeserializeObject<IList<Categoria>>(contenuto, settings);
         }
 
         public static void SaveCategorie()
         {
             //Serializziamo le categorie in JSON
-            var json = JsonConvert.SerializeObject(Categorie);
+            var json = JsonConvert.SerializeObject(Categorie, Formatting.Indented, settings);
 
             //Scrittura del file sul disco
             File.WriteAllText(FileUtils.ComposeFileName<Categoria>(), json);
@@ -59,13 +65,13 @@ namespace DeathBringer.Terminal.Data
             var contenuto = File.ReadAllText(FileUtils.ComposeFileName<Prodotto>());
 
             //De-serializzo il contenuto sulla classe corrente
-            Prodotti = JsonConvert.DeserializeObject<IList<Prodotto>>(contenuto);
+            Prodotti = JsonConvert.DeserializeObject<IList<Prodotto>>(contenuto, settings);
         }
 
         public static void SaveProdotti()
         {
             //Serializziamo le categorie in JSON
-            var json = JsonConvert.SerializeObject(Prodotti);
+            var json = JsonConvert.SerializeObject(Prodotti, Formatting.Indented, settings);
 
             //Scrittura del file sul disco
             File.WriteAllText(FileUtils.ComposeFileName<Prodotto>(), json);
@@ -80,13 +86,13 @@ namespace DeathBringer.Terminal.Data
             var contenuto = File.ReadAllText(FileUtils.ComposeFileName<Utente>());
 
             //De-serializzo il contenuto sulla classe corrente
-            Utenti = JsonConvert.DeserializeObject<IList<Utente>>(contenuto);
+            Utenti = JsonConvert.DeserializeObject<IList<Utente>>(contenuto, settings);
         }
 
         public static void SaveUtenti()
         {
             //Serializziamo le categorie in JSON
-            var json = JsonConvert.SerializeObject(Utenti);
+            var json = JsonConvert.SerializeObject(Utenti, Formatting.Indented, settings);
 
             //Scrittura del file sul disco
             File.WriteAllText(FileUtils.ComposeFileName<Utente>(), json);

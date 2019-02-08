@@ -63,7 +63,28 @@ namespace DeathBringer.Terminal.Data
             //Scrittura del file sul disco
             File.WriteAllText(PercorsoFileDatabaseProdotti, json);
         }
-    }
 
-    
+        public static void LoadUtenti()
+        {
+            //Verifico che il file esiste
+            if (!File.Exists(PercorsoFileDatabaseUtenti))
+                return;
+
+            //Leggo il contenuto del file
+            var contenuto = File.ReadAllText(PercorsoFileDatabaseUtenti);
+
+            //De-serializzo il contenuto sulla classe corrente
+            Utenti = JsonConvert.DeserializeObject<IList<Utente>>(contenuto);
+        }
+
+        public static void SaveUtenti()
+        {
+            //Serializziamo le categorie in JSON
+            var json = JsonConvert.SerializeObject(Utenti);
+
+            //Scrittura del file sul disco
+            File.WriteAllText(PercorsoFileDatabaseUtenti, json);
+        }
+
+    }
 }

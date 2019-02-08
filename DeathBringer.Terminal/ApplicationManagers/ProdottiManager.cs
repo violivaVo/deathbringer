@@ -29,35 +29,35 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.Write(" Opzione selezionata: ");
             selection = Console.ReadLine();
 
-            while (selection != "exit")
+            //while (selection != "exit")
+            //{
+            switch (selection)
             {
-                switch (selection)
-                {
-                    case "1":
-                        InserimentoProdotto();
-                        break;
-                    case "2":
-                        ElencoProdotti();
-                        break;
-                    case "3":
-                        EliminaProdotto();
-                        break;
-                    case "4":
-                        ModificaProdotto();
-                        break;
-                    default:
-                        Console.WriteLine("Scelta non valida !");
-                        break;
-
-                }
+                case "1":
+                    InserimentoProdotto();
+                    break;
+                case "2":
+                    ElencoProdotti();
+                    break;
+                case "3":
+                    EliminaProdotto();
+                    break;
+                case "4":
+                    ModificaProdotto();
+                    break;
+                default:
+                    Console.WriteLine("Scelta non valida !");
+                    break;
 
             }
 
-
-
+            if (selection != "exit") Indice();
+            //}
         }
+
         internal static void InserimentoProdotto()
         {
+
             var Layer = new ApplicationServiceLayer();
             IList<Prodotto> prodotti = Layer.FetchProdotti();
             Console.WriteLine("Creazione nuovo prodotto");
@@ -65,8 +65,8 @@ namespace DeathBringer.Terminal.ApplicationManagers
             var nome = Console.ReadLine();
             Console.WriteLine(" => categoria : ");
             var categoryString = Console.ReadLine();
-            int m = ApplicationStorage.Prodotti.Count;
-            for (int i = 0; i < m; i++)
+            int m = ApplicationStorage.Categorie.Count;
+            for (int i = 0; i < m; i += 1)
             {
                 string category = ApplicationStorage.Categorie[i].Nome;
                 Categoria categoriaClasse = new Categoria();
@@ -74,9 +74,10 @@ namespace DeathBringer.Terminal.ApplicationManagers
                     categoriaClasse = ApplicationStorage.Categorie[i];
             };
 
-            Console.WriteLine("Data Produzione: ");
-            var dataProduzioneString = Console.ReadLine();
-            DateTime dataProduzione = Convert.ToDateTime(dataProduzioneString);
+            DateTime dataProduzione = DateTime.Now;
+            //Console.WriteLine("Data Produzione: ");
+            //var dataProduzioneString = Console.ReadLine();
+            //DateTime dataProduzione = Convert.ToDateTime(dataProduzioneString);
             Console.WriteLine("Inserisci descrizione: ");
             string descrizione = Console.ReadLine();
             Console.WriteLine("Inserisci brand: ");
@@ -98,6 +99,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.ReadLine();
 
 
+
         }
 
         internal static void ElencoProdotti()
@@ -109,6 +111,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             {
                 // Visualizza dati Utente
                 Console.WriteLine(
+                    $"id: {prodottiRecuperatiDallaMemoria[i].Id}, " +
                     $"nome: {prodottiRecuperatiDallaMemoria[i].Nome}, " +    //accedo all'i-esimo elemento della lista, e prendo il suo Nome
                     $"descrizione: {prodottiRecuperatiDallaMemoria[i].Descrizione}, "
                     );
@@ -154,7 +157,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 var nuovoNome = Console.ReadLine();
                 Console.Write(" => nuovo descr: ");
                 var nuovaDescrizione = Console.ReadLine();
-                
+
 
                 //Assegnamento ad oggetto esistente
                 prodottoDaProcessare.Nome = nuovoNome;
@@ -176,7 +179,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             }
 
             else
-            {  
+            {
                 Prodotto prodottoEsistente = ApplicationStorage.Prodotti
                     .SingleOrDefault(prodottoCorrente => prodottoCorrente.Id == idIntero);
 

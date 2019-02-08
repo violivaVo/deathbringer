@@ -15,10 +15,9 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.WriteLine("*DeathBringer - Menu Principale *");
             Console.WriteLine("*********************************");
             Console.WriteLine();
-            Console.WriteLine("1 - Dati Esempio");
-            Console.WriteLine("2 - Gestione Prodotti");
-            Console.WriteLine("3 - Gestione Categorie");
-            Console.WriteLine("4 - Gestione Utenti");            
+            Console.WriteLine("1 - Gestione Prodotti");
+            Console.WriteLine("2 - Gestione Categorie");
+            Console.WriteLine("3 - Gestione Utenti");
             Console.WriteLine("Premere un tasto per terminare");
 
             // permetto all'utente di scegliiere una funzione (un numero)
@@ -27,36 +26,29 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.Write("Selezione: ");
             string numeroSelezioneUtente = Console.ReadLine();
             Console.WriteLine(" Selezione eseguita:" + numeroSelezioneUtente);
-           
-              // leggo il numero e avvio la funzione scelta
-           if (numeroSelezioneUtente == "1")
+
+
+            if (numeroSelezioneUtente == "1")
             {
-                SampleCreazioneDati.CreaDatiEsempio();
+                ProdottiManager.Indice();
             }
+
+            else if (numeroSelezioneUtente == "2")
+            {
+                CategoriaManager.VisualizzaMenu();
+            }
+
+
+            else if (numeroSelezioneUtente == "3")
+            {
+                UtentiManager.VisualizzaMenu();
+            }
+
             else
             {
-                if (numeroSelezioneUtente == "2")
-                {
-                    ProdottiManager.Indice();
-                }
-
-                else if (numeroSelezioneUtente == "3")
-                {
-                    CategoriaManager.VisualizzaMenu();
-                }
-
-
-                else if (numeroSelezioneUtente == "4")
-                {
-                    UtentiManager.VisualizzaMenu();
-                }
-
-                else
-                {                                      
-                    throw new InvalidOperationException("La selezione fatta non è gestita!");
-                }
+                throw new InvalidOperationException("La selezione fatta non è gestita!");
             }
-
         }
+
     }
 }

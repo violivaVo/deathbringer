@@ -252,6 +252,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             {
                 // Visualizza dati Utente
                 Console.WriteLine(
+                    $"id: {UtentiRecuperatiDallaMemoria[i].Id}, " +
                     $"nome: {UtentiRecuperatiDallaMemoria[i].Nome}, " +    //accedo all'i-esimo elemento della lista, e prendo il suo Nome
                     $"Cognome: {UtentiRecuperatiDallaMemoria[i].Cognome}, " +
                     $"Email: {UtentiRecuperatiDallaMemoria[i].Email}, " +

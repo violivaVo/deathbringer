@@ -58,7 +58,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
         }
         internal static void InserimentoProdotto()
         {
-            var Layer = new ProdottiServiceLayer();
+            var Layer = new ApplicationServiceLayer();
             IList<Prodotto> prodotti = Layer.FetchProdotti();
             Console.WriteLine("Creazione nuovo prodotto");
             Console.WriteLine(" => nome : ");

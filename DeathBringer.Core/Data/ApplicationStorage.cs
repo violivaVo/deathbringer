@@ -39,5 +39,27 @@ namespace DeathBringer.Terminal.Data
             //Scrittura del file sul disco
             File.WriteAllText(PercorsoFileDatabaseCategorie, json);
         }
+
+        public static void LoadProdotti()
+        {
+            //Verifico che il file esiste
+            if (!File.Exists(PercorsoFileDatabaseProdotti))
+                return;
+
+            //Leggo il contenuto del file
+            var contenuto = File.ReadAllText(PercorsoFileDatabaseProdotti);
+
+            //De-serializzo il contenuto sulla classe corrente
+            Prodotti = JsonConvert.DeserializeObject<IList<Prodotto>>(contenuto);
+        }
+
+        public static void SaveProdotti()
+        {
+            //Serializziamo le categorie in JSON
+            var json = JsonConvert.SerializeObject(Prodotti);
+
+            //Scrittura del file sul disco
+            File.WriteAllText(PercorsoFileDatabaseProdotti, json);
+        }
     }
 }

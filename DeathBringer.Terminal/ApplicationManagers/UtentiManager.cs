@@ -100,8 +100,14 @@ namespace DeathBringer.Terminal.ApplicationManagers
             var cognome = Console.ReadLine();
 
             //Istanzio il layer di lavoro
-            UtenteServiceLayer layer = new UtenteServiceLayer();
-            var validazioni = layer.InsertUtente(nome, cognome);
+            ApplicationServiceLayer layer = new ApplicationServiceLayer();
+
+            //Aggancio l'evento di salvataggio della categoria e mostro a video
+
+            layer.UtentiSaved += (o, a) => { Console.WriteLine(a); };
+
+            UtenteServiceLayer layer1 = new UtenteServiceLayer();
+            var validazioni = layer1.InsertUtente(nome, cognome);
                
             if(validazioni.Count == 0)
             {

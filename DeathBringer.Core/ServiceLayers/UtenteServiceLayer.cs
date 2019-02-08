@@ -107,7 +107,6 @@ namespace DeathBringer.Core.ServiceLayers
             utenteEsistente.Civico = civico;
 
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
-            ApplicationStorage.SaveUtenti();
             return validations;
 
         }

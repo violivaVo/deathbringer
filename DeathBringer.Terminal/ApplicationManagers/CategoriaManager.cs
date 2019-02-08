@@ -85,7 +85,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 //Assegnamento ad oggetto esistente
                 categoriaDaProcessare.Nome = nuovoNome;
                 categoriaDaProcessare.Descrizione = nuovaDesc;
-
+                ApplicationStorage.SaveCategorie();
                 Console.WriteLine("La modifica è stata fatta!");
             }
         }

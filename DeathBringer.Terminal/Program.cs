@@ -11,6 +11,11 @@ namespace DeathBringer.Terminal
     {
         public static void Main(string[] args)
         {
+            var start = new DateTime(2017, 03, 08, 11, 13, 14);
+            var end = new DateTime(2017, 03, 31, 06, 03, 52);
+
+            var duration = end.Subtract(start);
+
 
             MainMenu.VisualizzaMenuPrincipale();
 

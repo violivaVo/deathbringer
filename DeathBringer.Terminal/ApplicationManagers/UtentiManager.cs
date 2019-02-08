@@ -151,7 +151,8 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void ModificaUtente()
         {
-
+            UtenteServiceLayer layer = new UtenteServiceLayer();
+            
             Console.WriteLine("[ ---------------------------- ]");
             Console.WriteLine("[ Modifica utente esistente ]");
 
@@ -193,9 +194,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 utenteDaProcessare.Email = nuovaEmail;
                 utenteDaProcessare.Indirizzo = nuovoIndirizzo;
                 utenteDaProcessare.Civico = nuovoCivico;
-              
-
-
+                ApplicationStorage.SaveUtenti();
                 Console.WriteLine("La modifica è stata completata!");
             }
         }
@@ -256,6 +255,8 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void ElencoUtenti()
         {
+            UtenteServiceLayer layer = new UtenteServiceLayer();
+            layer.FetchUtenti();
             //recupera quelli in memoria
             var UtentiRecuperatiDallaMemoria = ApplicationStorage.Utenti;
             // cicla sulle categorie in memoria

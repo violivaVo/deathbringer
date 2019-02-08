@@ -66,7 +66,40 @@ namespace DeathBringer.Core.ServiceLayers
 
         public IList<ValidationResult> UpdateProdotto(int id, string name, string description)
         {
-            throw new NotImplementedException();
+            //Preparo la lista vuota che è simbolo di successo dell'operazione
+            IList<ValidationResult> validations = new List<ValidationResult>();
+
+            //Carico dal disco
+            ApplicationStorage.LoadProdotti();
+
+            //Recupero della categoria esistente
+            var prodottoEsistente = GetProdotto(id);
+
+            //Se non esiste, messaggio
+            if (prodottoEsistente == null)
+            {
+                //Aggiungo il messaggio con la spiegazione ed esco
+                validations.Add(new ValidationResult($"il prodotto {id} non esiste"));
+                return validations;
+            }
+
+            //Se il nome (che è OBBLIGATORIO) è vuoto o nullo, esco
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                //Aggiungo il messaggio con la spiegazione ed esco
+                validations.Add(new ValidationResult($"Il nome è obbligatorio"));
+                return validations;
+            }
+
+            //Aggiornamento entità
+            prodottoEsistente.Nome = name;
+            prodottoEsistente.Descrizione = description;
+
+            //Salvo sul disco
+            ApplicationStorage.SaveProdotti();
+
+            //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
+            return validations;
         }
 
         public IList<ValidationResult> DeleteProdotto(int id)

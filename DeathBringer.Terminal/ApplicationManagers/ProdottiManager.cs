@@ -57,7 +57,37 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         private static void ModificaProdotto()
         {
-            throw new NotImplementedException();
+            
+            
+            
+            Console.WriteLine("[ ---------------------------- ]");
+            Console.WriteLine("[ Modifica Prodotto esistente ]");
+
+            Console.Write("Inserisci id Prodotto da modificare: ");
+            Prodotto prodottoDaProcessare = ReadProdottoFromConsole();
+
+            //Se non esiste, non faccio null
+            if (prodottoDaProcessare == null)
+            {
+                return;
+            }
+            else
+            {
+                //Richiedo il nuovo nomoe
+                Console.Write(" => nuovo nome: ");
+                var nuovoNome = Console.ReadLine();
+                Console.Write(" => nuova desc: ");
+                var nuovaDesc = Console.ReadLine();
+
+                //Assegnamento ad oggetto esistente
+               
+                prodottoDaProcessare.Nome = nuovoNome;
+                prodottoDaProcessare.Descrizione = nuovaDesc;
+                
+                ProdottiServiceLayer layer = new ProdottiServiceLayer();
+                ApplicationStorage.SaveProdotti();
+                Console.WriteLine("La modifica è stata fatta!");
+            }
         }
 
         internal static void InserimentoProdotto()

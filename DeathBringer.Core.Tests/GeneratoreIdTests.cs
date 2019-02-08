@@ -64,5 +64,28 @@ namespace DeathBringer.Core.Tests
             //Assert: se non ho elementi, il test è passato
             Assert.IsTrue(elementoCon17 != null);
         }
+
+        [TestMethod]
+        public void DovrebbeSaltareTuttiINumeriPari()
+        {
+            //Lista vuota
+            var sampleCategorie = new List<Categoria>();
+
+            //Creo 20 categorie
+            for (var i = 0; i < 100; i++)
+            {
+                sampleCategorie.Add(new Categoria
+                {
+                    Id = GeneratoreId.GeneraNuovoIdentificatore(sampleCategorie)
+                });
+            };
+
+            //Estrazione di tutti gli id
+            var ids = sampleCategorie.Select(e => e.Id).ToArray();
+
+            //Verifico che siano tutti dispari
+            foreach (var currentId in ids)
+                Assert.IsTrue(currentId % 2 == 1);
+        }
     }
 }

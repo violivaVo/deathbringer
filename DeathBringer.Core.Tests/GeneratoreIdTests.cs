@@ -24,7 +24,7 @@ namespace DeathBringer.Core.Tests
         }
 
         [TestMethod]
-        public void DovrebbeRitornarmi2SeChiamatoDueVolte()
+        public void DovrebbeRitornarmi3SeChiamatoDueVolte()
         {
             //Lista vuota
             var sampleCategorie = new List<Categoria>();
@@ -40,7 +40,7 @@ namespace DeathBringer.Core.Tests
             var secondValoreGenerato = GeneratoreId.GeneraNuovoIdentificatore(sampleCategorie);
 
             //Asserzione
-            Assert.AreEqual(primoValoreGenerato + 1, secondValoreGenerato);
+            Assert.AreEqual(3, secondValoreGenerato);
         }
 
         [TestMethod]

@@ -181,6 +181,9 @@ namespace DeathBringer.Terminal.ApplicationManagers
             //Istanzio il layer di lavoro
             ApplicationServiceLayer layer = new ApplicationServiceLayer();
 
+            //Aggancio l'evento di salvataggio della categoria e mostro a video
+            layer.CategorieSaved += (o, a) => { Console.WriteLine(a); };
+
             //Creazione categorie
             var validazioni = layer.InsertCategoria(nome, descr);
 

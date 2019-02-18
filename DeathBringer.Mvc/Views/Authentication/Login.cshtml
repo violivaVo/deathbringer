@@ -1,0 +1,21 @@
+﻿@using DeathBringer.Mvc.Models.Authentication;
+@model LoginModel
+
+<form method="post" asp-controller="Authentication" asp-action="Login">
+    username <input type="text" asp-for="Username" />
+    <br />
+    password <input type="text" asp-for="Password" />
+    <br />
+    <input type="submit" value="Login" />
+
+    @if (Model.IsLoginOk == true)
+    {
+        <p>Autenticazione corretta!</p>
+    }
+    else if (Model.IsLoginOk == false)
+    {
+        <p>Autenticazione fallita!</p>
+    }
+
+</form>
+

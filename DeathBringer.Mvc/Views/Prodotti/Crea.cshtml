@@ -1,0 +1,34 @@
+﻿@using DeathBringer.Mvc.Models.Prodotti;
+@model CreaModel
+
+<h1>Crea Prodotto</h1>
+
+@switch (Model.IsValid)
+{
+    case true:
+        <p>
+            Il prodotto è stato salvato! bravo!
+        </p>
+        break;
+    case false:
+        <p>
+            Alcuni dati inseriti non sono validi!
+        </p>
+        break;
+}
+
+<form method="post" asp-action="Crea" asp-controller="Prodotti">
+    nome: <input type="text" asp-for="Nome" />
+    <br />
+    descrizione: <input type="text" asp-for="Descrizione" />
+    <br />
+    brand: <input type="text" asp-for="Brand" />
+    <br />
+    data di creazione: <input type="text" asp-for="DataCreazione" />
+    <br />
+    <input type="checkbox" asp-for="SetDataDiOggi" /> imposta data di oggi
+    <br />
+    <input type="submit" value="Crea">
+</form>
+<a asp-controller="Prodotti" asp-action="Index">Torna all'indice</a>
+

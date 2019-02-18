@@ -1,0 +1,38 @@
+﻿@using DeathBringer.Mvc.Models.Home;
+@model IndexModel
+Benvenuti nella pagina Prodotti
+
+@if (Model.ListaProdotti.Count == 0)
+{
+    <p>
+        Attenzione! Non ci sono prodotti nel tuo catalogo @@
+    </p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Brand</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var singleRow in Model.ListaProdotti)
+            {
+                <tr>
+                    <td>@singleRow.Nome</td>
+                    <td>@singleRow.Descrizione</td>
+                    <td>@singleRow.Brand</td>
+                    <td>@singleRow.DataProduzione</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-controller="Prodotti" asp-action="Crea">
+    Crea nuovo prodotto
+</a>

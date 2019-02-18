@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeathBringer.Terminal", "De
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeathBringer.Core", "DeathBringer.Core\DeathBringer.Core.csproj", "{08D91478-929B-43AA-AC12-1A6D21203B08}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeathBringer.Server", "DeathBringer.Server\DeathBringer.Server.csproj", "{40740F1B-73B5-4E2F-A527-CB157B01DCA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeathBringer.Server", "DeathBringer.Server\DeathBringer.Server.csproj", "{40740F1B-73B5-4E2F-A527-CB157B01DCA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeathBringer.Core.Tests", "DeathBringer.Core.Tests\DeathBringer.Core.Tests.csproj", "{C2BC4761-8F7C-4DA8-975D-1B053CEDC557}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeathBringer.Core.Tests", "DeathBringer.Core.Tests\DeathBringer.Core.Tests.csproj", "{C2BC4761-8F7C-4DA8-975D-1B053CEDC557}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeathBringer.Mvc", "DeathBringer.Mvc\DeathBringer.Mvc.csproj", "{D6B88CC0-D6BB-4620-B9B1-4D28E786AAAA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C2BC4761-8F7C-4DA8-975D-1B053CEDC557}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2BC4761-8F7C-4DA8-975D-1B053CEDC557}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2BC4761-8F7C-4DA8-975D-1B053CEDC557}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6B88CC0-D6BB-4620-B9B1-4D28E786AAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6B88CC0-D6BB-4620-B9B1-4D28E786AAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6B88CC0-D6BB-4620-B9B1-4D28E786AAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6B88CC0-D6BB-4620-B9B1-4D28E786AAAA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

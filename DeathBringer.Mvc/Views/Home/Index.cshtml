@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+</div>
+
+<ul>
+    <li>
+        <a href="https://www.google.it">
+            Google
+        </a>
+    </li>
+    <li>        
+        <a asp-action="Index" asp-controller="Prodotti">
+            Lista Prodotti
+        </a>
+    </li>
+    <li>
+        <a asp-action="Crea" asp-controller="Prodotti">
+            Crea Prodotto
+        </a>
+    </li>
+</ul>

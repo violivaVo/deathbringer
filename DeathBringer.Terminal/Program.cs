@@ -1,4 +1,5 @@
 ﻿using System;
+using DeathBringer.EntityFramework.Data.Repositories;
 using DeathBringer.Terminal.ApplicationManagers;
 using DeathBringer.Terminal.BaseClasses;
 using DeathBringer.Terminal.Entities;
@@ -10,7 +11,7 @@ namespace DeathBringer.Terminal
     class Program: EntityBase
     {
         public static void Main(string[] args)
-        {
+        {            
             var start = new DateTime(2017, 03, 08, 11, 13, 14);
             var end = new DateTime(2017, 03, 31, 06, 03, 52);
 

@@ -30,6 +30,7 @@ namespace DeathBringer.Mvc.Controllers
             {
                 var currentModel = new RigaProdottoModel
                 {
+                    Id = currentEntity.Id,
                     Nome = currentEntity.Nome,
                     Descrizione = currentEntity.Descrizione,
                     Brand = currentEntity.Brand,
@@ -82,6 +83,11 @@ namespace DeathBringer.Mvc.Controllers
             //Altrimenti renderizzo
             model.IsValid = true;
             return View(model);
+        }
+
+        public IActionResult Modifica(int id)
+        {
+            return View();
         }
     }
 }

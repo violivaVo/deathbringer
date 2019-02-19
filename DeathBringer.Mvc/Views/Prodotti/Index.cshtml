@@ -27,6 +27,11 @@ else
                     <td>@singleRow.Descrizione</td>
                     <td>@singleRow.Brand</td>
                     <td>@singleRow.DataProduzione</td>
+                    <td>
+                        <a asp-controller="Prodotti" asp-action="Modifica" asp-route-id="@singleRow.Id">
+                            Modifica
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>

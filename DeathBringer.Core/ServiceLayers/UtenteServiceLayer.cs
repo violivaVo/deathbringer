@@ -14,9 +14,10 @@ namespace DeathBringer.Core.ServiceLayers
 {
     public class UtenteServiceLayer
     {
-       
 
-        public IList<ValidationResult> InsertUtente(string name, string surname)
+
+        public IList<ValidationResult> InsertUtente(string name, string surname,
+            string username, string password)
         {
             //Preparo la lista vuota che è simbolo di successo dell'operazione
             IList<ValidationResult> validations = new List<ValidationResult>();
@@ -35,6 +36,8 @@ namespace DeathBringer.Core.ServiceLayers
                 Id = GeneratoreId.GeneraNuovoIdentificatore<Utente>(ApplicationStorage.Utenti),
                 Nome = name,
                 Cognome = surname,
+                Username = username,
+                Password = password,
                 DataCreazioneRecord = DateTime.Now,
                 DataUltimaModifica = DateTime.Now,
                 UtenteCreazioneRecord = "anonymous",
@@ -93,7 +96,7 @@ namespace DeathBringer.Core.ServiceLayers
             {
                 //Aggiungo il messaggio con la spiegazione ed esco
                 validations.Add(new ValidationResult("Hai mancato un campo di inserimento "));
-                
+
                 return validations;
             }
             utenteEsistente.Username = username;

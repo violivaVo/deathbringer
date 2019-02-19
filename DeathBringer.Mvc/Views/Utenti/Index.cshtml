@@ -1,0 +1,50 @@
+﻿@using DeathBringer.Mvc.Models.Utenti;
+@model UtentiModel
+Benvenuti nella pagina Utenti
+
+@if (Model.ListaUtenti.Count == 0)
+{
+    <p>
+        Attenzione! Non ci sono utenti!
+    </p>
+}
+else
+{
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Indirizzo</th>
+                <th>Civico</th>
+                <th>Cap</th>
+                <th>Citta</th>
+                <th>IsAdministrator</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var singleRow in Model.ListaUtenti)
+            {
+            <tr>
+                <td>@singleRow.Nome</td>
+                <td>@singleRow.Cognome</td>
+                <td>@singleRow.Username</td>
+                <td>@singleRow.Email</td>
+                <td>@singleRow.Indirizzo</td>
+                <td>@singleRow.Civico</td>
+                <td>@singleRow.Cap</td>
+                <td>@singleRow.Citta</td>
+                <td>@singleRow.IsAdministrator</td>
+
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-controller="Utenti" asp-action="Crea">
+    Crea nuovo utente
+</a>

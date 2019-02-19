@@ -1,0 +1,32 @@
+﻿@using DeathBringer.Mvc.Models.Utenti;
+@model CreaUtenteModel
+
+<h1>Crea Utente</h1>
+
+@switch (Model.IsValid)
+{
+    case true:
+        <p>
+            L'utente è stato salvato! bravo!
+        </p>
+        break;
+    case false:
+        <p>
+            Alcuni dati inseriti non sono validi!
+        </p>
+        break;
+}
+
+        <form method="post" asp-action="Crea" asp-controller="Utenti">
+            nome: <input type="text" asp-for="Nome" />
+            <br />
+            cognome: <input type="text" asp-for="Cognome" />
+            <br />
+            username: <input type="text" asp-for="Username" />
+            <br />
+            password: <input type="text" asp-for="Password" />
+            <br />
+            <br />
+            <input type="submit" value="Crea">
+        </form>
+<a asp-controller="Utenti" asp-action="Index">Torna all'indice</a>

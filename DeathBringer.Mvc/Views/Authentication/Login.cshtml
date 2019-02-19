@@ -10,7 +10,10 @@
 
     @if (Model.IsLoginOk == true)
     {
-        <p>Autenticazione corretta!</p>
+        
+        <a asp-controller="Home" asp-action="Index">
+            <p>Autenticazione corretta! Vai alla home</p>
+        </a>
     }
     else if (Model.IsLoginOk == false)
     {

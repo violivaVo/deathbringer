@@ -1,5 +1,9 @@
-﻿using DeathBringer.Mvc.Models.Authentication;
+﻿using DeathBringer.Core.ServiceLayers;
+using DeathBringer.Mvc.Models.Authentication;
+using DeathBringer.Terminal.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DeathBringer.Mvc.Controllers
 {
@@ -16,18 +20,24 @@ namespace DeathBringer.Mvc.Controllers
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
-            //Verificare username e password
-            if (model.Username == "mario.rossi" && model.Password == "paperino")
+            UtenteServiceLayer layer = new UtenteServiceLayer();
+
+            //Recupero la lista dei prodotti dal database
+            IList<Utente> utentiFromDatabase = layer.FetchUtenti();
+
+            var res = utentiFromDatabase.SingleOrDefault(r => r.Username == model.Username &&
+            r.Password == model.Password);
+            if(res!=null)
             {
-                //Se sono ok, dare conferma
                 model.IsLoginOk = true;
             }
             else
             {
-                //Se sono errati, dare errore
                 model.IsLoginOk = false;
             }
 
+
+             
             return View(model);
         }
     }

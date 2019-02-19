@@ -30,14 +30,12 @@ namespace DeathBringer.Mvc.Controllers
             if(res!=null)
             {
                 model.IsLoginOk = true;
+                return RedirectToAction("Index", "Home");
             }
             else
             {
                 model.IsLoginOk = false;
-            }
-
-
-             
+            } 
             return View(model);
         }
     }

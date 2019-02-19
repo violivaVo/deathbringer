@@ -8,14 +8,7 @@
     <br />
     <input type="submit" value="Login" />
 
-    @if (Model.IsLoginOk == true)
-    {
-        
-        <a asp-controller="Home" asp-action="Index">
-            <p>Autenticazione corretta! Vai alla home</p>
-        </a>
-    }
-    else if (Model.IsLoginOk == false)
+     @if (Model.IsLoginOk == false)
     {
         <p>Autenticazione fallita!</p>
     }

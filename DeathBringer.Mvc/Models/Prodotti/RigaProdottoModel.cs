@@ -7,6 +7,8 @@ namespace DeathBringer.Mvc.Models.Home
 {
     public class RigaProdottoModel
     {
+        public int Id { get; set; }
+
         public string Nome { get; set; }
 
         public DateTime DataProduzione { get; set; }

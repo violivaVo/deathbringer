@@ -107,7 +107,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             layer.UtentiSaved += (o, a) => { Console.WriteLine(a); };
 
             UtenteServiceLayer layer1 = new UtenteServiceLayer();
-            var validazioni = layer1.InsertUtente(nome, cognome);
+            var validazioni = layer1.InsertUtente(nome, cognome, "", "");
                
             if(validazioni.Count == 0)
             {

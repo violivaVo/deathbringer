@@ -1,4 +1,5 @@
-﻿using DeathBringer.Terminal.BaseClasses;
+﻿using DeathBringer.Core.Data;
+using DeathBringer.Terminal.BaseClasses;
 using DeathBringer.Terminal.Data;
 using DeathBringer.Terminal.Entities;
 using System;
@@ -15,8 +16,13 @@ namespace DeathBringer.Core.ServiceLayers
         public event EventHandler<string> UtentiSaved;
         public event EventHandler<string> ProdottiSaved;
 
+        public IUtenteRepository UtenteRepository;
+
         public ApplicationServiceLayer()
         {
+            UtenteRepository = DependencyInjectionContainer
+                .Resolve<IUtenteRepository>();
+
             //Aggancio il delegato sull'evento
             ApplicationStorage.DatabaseSaved += OnDatabaseSaved;
         }
@@ -202,6 +208,32 @@ namespace DeathBringer.Core.ServiceLayers
             return validations;
         }
 
+        /// <summary>
+        /// Ritorna una lista di tutti gli utenti del database
+        /// </summary>
+        /// <returns>Ritorna lista</returns>
+        public IList<Utente> FetchUtenti()
+        {
+            return UtenteRepository.FetchAllUtenti();
+        }
 
+        public IList<ValidationResult> CreaUtente(string username,
+            string password, string nome, string cognome)
+        {
+            //TODO Aggiungere altre proprietà
+
+            //Creo l'utente
+            Utente entity = new Utente
+            {
+                Username = username,
+                Password = password,
+                Nome = nome,
+                Cognome = cognome
+            };
+
+            //Creo usando il repository
+            var validations = UtenteRepository.Crea(entity);
+            return validations;
+        }
     }
 }

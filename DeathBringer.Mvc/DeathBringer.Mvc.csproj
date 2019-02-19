@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
   </PropertyGroup>
 
 
@@ -15,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DeathBringer.Core\DeathBringer.Core.csproj" />
+    <ProjectReference Include="..\DeathBringer.EntityFramework\DeathBringer.EntityFramework.csproj" />
   </ItemGroup>
 
 

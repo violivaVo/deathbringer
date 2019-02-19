@@ -71,12 +71,15 @@ namespace DeathBringer.Core.ServiceLayers
                 .SingleOrDefault(e => e.Id == id);
         }
 
-        public IList<ValidationResult> UpdateUtente(int id, string username, string password, string nome, string cognome,
-            string email, string citta, int cap, string indirizzo, string civico)
+        public IList<ValidationResult> UpdateUtente(int id, string username, string password, 
+            string nome, string cognome,
+            string email, string citta, int cap, 
+            string indirizzo, string civico)
         {
+            ApplicationStorage.LoadUtenti();
             //Cerco l'elemento in archivio
             var utenteEsistente = GetUtente(id);
-            ApplicationStorage.LoadUtenti();
+            
             //Preparo la lista vuota che è simbolo di successo dell'operazione
             IList<ValidationResult> validations = new List<ValidationResult>();
 
@@ -89,7 +92,7 @@ namespace DeathBringer.Core.ServiceLayers
             }
 
             //Se i campi richiesti non sono compilati
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(nome)
+           if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(nome)
                 || string.IsNullOrWhiteSpace(cognome) || string.IsNullOrWhiteSpace(email) ||
                 string.IsNullOrWhiteSpace(citta) || string.IsNullOrWhiteSpace(indirizzo) ||
                 string.IsNullOrWhiteSpace(civico) || cap <= 0 || cap >= 100000)
@@ -108,7 +111,8 @@ namespace DeathBringer.Core.ServiceLayers
             utenteEsistente.Cap = cap;
             utenteEsistente.Indirizzo = indirizzo;
             utenteEsistente.Civico = civico;
-
+            
+            ApplicationStorage.SaveUtenti();
             //Mando in uscita le validazioni (VUOTE) per segnalare che è tutto ok
             return validations;
 

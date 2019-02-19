@@ -39,9 +39,9 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 //seleziona la funzione giusta
                 switch (selezioneU)
                 {
-                    case "1":
+                    /*case "1":
                         CreaUtente();
-                        break;
+                        break;*/
                     case "2":
                         ModificaUtente();
                         break;
@@ -91,7 +91,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
         }
 
-        private static void CreaUtente()
+        /*private static void CreaUtente()
         {
             Console.WriteLine("Creazione nuovo utente");
             Console.WriteLine(" => Nome : ");
@@ -120,7 +120,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             
             Console.ReadLine();
         }
-
+        */
         private static int GeneraNuovoUtente()
         {
             //verifico quanti ce ne sono in archivio

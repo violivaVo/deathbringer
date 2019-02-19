@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DeathBringer.Mvc.Models.Utenti
 {
-    public class RigaUtentiModel
+    public class ModificaUtenteModel
     {
         public int Id { get; set; }
         public string Username { get; set; }
@@ -17,6 +17,8 @@ namespace DeathBringer.Mvc.Models.Utenti
         public int Cap { get; set; }
         public string Citta { get; set; } // i caratteri accentati non sono accettati
         public string Password { get; set; }
-        public bool IsAdministrator { get; set; } //permessi utente, è un admin? 
+        public bool IsAdministrator { get; set; } //permessi utente, è un admin?
+
+        public bool? IsModifica { get; set; }
     }
 }

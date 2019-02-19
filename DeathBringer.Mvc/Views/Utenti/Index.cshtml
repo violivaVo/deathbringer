@@ -22,7 +22,9 @@ else
                 <th>Cap</th>
                 <th>Citta</th>
                 <th>IsAdministrator</th>
-                
+                <!--<th>Eliminare</th>-->
+                <th>Modificare</th>
+
             </tr>
         </thead>
         <tbody>
@@ -39,12 +41,14 @@ else
                 <td>@singleRow.Citta</td>
                 <td>@singleRow.IsAdministrator</td>
 
-            </tr>
-            }
-        </tbody>
-    </table>
-}
+                <td><a asp-controller="Utenti" asp-action="Modifica" asp-route-id="@singleRow.Id">Modificare Utente</a></td>
 
-<a asp-controller="Utenti" asp-action="Crea">
-    Crea nuovo utente
-</a>
+                </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <a asp-controller="Utenti" asp-action="Crea">
+        Crea nuovo utente
+    </a>

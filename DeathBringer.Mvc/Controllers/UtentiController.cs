@@ -1,5 +1,6 @@
 ﻿using DeathBringer.Core.ServiceLayers;
 using DeathBringer.Mvc.Models.Utenti;
+using DeathBringer.Terminal.Data;
 using DeathBringer.Terminal.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -78,6 +79,7 @@ namespace DeathBringer.Mvc.Controllers
             {
                 var currentModel = new RigaUtentiModel
                 {
+                    Id = currentEntity.Id,
                     Username = currentEntity.Username,
                     Nome = currentEntity.Nome,
                     Cognome = currentEntity.Cognome,
@@ -97,5 +99,51 @@ namespace DeathBringer.Mvc.Controllers
             //Renderizzazione del modello
             return View(model);
         }
+        
+        public IActionResult Modifica(int id)
+        {
+            
+            UtenteServiceLayer layer = new UtenteServiceLayer();
+            Utente utente = layer.GetUtente(id);
+            ModificaUtenteModel modificaModel = new ModificaUtenteModel()
+            {
+                Id= utente.Id,
+                Username = utente.Username,
+                Nome=utente.Nome,
+                Password = utente.Password,
+                Cognome = utente.Cognome,
+                Indirizzo = utente.Indirizzo,
+                Email = utente.Email,
+                Cap = utente.Cap,
+                Civico = utente.Civico,
+                Citta = utente.Citta
+
+            };
+            
+            return View(modificaModel);
+        }
+        [HttpPost]
+        public IActionResult Modifica(ModificaUtenteModel modificaModel)
+        {
+                UtenteServiceLayer layer = new UtenteServiceLayer();
+                layer
+                .UpdateUtente(modificaModel.Id, modificaModel.Username, modificaModel.Password,
+                modificaModel.Nome, modificaModel.Cognome, modificaModel.Email, modificaModel.Citta,
+                modificaModel.Cap, modificaModel.Indirizzo, modificaModel.Civico);  
+             
+                modificaModel.IsModifica = true;
+                return RedirectToAction("Index", "Utenti");
+           
+          
+              
+          
+
+            
+
+
+        }
+
+        
+
     }
 }

@@ -1,0 +1,29 @@
+﻿@using DeathBringer.Mvc.Models.Utenti;
+@model ModificaUtenteModel
+
+<h1>Modifica Utente</h1>
+<form method="post" asp-action="Modifica" asp-controller="Utenti">
+    Id: <input type="text" asp-for="Id" />
+    <br />
+    nome: <input type="text" asp-for="Nome" />
+    <br />
+    cognome: <input type="text" asp-for="Cognome" />
+    <br />
+    username: <input type="text" asp-for="Username" />
+    <br />
+    password: <input type="text" asp-for="Password" />
+    <br />
+    Email: <input type="text" asp-for="Email" />
+    <br />
+    Indirizzo: <input type="text" asp-for="Indirizzo" />
+    <br />
+    Citta: <input type="text" asp-for="Citta" />
+    <br />
+    Cap: <input type="text" asp-for="Cap" />
+    <br />
+    Civico: <input type="text" asp-for="Civico" />
+    <br />
+    <input type="submit" value="Modifica">
+</form>
+<a asp-controller="Utenti" asp-action="Index">Torna all'indice</a>
+

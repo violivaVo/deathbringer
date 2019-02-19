@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DeathBringer.Core.Data;
+using DeathBringer.EntityFramework.Data.Repositories;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +16,10 @@ namespace DeathBringer.Mvc
     {
         public static void Main(string[] args)
         {
+            DependencyInjectionContainer
+                .Register<IUtenteRepository, EntityFrameworkUtenteRepository>();
+
+
             CreateWebHostBuilder(args).Build().Run();
         }
 

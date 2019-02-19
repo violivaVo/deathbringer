@@ -32,7 +32,10 @@ namespace DeathBringer.EntityFramework.Data.Repositories
         public IList<Utente> FetchAllUtenti()
         {
             //Semplicemente ritorno la lista sul Context
-            return Context.Utenti.ToList();
+            return Context.Utenti
+                .OrderBy(e => e.Username)
+                .ThenBy(e => e.Nome)
+                .ToList();
         }
 
         /// <summary>

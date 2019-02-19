@@ -48,13 +48,19 @@ namespace DeathBringer.Mvc.Controllers
                 return View(model);
             }
 
+            ApplicationServiceLayer layer = new ApplicationServiceLayer();
+
+            //Creo sul database
+            var validations = layer.CreaUtente(
+                model.Username, model.Password, 
+                model.Nome, model.Cognome);
            
             //Istanza del layer di servizio per i prodotti
-            UtenteServiceLayer layer = new UtenteServiceLayer();
+            //UtenteServiceLayer layer = new UtenteServiceLayer();
 
-            //Inserisco il prodotto sul layer di servizio
-            IList<ValidationResult> validazioni = layer
-                .InsertUtente(model.Nome, model.Cognome, model.Username, model.Password);
+            ////Inserisco il prodotto sul layer di servizio
+            //IList<ValidationResult> validazioni = layer
+            //    .InsertUtente(model.Nome, model.Cognome, model.Username, model.Password);
 
             //Altrimenti renderizzo
             model.IsValid = true;

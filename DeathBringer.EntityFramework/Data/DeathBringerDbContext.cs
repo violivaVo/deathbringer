@@ -67,10 +67,10 @@ namespace Yred.Authentication.Relationals.Data.Contexts
             modelBuilder.Entity<Prodotto>().ToTable("tabella_Prodotti");
 
             modelBuilder.Entity<Prodotto>()
-               .HasOne(e => e.CategoriaAppartenenza)
-               .WithMany(e => e.Prodotti)
-               .HasPrincipalKey(e => e.Id)
-               .HasForeignKey(e => e.CategoriaAppartenenzaId);
+               .HasOne(prod => prod.CategoriaAppartenenza)
+               .WithMany(cat => cat.Prodotti)
+               .HasPrincipalKey(cat => cat.Id)
+               .HasForeignKey(pro => pro.CategoriaAppartenenzaId);
         }
 
 //CREATE PROCEDURE SelezionaProdottiConCategorieCreateInData

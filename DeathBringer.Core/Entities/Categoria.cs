@@ -8,10 +8,10 @@ namespace DeathBringer.Terminal.Entities
     {
         [Required(ErrorMessage = "Il campo è richesto")]
         [StringLength(255)]
-        public string Nome { get; set; }
+        public virtual string Nome { get; set; }
 
-        public string Descrizione { get; set; }
+        public virtual string Descrizione { get; set; }
 
-        public List<Prodotto> Prodotti { get; set; }
+        public virtual List<Prodotto> Prodotti { get; set; }
     }
 }

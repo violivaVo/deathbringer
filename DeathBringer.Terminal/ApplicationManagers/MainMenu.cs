@@ -19,6 +19,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             Console.WriteLine("2 - Gestione Prodotti");
             Console.WriteLine("3 - Gestione Categorie");
             Console.WriteLine("4 - Gestione Utenti");
+            Console.WriteLine("5 - Entity Framework Manager");
             Console.WriteLine("Premere un tasto per terminare");
 
             // permetto all'utente di scegliiere una funzione (un numero)
@@ -28,40 +29,26 @@ namespace DeathBringer.Terminal.ApplicationManagers
             string numeroSelezioneUtente = Console.ReadLine();
             Console.WriteLine(" Selezione eseguita:" + numeroSelezioneUtente);
 
-            // leggo il numero e avvio la funzione scelta
-            if (numeroSelezioneUtente == "1")
+            switch (numeroSelezioneUtente)
             {
-                SampleCreazioneDati.CreaDatiEsempio();
-            }
-            else
-            {
-                if (numeroSelezioneUtente == "2")
-                {
+                case "1":
+                    SampleCreazioneDati.CreaDatiEsempio();
+                    break;
+                case "2":
                     ProdottiManager.Indice();
-                }
-
-                else if (numeroSelezioneUtente == "3")
-                {
+                    break;
+                case "3":
                     CategoriaManager.VisualizzaMenu();
-                }
-
-
-                else if (numeroSelezioneUtente == "4")
-                {
+                    break;
+                case "4":
                     UtentiManager.VisualizzaMenu();
-                }
-
-                else
-                {
-                    
-                    {
-                        throw new InvalidOperationException("La selezione fatta non è gestita!");
-                    }
-
-                }
-
+                    break;
+                case "5":
+                    EntityFrameworkManager.VisualizzaMenu();
+                    break;
+                default:
+                    throw new InvalidOperationException("La selezione fatta non è gestita!");
             }
-
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using DeathBringer.Terminal.BaseClasses;
 using DeathBringer.Terminal.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,10 @@ namespace Yred.Authentication.Relationals.Data.Contexts
     public class DeathBringerDbContext: DbContext
     {
         public DbSet<Utente> Utenti { get; set; }
+
+        public DbSet<Prodotto> Prodotti { get; set; }
+
+        public DbSet<Categoria> Categorie { get; set; }
 
         /// <summary>
         /// Raised during context configuration
@@ -58,6 +63,25 @@ namespace Yred.Authentication.Relationals.Data.Contexts
         {
             //Mappo le entità
             modelBuilder.Entity<Utente>().ToTable("tabella_Utenti");
+            modelBuilder.Entity<Categoria>().ToTable("tabella_Categorie");
+            modelBuilder.Entity<Prodotto>().ToTable("tabella_Prodotti");
+
+            modelBuilder.Entity<Prodotto>()
+               .HasOne(e => e.CategoriaAppartenenza)
+               .WithMany(e => e.Prodotti)
+               .HasPrincipalKey(e => e.Id)
+               .HasForeignKey(e => e.CategoriaAppartenenzaId);
         }
+
+//CREATE PROCEDURE SelezionaProdottiConCategorieCreateInData
+//    @From datetime, 
+//	@To datetime
+//AS
+
+//    SELECT* FROM tabella_Prodotti as P, tabella_Categorie as C
+//   WHERE P.CategoriaAppartenenzaId = C.Id
+//   AND C.DataCreazioneRecord >= @From
+//   AND C.DataCreazioneRecord<@To;
+//GO;
     }
 }

@@ -3,23 +3,46 @@ using DeathBringer.Mvc.Models.Home;
 using DeathBringer.Mvc.Models.Prodotti;
 using DeathBringer.Terminal.BaseClasses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DeathBringer.Mvc.Controllers
 {
     public class ProdottiController: Controller
     {
+        private const string ProdottiCacheKey = "ProdottiInMemoria";
+        private IMemoryCache Cache { get; }
+
+        public ProdottiController(IMemoryCache cache)
+        {
+            //Imposto l'accesso alla cache
+            Cache = cache;
+        }
+
         public IActionResult Index()
         {
-            //Istanza del layer di servizio per i prodotti
-            ProdottiServiceLayer layer = new ProdottiServiceLayer();
+            //Predisposizione della lista dei prodotti
+            IList<Prodotto> prodottiFromDatabase = null;
 
-            //Recupero la lista dei prodotti dal database
-            IList<Prodotto> prodottiFromDatabase = layer.FetchProdotti();
+            //Se ho una lista in cache, uso quella
+            var hoRecuperatoDaCache = Cache.TryGetValue(ProdottiCacheKey, out prodottiFromDatabase);
+
+            //Se non ho prelevato da cache, prelevo da database
+            if (!hoRecuperatoDaCache)
+            {
+                //Istanza del layer di servizio per i prodotti
+                ProdottiServiceLayer layer = new ProdottiServiceLayer();
+
+                //Recupero la lista dei prodotti dal database
+                prodottiFromDatabase = layer.FetchProdotti();
+
+                //metto in cache i prodotti scaricati dal database
+                Cache.Set(ProdottiCacheKey, prodottiFromDatabase);
+            }
+
+            //NOTA: Con .NET "Classic" userei "HttpContext.Cache["ProdottiInMemoria"]"
 
             //inizializziamo il modello per il ModelBinder di ASP.NET
             IndexModel model = new IndexModel();

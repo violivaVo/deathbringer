@@ -32,6 +32,9 @@ namespace DeathBringer.Mvc
                     options.LogoutPath = "/Authentication/Logout";
                 });
 
+            //Aggiunta della cache in memoria
+            services.AddMemoryCache();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

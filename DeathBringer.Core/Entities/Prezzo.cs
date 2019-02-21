@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using DeathBringer.Terminal.BaseClasses;
 
 namespace DeathBringer.Terminal.Entities

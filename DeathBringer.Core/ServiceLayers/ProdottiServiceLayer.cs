@@ -4,13 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 
 namespace DeathBringer.Core.ServiceLayers
 {
     public class ProdottiServiceLayer
-    {
-        
+    {        
         public IList<Prodotto> FetchProdotti()
         {
             ApplicationStorage.LoadProdotti();

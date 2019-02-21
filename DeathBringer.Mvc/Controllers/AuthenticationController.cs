@@ -49,24 +49,56 @@ namespace DeathBringer.Mvc.Controllers
         [HttpPost]
         public async Task<IActionResult> LoginCookie(LoginModel model)
         {
+            ApplicationServiceLayer layer = new ApplicationServiceLayer();
+
+            //Recupero la lista dei prodotti dal database
+            IList<Utente> utentiFromDatabase = layer.FetchUtenti();
+
+            //Prendo l'utente corrispondente
+            var utenteSelezionato = utentiFromDatabase.SingleOrDefault(u => u.Username == model.Username);
+
+            //Se non ho trovato l'utente, esco e non faccio nulla
+            if (utenteSelezionato == null)
+            {
+                //Imposto il fallimento e renderizzo la view
+                model.IsLoginOk = false;
+                return View("Login", model);
+            }                
+
+            //Se è stato trovato, verifico la password e ritorno fallimento se errata
+            if (utenteSelezionato.Password != model.Password)
+            {
+                //Imposto il fallimento e renderizzo la view
+                model.IsLoginOk = false;
+                return View("Login", model);
+            }
+
+            //Se sono qui, creo l'elenco dei claims
             var claims = new List<Claim>
             {
-                new Claim( ClaimTypes.Name, model.Username),
-                new Claim("FullName", "Mario"),
-                new Claim(ClaimTypes.Role, "Administrator"),
+                new Claim(ClaimTypes.Name, model.Username),
+                new Claim(ClaimTypes.GivenName, $"{utenteSelezionato.Nome} {utenteSelezionato.Cognome}"),
+                new Claim(ClaimTypes.Email, utenteSelezionato.Email),
+                new Claim("IsAdministrator", utenteSelezionato.IsAdministrator.ToString()),
             };
 
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            //Creo l'Identity usando i claims
+            var claimsIdentity = new ClaimsIdentity(claims, 
+                CookieAuthenticationDefaults.AuthenticationScheme);
 
+            //Creazione delle autorizzazioni
             var authProperties = new AuthenticationProperties
             {
+                //Nessuna impostazione specifica
             };
 
+            //Chiamo la pipeline di ASP.NET per salvare il cookie
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
 
+            //Ridirigo alla pagina principale
             return RedirectToAction("Index", "Home");
         }
     }

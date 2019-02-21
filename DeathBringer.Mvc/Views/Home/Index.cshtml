@@ -1,15 +1,27 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@using DeathBringer.Mvc.Models.Home
+@model HomeIndexModel
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome @Model.AuthenticatedUserName</h1>
 </div>
 
 <ul>
     <li>
         <a href="https://www.google.it">
             Google
+        </a>
+    </li>
+    <li>
+        <a asp-action="Login" asp-controller="Authentication">
+            Login
+        </a>
+    </li>
+    <li>
+        <a asp-action="SuperSecretPage" asp-controller="Home">
+            SuperSecret Page => richiede autorizzazione
         </a>
     </li>
     <li>
@@ -35,6 +47,11 @@
     <li>
         <a asp-action="Login" asp-controller="Authentication">
             <font color="red">Logout</font>
+        </a>
+    </li>
+    <li>
+        <a asp-action="About" asp-controller="Home">
+            About
         </a>
     </li>
 </ul>

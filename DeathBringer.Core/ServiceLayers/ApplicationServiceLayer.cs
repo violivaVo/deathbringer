@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 
 namespace DeathBringer.Core.ServiceLayers
 {
@@ -25,6 +24,20 @@ namespace DeathBringer.Core.ServiceLayers
 
             //Aggancio il delegato sull'evento
             ApplicationStorage.DatabaseSaved += OnDatabaseSaved;
+        }
+
+        /// <summary>
+        /// Ritorna un'utente sulla base del suo username
+        /// </summary>
+        /// <param name="userName">Username</param>
+        /// <returns>Ritorna utente o null</returns>
+        public Utente GetUserByUsername(string userName)
+        {
+            //Estrazione di tutti gli utenti
+            var utenti = FetchUtenti();
+
+            //Ritorno l'utente con username indicato
+            return utenti.SingleOrDefault(u => u.Username == userName);
         }
 
         private void OnDatabaseSaved(object sender, string e)
@@ -218,7 +231,7 @@ namespace DeathBringer.Core.ServiceLayers
         }
 
         public IList<ValidationResult> CreaUtente(string username,
-            string password, string nome, string cognome)
+            string password, string nome, string cognome, string email)
         {
             //TODO Aggiungere altre proprietà
 
@@ -228,7 +241,8 @@ namespace DeathBringer.Core.ServiceLayers
                 Username = username,
                 Password = password,
                 Nome = nome,
-                Cognome = cognome
+                Cognome = cognome, 
+                Email = email
             };
 
             //Creo usando il repository

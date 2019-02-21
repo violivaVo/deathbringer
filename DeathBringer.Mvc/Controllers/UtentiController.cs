@@ -47,13 +47,19 @@ namespace DeathBringer.Mvc.Controllers
                 model.IsValid = false;
                 return View(model);
             }
+            if (string.IsNullOrEmpty(model.Email))
+            {
+                //Imposto il valore di NON validità ed esco
+                model.IsValid = false;
+                return View(model);
+            }
 
             ApplicationServiceLayer layer = new ApplicationServiceLayer();
 
             //Creo sul database
             var validations = layer.CreaUtente(
                 model.Username, model.Password, 
-                model.Nome, model.Cognome);
+                model.Nome, model.Cognome, model.Email);
            
             //Istanza del layer di servizio per i prodotti
             //UtenteServiceLayer layer = new UtenteServiceLayer();

@@ -27,6 +27,34 @@ namespace DeathBringer.Core.ServiceLayers
         }
 
         /// <summary>
+        /// Esegue l'autenticazione dell'utente con le credenziali
+        /// ed emette l'utente se è andata a buon fine
+        /// </summary>
+        /// <param name="userName">Username</param>
+        /// <param name="password">Password</param>
+        /// <returns>Ritorna l'utente o null</returns>
+        public Utente SignIn(string userName, string password)
+        {
+            //Validazione argomenti
+            if (string.IsNullOrEmpty(userName)) throw new ArgumentNullException(nameof(userName));
+            if (string.IsNullOrEmpty(password)) throw new ArgumentNullException(nameof(password));
+
+            //Recupero l'utente usando username
+            var user = GetUserByUsername(userName);
+
+            //Non ho un utente, esco
+            if (user == null)
+                return null;
+
+            //Se ho l'utente, controllo la password
+            if (user.Password != password)
+                return null;
+
+            //Ritorno l''utente autenticato
+            return user;
+        }
+
+        /// <summary>
         /// Ritorna un'utente sulla base del suo username
         /// </summary>
         /// <param name="userName">Username</param>

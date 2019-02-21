@@ -1,12 +1,18 @@
 ﻿using System;
+using DeathBringer.Terminal.BaseClasses;
 using DeathBringer.Terminal.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Yred.Authentication.Relationals.Data.Contexts
 {
-    public class DeathBringerDbContext: DbContext
+    public class DeathBringerDbContext : DbContext
     {
         public DbSet<Utente> Utenti { get; set; }
+
+        public DbSet<Prodotto> Prodotti { get; set; }
+
+        public DbSet<Categoria> Categorie { get; set; }
+        public DbSet<Prezzo> Prezzi { get; set; }
 
         /// <summary>
         /// Raised during context configuration
@@ -39,9 +45,9 @@ namespace Yred.Authentication.Relationals.Data.Contexts
             if (optionsBuilder == null) throw new ArgumentNullException(nameof(optionsBuilder));
 
             //Check is "Default connection string exists
-            const string ConnectionString = "Server=tcp:maurobussini.database.windows.net,1433;" + 
-                "Database=Kirey;User ID=AdminMauroBussini;Password=P@ssw0rd;"  + 
-                "Trusted_Connection=False;Encrypt=True;Connection Timeout=30;MultipleActiveResultSets=true;";
+            const string ConnectionString = @"Server=(LocalDb)\MSSQLLocalDB;" +
+                "Database=Kirey;" +
+                "Trusted_Connection=True;";
 
             //Add SQL configuration
             optionsBuilder.UseSqlServer(ConnectionString);
@@ -58,6 +64,32 @@ namespace Yred.Authentication.Relationals.Data.Contexts
         {
             //Mappo le entità
             modelBuilder.Entity<Utente>().ToTable("tabella_Utenti");
+            modelBuilder.Entity<Categoria>().ToTable("tabella_Categorie");
+            modelBuilder.Entity<Prodotto>().ToTable("tabella_Prodotti");
+            modelBuilder.Entity<Prezzo>().ToTable("tabella_Prezzo");
+
+            modelBuilder.Entity<Prodotto>()
+               .HasOne(prod => prod.CategoriaAppartenenza)
+               .WithMany(cat => cat.Prodotti)
+               .HasPrincipalKey(cat => cat.Id)
+               .HasForeignKey(pro => pro.CategoriaAppartenenzaId);
+
+            modelBuilder.Entity<Prezzo>()
+                .HasOne(prezzo => prezzo.ProdottoAssociato)
+                .WithMany(prod => prod.Prezzi)
+                .HasPrincipalKey(prod => prod.Id)
+                .HasForeignKey(prezzo => prezzo.ProdottoAssociatoId);
         }
+
+        //CREATE PROCEDURE SelezionaProdottiConCategorieCreateInData
+        //    @From datetime, 
+        //	@To datetime
+        //AS
+
+        //    SELECT* FROM tabella_Prodotti as P, tabella_Categorie as C
+        //   WHERE P.CategoriaAppartenenzaId = C.Id
+        //   AND C.DataCreazioneRecord >= @From
+        //   AND C.DataCreazioneRecord<@To;
+        //GO;
     }
 }

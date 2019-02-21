@@ -16,6 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DeathBringer.Core\DeathBringer.Core.csproj" />
+    <ProjectReference Include="..\DeathBringer.EntityFramework\DeathBringer.EntityFramework.csproj" />
+    <ProjectReference Include="..\DeathBringer.Terminal\DeathBringer.Terminal.csproj" />
   </ItemGroup>
 
 </Project>

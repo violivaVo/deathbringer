@@ -83,7 +83,7 @@ namespace DeathBringer.Wpf.ViewModels
                 MessageBox.Show($"Autenticato con successo!");
 
                 //Creo il messaggio per il Messenger
-                Messenger.Default.Send(new CloseSignInViewMessage());
+                Messenger.Default.Send(new ShowMainViewMessage());
 
                 //Chiudo la finestra corrente
 

@@ -155,12 +155,16 @@
     <Compile Include="Converters\ReverseBooleanToBooleanConverter.cs" />
     <Compile Include="Converters\ReverseBooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Messaging\CloseSignInViewMessage.cs" />
+    <Compile Include="Messaging\ShowMainViewMessage.cs" />
     <Compile Include="Misc\SezioneB\Automobile.Parte2.cs" />
     <Compile Include="Misc\SezioneB\Automobile.cs" />
     <Compile Include="ViewModels\SignInViewModel.cs" />
+    <Compile Include="ViewModels\UtenteViewModel.cs" />
     <Compile Include="Views\SignInView.xaml.cs">
       <DependentUpon>SignInView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UtenteView.xaml.cs">
+      <DependentUpon>UtenteView.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\MainView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +180,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\SignInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UtenteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,6 +227,12 @@
       <Project>{08d91478-929b-43aa-ac12-1a6d21203b08}</Project>
       <Name>DeathBringer.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\images\main.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

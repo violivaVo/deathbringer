@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DeathBringer.Wpf.Messaging
 {
-    public class CloseSignInViewMessage
+    public class ShowMainViewMessage
     {
     }
 }

@@ -1,0 +1,41 @@
+﻿<Window x:Class="DeathBringer.Wpf.Views.SignInView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:DeathBringer.Wpf.ViewModels"
+        xmlns:conv="clr-namespace:DeathBringer.Wpf.Converters" 
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d" FontSize="20" MinHeight="300" MinWidth="500" WindowStyle="ToolWindow"
+        d:DataContext="{d:DesignInstance vm:SignInViewModel, IsDesignTimeCreatable=True}"
+        Title="DeathBringer WPF Application" Height="400" Width="600">
+    <Window.Resources>
+        <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverterInstance"/>
+        <conv:ReverseBooleanToVisibilityConverter x:Key="ReverseBooleanToVisibilityConverterInstance"/>
+        <conv:ReverseBooleanToBooleanConverter x:Key="ReverseBooleanToBooleanConverterInstance"/>
+    </Window.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="1" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10" FontSize="48">Welcome</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="0" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center">Username:</TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="0" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Center">Password:</TextBlock>
+        <TextBox Grid.Row="1" Grid.Column="1" Margin="10" x:Name="txtUserName" VerticalContentAlignment="Center" Padding="2" Text="{Binding UserName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" IsEnabled="{Binding IsBusy, Converter={StaticResource ReverseBooleanToBooleanConverterInstance}}" />
+        <TextBox Grid.Row="2" Grid.Column="1" Margin="10" x:Name="txtPassword" VerticalContentAlignment="Center" Padding="2" Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" IsEnabled="{Binding IsBusy, Converter={StaticResource ReverseBooleanToBooleanConverterInstance}}" />
+        <Button Grid.Column="1" Grid.Row="3" Margin="10" Height="50" VerticalAlignment="Top" Command="{Binding SignInCommand}">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Visibility="{Binding IsBusy, Converter={StaticResource ReverseBooleanToVisibilityConverterInstance}}">Sign-in</TextBlock>
+                <TextBlock Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverterInstance}}">Please wait...</TextBlock>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Window>

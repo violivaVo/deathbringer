@@ -9,6 +9,7 @@ using DeathBringer.Core.Data;
 using DeathBringer.EntityFramework.Data.Repositories;
 using DeathBringer.Wpf.SezioneB;
 using DeathBringer.Wpf.ViewModels;
+using DeathBringer.Wpf.Views;
 
 namespace DeathBringer.Wpf
 {
@@ -26,10 +27,10 @@ namespace DeathBringer.Wpf
             base.OnStartup(e);
 
             //Creo istanza della view principale
-            MainView view = new MainView();
+            SignInView view = new SignInView();
 
             //Creo istanza del suo viewmodel
-            MainViewModel viewModel = new MainViewModel();
+            SignInViewModel viewModel = new SignInViewModel();
 
             //Creo il "matrimonio"
             view.DataContext = viewModel;

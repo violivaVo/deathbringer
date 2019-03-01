@@ -23,15 +23,6 @@ namespace DeathBringer.Wpf
         public MainView()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            string username = txtUserName.Text;
-            string password = txtPassword.Text;
-
-            
-
-        }
+        }        
     }
 }

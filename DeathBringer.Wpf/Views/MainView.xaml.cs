@@ -18,9 +18,9 @@ namespace DeathBringer.Wpf
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainView : Window
     {
-        public MainWindow()
+        public MainView()
         {
             InitializeComponent();
         }
@@ -30,7 +30,7 @@ namespace DeathBringer.Wpf
             string username = txtUserName.Text;
             string password = txtPassword.Text;
 
-            MessageBox.Show($"Credenziali: {username}, {password}");
+            
 
         }
     }

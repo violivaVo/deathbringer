@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Deathbringer.Contracts\Deathbringer.Contracts.csproj" />
     <ProjectReference Include="..\DeathBringer.Core.EntityFramework\DeathBringer.Core.EntityFramework.csproj" />
     <ProjectReference Include="..\DeathBringer.Core\DeathBringer.Core.csproj" />
   </ItemGroup>

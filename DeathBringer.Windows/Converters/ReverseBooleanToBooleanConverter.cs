@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
 
 namespace DeathBringer.Wpf.Converters
 {
-    public class BooleanToVisibilityConverter : IValueConverter
+    public class ReverseBooleanToBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -20,10 +24,8 @@ namespace DeathBringer.Wpf.Converters
             //Sono sicuro che è boolean quindi faccio il cast
             bool castedValue = (bool)value;
 
-            //Se è vero, Visible, altrimenti Collassato
-            return castedValue == true 
-                ? Visibility.Visible 
-                : Visibility.Collapsed;
+            //Ritorno il reciproco
+            return !castedValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

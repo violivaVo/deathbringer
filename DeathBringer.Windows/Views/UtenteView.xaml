@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="DeathBringer.Wpf.Views.UtenteView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DeathBringer.Wpf.Views"
+             xmlns:vm="clr-namespace:DeathBringer.Wpf.ViewModels"
+             mc:Ignorable="d" 
+             d:DataContext="{d:DesignInstance vm:UtenteViewModel, IsDesignTimeCreatable=True}" d:DesignWidth="800" Height="27.563">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="/Assets/images/user.png" Margin="4" Stretch="Uniform" Width="32" Grid.Column="0"></Image>
+        <TextBlock Text="{Binding UserName}" VerticalAlignment="Center" Margin="4" HorizontalAlignment="Left" Grid.Column="1" />
+        <TextBlock Text="{Binding Email}" VerticalAlignment="Center" Margin="4" HorizontalAlignment="Left" Grid.Column="2" />
+        <TextBlock Text="{Binding NomeCompleto}" VerticalAlignment="Center" Margin="4" HorizontalAlignment="Left" Grid.Column="3" />
+        <CheckBox IsChecked="{Binding IsFromMilano}" VerticalAlignment="Center" Grid.Column="4" />
+    </Grid>
+</UserControl>

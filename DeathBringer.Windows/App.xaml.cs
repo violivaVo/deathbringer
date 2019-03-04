@@ -1,8 +1,14 @@
-﻿using System.Windows;
-using DeathBringer.Wpf.ViewModels;
+﻿using DeathBringer.Wpf.ViewModels;
 using DeathBringer.Wpf.Views;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 
-namespace DeathBringer.Wpf
+namespace DeathBringer.Windows
 {
     /// <summary>
     /// Interaction logic for App.xaml

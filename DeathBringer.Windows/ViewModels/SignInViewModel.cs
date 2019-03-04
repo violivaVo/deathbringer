@@ -4,6 +4,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace DeathBringer.Wpf.ViewModels
@@ -37,7 +38,7 @@ namespace DeathBringer.Wpf.ViewModels
         public SignInViewModel()
         {
             //Inizializzo il comando
-            SignInCommand = new RelayCommand(ExecuteSignIn, CanExecuteSignIn);
+            SignInCommand = new RelayCommand(async() => await ExecuteSignIn(), CanExecuteSignIn);
 
             //Se siamo a design time
             if (IsInDesignMode)
@@ -63,7 +64,7 @@ namespace DeathBringer.Wpf.ViewModels
             SignInCommand.RaiseCanExecuteChanged();
         }
 
-        private void ExecuteSignIn()
+        private async Task ExecuteSignIn()
         {
             //Inizio a lavorare: non rompermi le palle!
             IsBusy = true;
@@ -71,6 +72,8 @@ namespace DeathBringer.Wpf.ViewModels
             //ApplicationServiceLayer layer = new ApplicationServiceLayer();
             //var result = layer.SignIn(UserName, Password);
             object result = null;
+
+            await Task.Delay(5000);
 
             //Mostro ok o fallimento
             if (result == null)

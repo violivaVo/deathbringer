@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:DeathBringer.Wpf.ViewModels"
         xmlns:conv="clr-namespace:DeathBringer.Wpf.Converters" 
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         WindowStartupLocation="CenterScreen"
         mc:Ignorable="d" FontSize="20" MinHeight="300" MinWidth="500" WindowStyle="ToolWindow"
         d:DataContext="{d:DesignInstance vm:SignInViewModel, IsDesignTimeCreatable=True}"
@@ -37,5 +38,6 @@
                 <TextBlock Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverterInstance}}">Please wait...</TextBlock>
             </StackPanel>
         </Button>
+        <xctk:BusyIndicator IsBusy="{Binding IsBusy}" Grid.ColumnSpan="3" Grid.RowSpan="4" />
     </Grid>
 </Window>

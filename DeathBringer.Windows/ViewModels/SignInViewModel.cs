@@ -44,7 +44,7 @@ namespace DeathBringer.Wpf.ViewModels
             if (IsInDesignMode)
             {
                 //Inizializza i valori di sample
-                IsBusy = true;
+                IsBusy = false;
                 UserName = "mario.rossi";
                 Password = "iwef hwieufh o3wf oqwiffj qowidj oq2idj oqi";
             }
@@ -71,7 +71,7 @@ namespace DeathBringer.Wpf.ViewModels
 
             //ApplicationServiceLayer layer = new ApplicationServiceLayer();
             //var result = layer.SignIn(UserName, Password);
-            object result = null;
+            object result = 1;
 
             await Task.Delay(5000);
 

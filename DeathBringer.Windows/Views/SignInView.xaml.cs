@@ -22,11 +22,11 @@ namespace DeathBringer.Wpf.Views
 
         private void OnShowMainViewReceived(ShowMainViewMessage message)
         {
-            ////Creo il viewmodel della main
-            //MainViewModel vm = new MainViewModel();
-            //MainView view = new MainView();
-            //view.DataContext = vm;
-            //view.Show();
+            //Creo il viewmodel della main
+            MainViewModel vm = new MainViewModel();
+            MainView view = new MainView();
+            view.DataContext = vm;
+            view.Show();
 
             //Chiudo me stesso
             Close();

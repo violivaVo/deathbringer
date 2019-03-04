@@ -4,12 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:DeathBringer.Wpf.ViewModels"
-        xmlns:local="clr-namespace:DeathBringer.Wpf" 
         WindowStartupLocation="CenterScreen"
         xmlns:view="clr-namespace:DeathBringer.Wpf.Views"
         mc:Ignorable="d" FontSize="20" MinHeight="300" MinWidth="500"
         d:DataContext="{d:DesignInstance vm:MainViewModel, IsDesignTimeCreatable=True}"
-        Title="DeathBringer WPF Application" Height="500" Width="900">
+        Title="DeathBringer WPF Application" Height="700" Width="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -21,12 +20,16 @@
             <TextBlock FontSize="48" VerticalAlignment="Center">List of users</TextBlock>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">
-            <Button Margin="10">Refresh</Button>
+            <Button Margin="10">
+                <Image Source="/Assets/images/refresh.png" Margin="4"/>
+            </Button>
         </StackPanel>
-        <ListBox Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Utenti}" >
+        <ListBox Grid.Row="1" Grid.Column="0" 
+                 ItemsSource="{Binding Utenti}" 
+                 HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                        <view:UtenteView></view:UtenteView>
+                    <view:UtenteView></view:UtenteView>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

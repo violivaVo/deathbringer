@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 
@@ -12,10 +13,13 @@ namespace DeathBringer.Wpf.ViewModels
 
         public MainViewModel()
         {
+            //Inizializzazione della lista di elementi
+            Utenti = new List<UtenteViewModel>(); 
+
             //in design mode, lista di dati finti
-            if (IsInDesignMode || !IsInDesignMode)
+            if (IsInDesignMode)
             {
-                Utenti = new List<UtenteViewModel>();
+                
                 Utenti.Add(new UtenteViewModel
                 {
                     UserName = "mario",
@@ -37,6 +41,22 @@ namespace DeathBringer.Wpf.ViewModels
                     NomeCompleto = "Antonio Bianchi",
                     IsFromMilano = true
                 });
+            }
+            else
+            {
+                //Generazione di 50 elementi random
+                Random random = new Random();
+                for (var i = 0; i < 50; i++)
+                {
+                    Utenti.Add(new UtenteViewModel
+                    {
+                        IsExpanded = false,
+                        IsFromMilano = random.Next() % 2 == 1,
+                        Email = random.Next() + "@icubed.it", 
+                        NomeCompleto = "Nome" + random.Next(),
+                        UserName = "Username" + random.Next(),
+                    });
+                }
             }
         }
     }

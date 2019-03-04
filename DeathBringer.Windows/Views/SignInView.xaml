@@ -38,6 +38,8 @@
                 <TextBlock Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverterInstance}}">Please wait...</TextBlock>
             </StackPanel>
         </Button>
-        <xctk:BusyIndicator IsBusy="{Binding IsBusy}" Grid.ColumnSpan="3" Grid.RowSpan="4" />
+        <xctk:BusyIndicator IsBusy="{Binding IsBusy}" 
+                            Grid.ColumnSpan="3" 
+                            Grid.RowSpan="4" />
     </Grid>
 </Window>

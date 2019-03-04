@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <AssemblyVersion>1.2.2.0</AssemblyVersion>
+    <UserSecretsId>1fa8cf6c-8571-445b-ba7a-41f8d4032e7e</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Deathbringer.Contracts\Deathbringer.Contracts.csproj" />
     <ProjectReference Include="..\DeathBringer.Core.EntityFramework\DeathBringer.Core.EntityFramework.csproj" />
+    <ProjectReference Include="..\DeathBringer.Core.Mocks\DeathBringer.Core.Mocks.csproj" />
     <ProjectReference Include="..\DeathBringer.Core\DeathBringer.Core.csproj" />
   </ItemGroup>
 

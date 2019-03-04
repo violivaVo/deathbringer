@@ -1,4 +1,6 @@
-﻿using DeathBringer.Wpf.Messaging;
+﻿using DeathBringer.Api.Models.Requests;
+using DeathBringer.Clients.Clients;
+using DeathBringer.Wpf.Messaging;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -74,17 +76,18 @@ namespace DeathBringer.Wpf.ViewModels
             //Inizio a lavorare: non rompermi le palle!
             IsBusy = true;
 
-            //ApplicationServiceLayer layer = new ApplicationServiceLayer();
-            //var result = layer.SignIn(UserName, Password);
-            object result = 1;
-
-            //Thread.Sleep(5000);
-
-            await Task.Delay(2000);
-
-            //Mostro ok o fallimento
-            if (result == null)
+            //Creazione del client per la chiamata
+            AuthenticationClient client = new AuthenticationClient();
+            var response = await client.SignIn(new SignInRequest
             {
+                UserName = UserName,
+                Password = Password
+            });
+
+            //Se lo status code non è 200, fallisco
+            if (!response.Response.IsSuccessStatusCode)
+            {
+                //Credenziali errate
                 MessageBox.Show($"Credenziali errate!");
             }
             else

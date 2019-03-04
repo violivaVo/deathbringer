@@ -204,5 +204,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DeathBringer.Clients\DeathBringer.Clients.csproj">
+      <Project>{cbd3dc8d-7c7f-4629-acd3-3a58c626d296}</Project>
+      <Name>DeathBringer.Clients</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

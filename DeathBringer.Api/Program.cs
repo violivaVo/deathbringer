@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DeathBringer.Core.Data;
+using DeathBringer.Core.Mocks;
 using DeathBringer.EntityFramework.Data.Repositories;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -16,8 +17,10 @@ namespace DeathBringer.Api
     {
         public static void Main(string[] args)
         {
+            //DependencyInjectionContainer
+            //    .Register<IUtenteRepository, EntityFrameworkUtenteRepository>();
             DependencyInjectionContainer
-                .Register<IUtenteRepository, EntityFrameworkUtenteRepository>();
+                .Register<IUtenteRepository, MockUtenteRepository>();
 
             CreateWebHostBuilder(args).Build().Run();
         }

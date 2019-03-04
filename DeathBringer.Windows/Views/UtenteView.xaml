@@ -1,4 +1,4 @@
-﻿<UserControl
+﻿<UserControl x:Class="DeathBringer.Wpf.Views.UtenteView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:DeathBringer.Wpf.ViewModels" 
              xmlns:conv="clr-namespace:DeathBringer.Wpf.Converters"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"             
-             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" x:Class="DeathBringer.Wpf.Views.UtenteView"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" 
              mc:Ignorable="d"             
              d:DataContext="{d:DesignInstance {x:Type vm:UtenteViewModel}, IsDesignTimeCreatable=True}" 
              d:DesignWidth="800" d:DesignHeight="50">

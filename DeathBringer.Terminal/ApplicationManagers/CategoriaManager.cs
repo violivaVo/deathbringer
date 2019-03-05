@@ -187,7 +187,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             layer.CategorieSaved += (o, a) => { Console.WriteLine(a); };
 
             //Creazione categorie
-            var validazioni = layer.InsertCategoria(nome, descr);
+            var validazioni = layer.LegacyInsertCategoria(nome, descr);
 
             //Se non ho errori, confermo
             if (validazioni.Count == 0)

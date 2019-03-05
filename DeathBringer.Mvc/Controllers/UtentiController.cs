@@ -56,10 +56,18 @@ namespace DeathBringer.Mvc.Controllers
 
             ApplicationServiceLayer layer = new ApplicationServiceLayer();
 
+            //Creazione dell'utente
+            var utente = new Utente
+            {
+                Username = model.Username, 
+                Password = model.Password, 
+                Nome = model.Nome, 
+                Cognome = model.Cognome, 
+                Email = model.Email
+            };
+
             //Creo sul database
-            var validations = layer.CreaUtente(
-                model.Username, model.Password, 
-                model.Nome, model.Cognome, model.Email);
+            var validations = layer.CreaUtente(utente);
            
             //Istanza del layer di servizio per i prodotti
             //UtenteServiceLayer layer = new UtenteServiceLayer();

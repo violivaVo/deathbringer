@@ -17,11 +17,15 @@ namespace DeathBringer.Api
     {
         public static void Main(string[] args)
         {
-            //DependencyInjectionContainer
-            //    .Register<IUtenteRepository, EntityFrameworkUtenteRepository>();
-            DependencyInjectionContainer
-                .Register<IUtenteRepository, MockUtenteRepository>();
+            //*** Configurazione dei repositories con EntityFramework
+            //DependencyInjectionContainer.Register<IUtenteRepository, EntityFrameworkUtenteRepository>();
+            //DependencyInjectionContainer.Register<ICategoriaRepository, EntityFrameworkCategoriaRepository>();
 
+            //*** Configurazione dei repositories con Mock
+            DependencyInjectionContainer.Register<IUtenteRepository, MockUtenteRepository>();
+            DependencyInjectionContainer.Register<ICategoriaRepository, MockCategoriaRepository>();
+
+            //Avvio dell'host
             CreateWebHostBuilder(args).Build().Run();
         }
 

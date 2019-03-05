@@ -1,4 +1,5 @@
 ﻿using DeathBringer.Core.Data;
+using DeathBringer.Core.Data.Helpers;
 using DeathBringer.Terminal.BaseClasses;
 using DeathBringer.Terminal.Data;
 using DeathBringer.Terminal.Entities;
@@ -9,22 +10,138 @@ using System.Linq;
 
 namespace DeathBringer.Core.ServiceLayers
 {
-    public class ApplicationServiceLayer
+    public class ApplicationServiceLayer: IDisposable
     {
+        #region Fields privati
+        private bool _IsDisposed = false;
+        private IUtenteRepository _UtenteRepository;
+        private ICategoriaRepository _CategoriaRepository;
+        #endregion
+
+        #region Eventi pubblici
         public event EventHandler<string> CategorieSaved;
         public event EventHandler<string> UtentiSaved;
         public event EventHandler<string> ProdottiSaved;
+        #endregion
 
-        public IUtenteRepository UtenteRepository;
-
+        /// <summary>
+        /// Costruttore
+        /// </summary>
         public ApplicationServiceLayer()
         {
-            UtenteRepository = DependencyInjectionContainer
-                .Resolve<IUtenteRepository>();
+            //Inizializzazione dei repository
+            _UtenteRepository = DependencyInjectionContainer.Resolve<IUtenteRepository>();
+            _CategoriaRepository = DependencyInjectionContainer.Resolve<ICategoriaRepository>();
 
-            //Aggancio il delegato sull'evento
-            ApplicationStorage.DatabaseSaved += OnDatabaseSaved;
+            //LEGACY Aggancio il delegato sull'evento
+            //ApplicationStorage.DatabaseSaved += OnDatabaseSaved;
         }
+
+        #region Categoria
+
+        /// <summary>
+        /// Ritorna una categoria sulla base dell'id
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <returns>Ritorna una entity o null</returns>
+        public Categoria GetCategoriaById(int id)
+        {
+            //Utilizzo il metodo sul repository
+            return _CategoriaRepository.GetById(id);
+        }
+
+        /// <summary>
+        /// Ritorna una lista di tutte le categorie
+        /// </summary>
+        /// <returns>Ritorna lista</returns>
+        public IList<Categoria> FetchCategorie()
+        {
+            //Estraggo direttamente dal repository
+            return _CategoriaRepository.Fetch();
+        }
+
+        /// <summary>
+        /// Crea una categoria sullo storage
+        /// </summary>
+        /// <param name="entity">Categoria da creare</param>
+        /// <returns>Ritorna la lista di validazioni</returns>
+        public IList<ValidationResult> CreaCategoria(Categoria entity)
+        {
+            //Validazione argomenti
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+            //Validazione
+            var validations = ValidationUtils.Validate(entity);
+            if (validations.Count > 0)
+                return validations;
+
+            //Creo usando il repository
+            validations = _CategoriaRepository.Crea(entity);
+            if (validations.Count > 0)
+                return validations;
+
+            //Se ho l'evento lo sollevo
+            CategorieSaved?.Invoke(this, entity.Nome);
+
+            //Ritorno le validazioni
+            return validations;
+        }
+
+        /// <summary>
+        /// Modifica una categoria sullo storage
+        /// </summary>
+        /// <param name="entity">Categoria da modificare</param>
+        /// <returns>Ritorna la lista di validazioni</returns>
+        public IList<ValidationResult> ModificaCategoria(Categoria entity)
+        {
+            //Validazione argomenti
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+            //Validazione
+            var validations = ValidationUtils.Validate(entity);
+            if (validations.Count > 0)
+                return validations;
+
+            //Modifica usando il repository
+            validations = _CategoriaRepository.Modifica(entity);
+            if (validations.Count > 0)
+                return validations;
+
+            //Se ho l'evento lo sollevo
+            CategorieSaved?.Invoke(this, entity.Nome);
+
+            //Ritorno le validazioni
+            return validations;
+        }
+
+        /// <summary>
+        /// Elimina una categoria sullo storage
+        /// </summary>
+        /// <param name="entity">Categoria da eliminare</param>
+        /// <returns>Ritorna la lista di validazioni</returns>
+        public IList<ValidationResult> EliminaCategoria(Categoria entity)
+        {
+            //Validazione argomenti
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
+
+            //TODO Qui si potrebbe mettere una verifica per
+            //determinare se la categoria può essere eliminata
+            //sulla base del suo utilizzo nei prodotti a catalogo
+
+            //Creo usando il repository
+            var validations = _CategoriaRepository.Elimina(entity);
+            if (validations.Count > 0)
+                return validations;
+
+            //Se ho l'evento lo sollevo
+            CategorieSaved?.Invoke(this, entity.Nome);
+
+            //Ritorno le validazioni
+            return validations;
+        }
+        #endregion
+
+        #region Utente
 
         /// <summary>
         /// Esegue l'autenticazione dell'utente con le credenziali
@@ -68,6 +185,110 @@ namespace DeathBringer.Core.ServiceLayers
             return utenti.SingleOrDefault(u => u.Username == userName);
         }
 
+        /// <summary>
+        /// Ritorna un utente sulla base dell'id
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <returns>Ritorna una entity o null</returns>
+        public Utente GetUtenteById(int id)
+        {
+            //Utilizzo il metodo sul repository
+            return _UtenteRepository.GetById(id);
+        }
+
+        /// <summary>
+        /// Ritorna una lista di tutti gli utenti del database
+        /// </summary>
+        /// <returns>Ritorna lista</returns>
+        public IList<Utente> FetchUtenti()
+        {
+            //Estraggo direttamente dal repository
+            return _UtenteRepository.FetchAllUtenti();
+        }
+
+        /// <summary>
+        /// Creo un utente sullo storage
+        /// </summary>
+        /// <param name="utente">Utente da creare</param>
+        /// <returns>Ritorna la lista di validazioni</returns>
+        public IList<ValidationResult> CreaUtente(Utente utente)
+        {
+            //Validazione argomenti
+            if (utente == null) throw new ArgumentNullException(nameof(utente));
+
+            //Validazione
+            var validations = ValidationUtils.Validate(utente);
+            if (validations.Count > 0)
+                return validations;
+
+            //Creo usando il repository
+            validations = _UtenteRepository.Crea(utente);
+            if (validations.Count > 0)
+                return validations;
+
+            //Se ho l'evento lo sollevo
+            UtentiSaved?.Invoke(this, utente.Username);
+
+            //Ritorno le validazioni
+            return validations;
+        }
+
+        /// <summary>
+        /// Modifica un utente sullo storage
+        /// </summary>
+        /// <param name="utente">Utente da modificare</param>
+        /// <returns>Ritorna la lista di validazioni</returns>
+        public IList<ValidationResult> ModificaUtente(Utente utente)
+        {
+            //Validazione argomenti
+            if (utente == null) throw new ArgumentNullException(nameof(utente));
+
+            //Validazione
+            var validations = ValidationUtils.Validate(utente);
+            if (validations.Count > 0)
+                return validations;
+
+            //Modifico usando il repository
+            validations = _UtenteRepository.Modifica(utente);
+            if (validations.Count > 0)
+                return validations;
+
+            //Se ho l'evento lo sollevo
+            UtentiSaved?.Invoke(this, utente.Username);
+
+            //Ritorno le validazioni
+            return validations;
+        }
+
+        /// <summary>
+        /// Elimina un utente sullo storage
+        /// </summary>
+        /// <param name="utente">Utente da eliminare</param>
+        /// <returns>Ritorna la lista di validazioni</returns>
+        public IList<ValidationResult> EliminaUtente(Utente utente)
+        {
+            //Validazione argomenti
+            if (utente == null) throw new ArgumentNullException(nameof(utente));
+
+            //TODO Qui ci dovrebbe essere una logica di business
+            //che definisce se l'utente è già usato in qualche
+            //flusso e quindi non può essere cancellato
+
+            //Elimino usando il repository
+            var validations = _UtenteRepository.Elimina(utente);
+            if (validations.Count > 0)
+                return validations;
+
+            //Se ho l'evento lo sollevo
+            UtentiSaved?.Invoke(this, utente.Username);
+
+            //Ritorno le validazioni
+            return validations;
+        }
+        #endregion
+
+        #region Versione ApplicationStorage su FileSystem
+
         private void OnDatabaseSaved(object sender, string e)
         {
             //Seleziono l'evento da lanciare a seconda della stringa
@@ -90,12 +311,11 @@ namespace DeathBringer.Core.ServiceLayers
             }
         }
 
-
         /// <summary>
         /// Recupera lista delle categorie
         /// </summary>
         /// <returns></returns>
-        public IList<Categoria> FetchCategorie()
+        public IList<Categoria> LegacyFetchCategorie()
         {
             //Carico dal disco
             ApplicationStorage.LoadCategorie();
@@ -112,7 +332,7 @@ namespace DeathBringer.Core.ServiceLayers
         /// </summary>
         /// <param name="id">Id categoria</param>
         /// <returns>Ritorna la categoria o null</returns>
-        public Categoria GetCategoria(int id)
+        public Categoria LegacyGetCategoria(int id)
         {
             //Validazione argomento
             if (id <= 0)
@@ -132,7 +352,7 @@ namespace DeathBringer.Core.ServiceLayers
         /// <param name="name">Nome</param>
         /// <param name="description">Descrizione</param>
         /// <returns>Ritorna lista di validazioni</returns>
-        public IList<ValidationResult> InsertCategoria(string name, string description)
+        public IList<ValidationResult> LegacyInsertCategoria(string name, string description)
         {
             //Preparo la lista vuota che è simbolo di successo dell'operazione
             IList<ValidationResult> validations = new List<ValidationResult>();
@@ -177,7 +397,7 @@ namespace DeathBringer.Core.ServiceLayers
         /// <param name="name">Nome</param>
         /// <param name="description">Descrizione</param>
         /// <returns>Ritorna lista di validazioni</returns>
-        public IList<ValidationResult> UpdateCategoria(int id, string name, string description)
+        public IList<ValidationResult> LegacyUpdateCategoria(int id, string name, string description)
         {
             //Preparo la lista vuota che è simbolo di successo dell'operazione
             IList<ValidationResult> validations = new List<ValidationResult>();
@@ -186,7 +406,7 @@ namespace DeathBringer.Core.ServiceLayers
             ApplicationStorage.LoadCategorie();
 
             //Recupero della categoria esistente
-            var categoriaEsistente = GetCategoria(id);
+            var categoriaEsistente = LegacyGetCategoria(id);
 
             //Se non esiste, messaggio
             if (categoriaEsistente == null)
@@ -220,13 +440,13 @@ namespace DeathBringer.Core.ServiceLayers
         /// </summary>
         /// <param name="id">Id della categoria</param>
         /// <returns>Ritorna lista di validazioni</returns>
-        public IList<ValidationResult> DeleteCategoria(int id)
+        public IList<ValidationResult> LegacyDeleteCategoria(int id)
         {
             //Carico dal disco
             ApplicationStorage.LoadCategorie();
 
             //Cerco l'elemento in archivio
-            var categoriaEsistente = GetCategoria(id);
+            var categoriaEsistente = LegacyGetCategoria(id);
 
             //Preparo la lista vuota che è simbolo di successo dell'operazione
             IList<ValidationResult> validations = new List<ValidationResult>();
@@ -249,33 +469,51 @@ namespace DeathBringer.Core.ServiceLayers
             return validations;
         }
 
+        #endregion
+
+        #region Disposable pattern
+
         /// <summary>
-        /// Ritorna una lista di tutti gli utenti del database
+        /// Esegue il rilascio della classe corrente
         /// </summary>
-        /// <returns>Ritorna lista</returns>
-        public IList<Utente> FetchUtenti()
+        /// <param name="disposing">Rilascio manuale</param>
+        protected virtual void Dispose(bool disposing)
         {
-            return UtenteRepository.FetchAllUtenti();
-        }
-
-        public IList<ValidationResult> CreaUtente(string username,
-            string password, string nome, string cognome, string email)
-        {
-            //TODO Aggiungere altre proprietà
-
-            //Creo l'utente
-            Utente entity = new Utente
+            //Se non è già stato rilasciato
+            if (!_IsDisposed)
             {
-                Username = username,
-                Password = password,
-                Nome = nome,
-                Cognome = cognome, 
-                Email = email
-            };
+                //Se sto rilasciando manualmente
+                if (disposing)
+                {
+                    //Rilascio i repository
+                    //TODO Quando i repository saranno "disposable"
+                }
 
-            //Creo usando il repository
-            var validations = UtenteRepository.Crea(entity);
-            return validations;
+                //Marco come rilasciato manualmente
+                _IsDisposed = true;
+            }
         }
+
+        /// <summary>
+        /// Distruttore
+        /// </summary>
+        ~ApplicationServiceLayer()
+        {
+            //Segnalo che la classe è stata disposta dal CG
+            Dispose(false);
+        }
+
+        /// <summary>
+        /// Esegue il rilascio delle risorse locali
+        /// </summary>
+        public void Dispose()
+        {
+            //Rilascio manualmente
+            Dispose(true);
+            
+            //Evito che il GC rilasci la classe corrente
+            GC.SuppressFinalize(this);
+        }
+        #endregion
     }
 }

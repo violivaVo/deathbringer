@@ -10,11 +10,20 @@ using System.Threading.Tasks;
 
 namespace DeathBringer.Api.Controllers
 {
+    /// <summary>
+    /// Controller per l'autenticazione
+    /// </summary>
     [Route("api/Authentication")]
     public class AuthenticationController: Controller
     {
+        /// <summary>
+        /// Esegue il sign-in alla piattaforma usando le credenziali
+        /// </summary>
+        /// <param name="request">Request</param>
+        /// <returns>Ritorna una response</returns>
         [HttpPost]
         [Route("SignIn")]
+        [ProducesResponseType(200, Type = typeof(UtenteContract))]
         public IActionResult SignIn([FromBody]SignInRequest request)
         {
             //Se la request è nulla, esci

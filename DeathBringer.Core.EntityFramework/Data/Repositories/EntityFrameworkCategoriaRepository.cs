@@ -9,7 +9,7 @@ using Yred.Authentication.Relationals.Data.Contexts;
 
 namespace DeathBringer.EntityFramework.Data.Repositories
 {
-    public class EntityFrameworkUtenteRepository : IUtenteRepository
+    public class EntityFrameworkCategoriaRepository : ICategoriaRepository
     {
         /// <summary>
         /// Contesto di EntityFramework
@@ -19,42 +19,29 @@ namespace DeathBringer.EntityFramework.Data.Repositories
         /// <summary>
         /// Construttore
         /// </summary>
-        public EntityFrameworkUtenteRepository()
+        public EntityFrameworkCategoriaRepository()
         {
             //Inizializzazione del contesto di lavoro
             Context = new DeathBringerDbContext();
         }
-
+        
         /// <summary>
-        /// Ritorna la lista di tutti gli utenti nel sistema
+        /// Eseguo la creazione di un entity
         /// </summary>
-        /// <returns>Ritorna la lista degli utenti</returns>
-        public IList<Utente> FetchAllUtenti()
-        {
-            //Semplicemente ritorno la lista sul Context
-            return Context.Utenti
-                .OrderBy(e => e.Username)
-                .ThenBy(e => e.Nome)
-                .ToList();
-        }
-
-        /// <summary>
-        /// Eseguo la creazione di un utente
-        /// </summary>
-        /// <param name="utente">Utente</param>
+        /// <param name="entity">Categoria</param>
         /// <returns>Ritorna la lista delle validazioni fallite</returns>
-        public IList<ValidationResult> Crea(Utente utente)
+        public IList<ValidationResult> Crea(Categoria entity)
         {
             //Validazione argomento
-            if (utente == null) throw new ArgumentNullException(nameof(utente));
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
             //Eseguo la validazione dell'entità: se non passo, esco
-            var validations = ValidationUtils.Validate(utente);
+            var validations = ValidationUtils.Validate(entity);
             if (validations.Count > 0)
                 return validations;
 
             //Aggiungo al context
-            Context.Utenti.Add(utente);
+            Context.Categorie.Add(entity);
 
             //Eseguo il "Commit"
             Context.SaveChanges();
@@ -64,17 +51,17 @@ namespace DeathBringer.EntityFramework.Data.Repositories
         }
 
         /// <summary>
-        /// Elimina l'utente specificato
+        /// Elimina l'entity specificato
         /// </summary>
-        /// <param name="utente">Utente da eliminare</param>
+        /// <param name="entity">Categoria da eliminare</param>
         /// <returns>Ritorna la lista delle validazioni fallite</returns>
-        public IList<ValidationResult> Elimina(Utente utente)
+        public IList<ValidationResult> Elimina(Categoria entity)
         {
             //Validazione argomento
-            if (utente == null) throw new ArgumentNullException(nameof(utente));
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
             //Aggiungo al context
-            Context.Utenti.Remove(utente);
+            Context.Categorie.Remove(entity);
 
             //Eseguo il "Commit"
             Context.SaveChanges();
@@ -84,17 +71,17 @@ namespace DeathBringer.EntityFramework.Data.Repositories
         }
 
         /// <summary>
-        /// Modifica l'utente specificato
+        /// Modifica l'entity specificato
         /// </summary>
-        /// <param name="utente">Utente da modificare</param>
+        /// <param name="entity">Categoria da modificare</param>
         /// <returns>Ritorna la lista delle validazioni fallite</returns>
-        public IList<ValidationResult> Modifica(Utente utente)
+        public IList<ValidationResult> Modifica(Categoria entity)
         {
             //Validazione argomento
-            if (utente == null) throw new ArgumentNullException(nameof(utente));
+            if (entity == null) throw new ArgumentNullException(nameof(entity));
 
             //Eseguo la validazione dell'entità: se non passo, esco
-            var validations = ValidationUtils.Validate(utente);
+            var validations = ValidationUtils.Validate(entity);
             if (validations.Count > 0)
                 return validations;
 
@@ -113,11 +100,23 @@ namespace DeathBringer.EntityFramework.Data.Repositories
         /// </summary>
         /// <param name="id">Id</param>
         /// <returns>Ritorna un elemento o null</returns>
-        public Utente GetById(int id)
+        public Categoria GetById(int id)
         {
             //Semplicemente ritorno la lista sul Context
-            return Context.Utenti
+            return Context.Categorie
                 .SingleOrDefault(e => e.Id == id);
+        }
+
+        /// <summary>
+        /// Ritorna la lista di tutti gli elementi
+        /// </summary>
+        /// <returns>Ritorna un elenco</returns>
+        public IList<Categoria> Fetch()
+        {
+            //Ritorno la lista ordinata per nome
+            return Context.Categorie
+                .OrderBy(e => e.Nome)
+                .ToList();
         }
     }
 }

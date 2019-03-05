@@ -50,6 +50,8 @@
     <Compile Include="Http\HttpResponseMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Requests\SignInRequest.cs" />
+    <Compile Include="Requests\UpdateUtenteRequest.cs" />
+    <Compile Include="Requests\UtenteRequest.cs" />
     <Compile Include="UtenteContract.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -68,6 +68,12 @@ namespace DeathBringer.Core.Mocks
             return Utenti.Value;
         }
 
+        public Utente GetById(int id)
+        {
+            //Ritorno l'utente con id (se esiste)
+            return Utenti.Value.SingleOrDefault(e => e.Id == id);
+        }
+
         public IList<ValidationResult> Modifica(Utente utente)
         {
             //Predisponsizione a nessun errore

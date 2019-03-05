@@ -28,7 +28,7 @@ namespace DeathBringer.Server
 
                 //Creazione di una categoria
                 Console.WriteLine("Creazione di una categoria....");
-                var validations = layer.InsertCategoria(nomeRandom, "questa non è importante");
+                var validations = layer.LegacyInsertCategoria(nomeRandom, "questa non è importante");
 
                 //Se ho validazioni fallite, esco
                 if (validations.Count > 0)

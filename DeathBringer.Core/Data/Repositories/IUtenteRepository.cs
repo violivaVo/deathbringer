@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DeathBringer.Core.Data
 {
+    /// <summary>
+    /// Interfaccia per un repository di utente
+    /// </summary>
     public interface IUtenteRepository
     {
         /// <summary>
@@ -11,6 +14,13 @@ namespace DeathBringer.Core.Data
         /// </summary>
         /// <returns>Ritorna la lista degli utenti</returns>
         IList<Utente> FetchAllUtenti();
+
+        /// <summary>
+        /// Ritorna un elemento corrispondente all'id
+        /// </summary>
+        /// <param name="id">Id</param>
+        /// <returns>Ritorna un elemento o null</returns>
+        Utente GetById(int id);
 
         /// <summary>
         /// Eseguo la creazione di un utente
@@ -31,6 +41,6 @@ namespace DeathBringer.Core.Data
         /// </summary>
         /// <param name="utente">Utente da eliminare</param>
         /// <returns>Ritorna la lista delle validazioni fallite</returns>
-        IList<ValidationResult> Elimina(Utente utente);
+        IList<ValidationResult> Elimina(Utente utente);        
     }
 }

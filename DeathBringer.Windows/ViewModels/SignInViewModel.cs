@@ -38,6 +38,13 @@ namespace DeathBringer.Wpf.ViewModels
 
         public RelayCommand SignInCommand { get; set; }
 
+        //public RelayCommand ShowUpdateUtenteCommand { get; set; }
+
+        //public void ExecuteShowUpdateUtente()
+        //{
+
+        //}
+
         //https://github.com/xceedsoftware/wpftoolkit
 
         public SignInViewModel()
@@ -46,6 +53,11 @@ namespace DeathBringer.Wpf.ViewModels
             SignInCommand = new RelayCommand(
                 async() => await ExecuteSignIn(), 
                 CanExecuteSignIn);
+
+            //Sample di un comando di apertura finestra
+            //con CanExecute che può essere omesso
+            //ShowUpdateUtenteCommand = new RelayCommand(
+            //    ExecuteShowUpdateUtente);
 
             //Se siamo a design time
             if (IsInDesignMode)

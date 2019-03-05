@@ -23,6 +23,9 @@ namespace DeathBringer.Wpf
         public MainView()
         {
             InitializeComponent();
+
+            //TODO Registrazione del messaggio di apertura della finestra 
+            //di edit delll'utente
         }        
     }
 }

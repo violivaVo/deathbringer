@@ -74,6 +74,72 @@ namespace DeathBringer.Api.Controllers
         }
 
         /// <summary>
+        /// Ritorna l'utente sulla base dello username
+        /// </summary>
+        /// <param name="request">Request</param>
+        /// <returns>Ritorna una response</returns>
+        [HttpPost]
+        [Route("GetUtenteByUserName")]
+        [ProducesResponseType(typeof(UtenteContract), 200)]
+        public IActionResult GetUtenteByUserName([FromBody]UtenteByUserNameRequest request)
+        {
+            //Validazione argomenti
+            if (request == null)
+                return BadRequest();
+
+            //Se non è valida
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            //Tento il recupero dal service layer
+            Utente entity = Layer.GetUtenteByUserName(request.UserName);
+            if (entity == null)
+                return NotFound();
+
+            //Ritorno il contratto
+            return Ok(ContractUtils.GenerateContract(entity));
+        }
+
+        /// <summary>
+        /// Creo un nuovo utente 
+        /// </summary>
+        /// <param name="request">Request</param>
+        /// <returns>Ritorna una response</returns>
+        [HttpPost]
+        [Route("CreateUtente")]
+        [ProducesResponseType(200, Type = typeof(UtenteContract))]
+        public IActionResult UpdateUtente([FromBody]CreateUtenteRequest request)
+        {
+            //Validazione argomenti
+            if (request == null)
+                return BadRequest();
+
+            //Validazione del model binding
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            //Creazione nuovo utente 
+            var entity = new Utente();
+            entity.Username = request.UserName;
+            entity.Nome = request.Nome;
+            entity.Cognome = request.Cognome;
+            entity.Email = request.Email;
+            entity.Indirizzo = request.Indirizzo;
+            entity.Civico = request.Civico;
+            entity.Cap = request.Cap;
+            entity.Citta = request.Citta;
+            entity.IsAdministrator = entity.IsAdministrator;
+
+            //Salvataggio dell'entità
+            var validations = Layer.CreaUtente(entity);
+            if (validations.Count > 0)
+                return BadRequest(validations);
+
+            //Serializzo e ritorno ok (200)
+            return Ok(ContractUtils.GenerateContract(entity));
+        }
+
+        /// <summary>
         /// Modifica un utente esistente
         /// </summary>
         /// <param name="request">Request</param>

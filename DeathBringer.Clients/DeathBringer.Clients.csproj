@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\UtentiClient.cs" />
     <Compile Include="Clients\AuthenticationClient.cs" />
     <Compile Include="Clients\Common\HttpClientBase.cs" />
     <Compile Include="Http\HttpResponseMessage.cs" />

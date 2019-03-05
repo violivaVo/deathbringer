@@ -157,7 +157,7 @@ namespace DeathBringer.Core.ServiceLayers
             if (string.IsNullOrEmpty(password)) throw new ArgumentNullException(nameof(password));
 
             //Recupero l'utente usando username
-            var user = GetUserByUsername(userName);
+            var user = GetUtenteByUserName(userName);
 
             //Non ho un utente, esco
             if (user == null)
@@ -176,7 +176,7 @@ namespace DeathBringer.Core.ServiceLayers
         /// </summary>
         /// <param name="userName">Username</param>
         /// <returns>Ritorna utente o null</returns>
-        public Utente GetUserByUsername(string userName)
+        public Utente GetUtenteByUserName(string userName)
         {
             //Estrazione di tutti gli utenti
             var utenti = FetchUtenti();

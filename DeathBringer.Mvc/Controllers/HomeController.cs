@@ -27,7 +27,7 @@ namespace DeathBringer.Mvc.Controllers
         public IActionResult SuperSecretPage()
         {
             ApplicationServiceLayer layer = new ApplicationServiceLayer();
-            Utente user = layer.GetUserByUsername(User.Identity.Name);
+            Utente user = layer.GetUtenteByUserName(User.Identity.Name);
             if (!user.IsAdministrator)
                 return RedirectToAction("Authentication", "Login");
 

@@ -44,9 +44,13 @@ namespace DeathBringer.Wpf.ViewModels
 
         public RelayCommand ToggleCommand { get; set; }
 
+        //TODO Definizione del Command ShowEditUtenteCommand
+
         public UtenteViewModel()
         {
             ToggleCommand = new RelayCommand(() => IsExpanded = !IsExpanded);
+
+            //TODO Inizializzazione del comando di ShowEditUtenteCommand
 
             //Se a design mode
             if (IsInDesignMode)
@@ -67,5 +71,11 @@ namespace DeathBringer.Wpf.ViewModels
             //NomeCompleto = $"{model.Nome} {model.Cognome}";
             //IsFromMilano = model.Citta == "Milano";
         }
+
+        //TODO public void ExecuteShowEditUtente()
+        //{
+        //    //TODO Invio del messaggio di richiesta apertura
+
+        //}
     }
 }

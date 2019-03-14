@@ -182,7 +182,7 @@ namespace DeathBringer.Core.ServiceLayers
             var utenti = FetchUtenti();
 
             //Ritorno l'utente con username indicato
-            return utenti.SingleOrDefault(u => u.Username == userName);
+            return utenti.SingleOrDefault(u => u.UserName == userName);
         }
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace DeathBringer.Core.ServiceLayers
                 return validations;
 
             //Se ho l'evento lo sollevo
-            UtentiSaved?.Invoke(this, utente.Username);
+            UtentiSaved?.Invoke(this, utente.UserName);
 
             //Ritorno le validazioni
             return validations;
@@ -254,7 +254,7 @@ namespace DeathBringer.Core.ServiceLayers
                 return validations;
 
             //Se ho l'evento lo sollevo
-            UtentiSaved?.Invoke(this, utente.Username);
+            UtentiSaved?.Invoke(this, utente.UserName);
 
             //Ritorno le validazioni
             return validations;
@@ -280,11 +280,62 @@ namespace DeathBringer.Core.ServiceLayers
                 return validations;
 
             //Se ho l'evento lo sollevo
-            UtentiSaved?.Invoke(this, utente.Username);
+            UtentiSaved?.Invoke(this, utente.UserName);
 
             //Ritorno le validazioni
             return validations;
         }
+
+        /// <summary>
+        /// Esegue la registrazione di un nuovo utente
+        /// </summary>
+        /// <param name="userName">Username</param>
+        /// <param name="password">Password</param>
+        /// <param name="confirmPassword">Conferma password</param>
+        /// <param name="email">Email</param>
+        /// <param name="nome">Nome</param>
+        /// <param name="cognome">Cognome</param>
+        /// <returns>Ritorna le validazioni</returns>
+        public IList<ValidationResult> Register(string userName, string password, 
+            string confirmPassword, string email, string nome, string cognome)
+        {
+            //Predisposizione validazioni
+            IList<ValidationResult> validations = new List<ValidationResult>();
+
+            //Verifico se le password e conferma sono uguali
+            if (password != confirmPassword)
+            {
+                //Aggiunta validazione ed uscita
+                validations.Add(new ValidationResult("Password and confirm are not equals"));
+                return validations;
+            }
+
+            //Cerco l'utente con lo stesso username
+            var existing = GetUtenteByUserName(userName);
+            if (existing != null)
+            {
+                //Aggiunta validazione ed uscita
+                validations.Add(new ValidationResult("Another user exists with the same username"));
+                return validations;
+            }
+
+            //Creazione utente
+            Utente user = new Utente
+            {
+                UserName = userName,
+                Password = password,
+                Email = email,
+                Nome = nome,
+                Cognome = cognome
+            };
+
+            //Creazione del record
+            validations = CreaUtente(user);
+
+            //Ritorno le validazioni
+            return validations;
+        }
+
         #endregion
 
         #region Versione ApplicationStorage su FileSystem

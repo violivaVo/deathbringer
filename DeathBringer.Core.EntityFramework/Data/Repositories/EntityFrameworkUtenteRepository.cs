@@ -33,7 +33,7 @@ namespace DeathBringer.EntityFramework.Data.Repositories
         {
             //Semplicemente ritorno la lista sul Context
             return Context.Utenti
-                .OrderBy(e => e.Username)
+                .OrderBy(e => e.UserName)
                 .ThenBy(e => e.Nome)
                 .ToList();
         }

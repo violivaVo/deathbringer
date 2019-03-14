@@ -5,16 +5,17 @@ using System.Threading.Tasks;
 
 namespace DeathBringer.Api.Models
 {
-    public class UtenteContract
+    public class UserContract
     {
-        public string Username { get; set; }
-        public string Nome { get; set; }
-        public string Cognome { get; set; }
+        public string UserName { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
         public string Email { get; set; }
-        public string Indirizzo { get; set; }
-        public string Civico { get; set; }
-        public int Cap { get; set; }
-        public string Citta { get; set; }
+        public string Address { get; set; }
+        public string CivicNumber { get; set; }
+        public int ZipCode { get; set; }
+        public string City { get; set; }
         public bool IsAdministrator { get; set; }
+        public int UserId { get; set; }
     }
 }

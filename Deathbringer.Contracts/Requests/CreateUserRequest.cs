@@ -5,7 +5,7 @@ namespace Deathbringer.Contracts.Requests
     /// <summary>
     /// Request per create utente
     /// </summary>
-    public class CreateUtenteRequest
+    public class CreateUserRequest
     {
         /// <summary>
         /// Username
@@ -15,18 +15,25 @@ namespace Deathbringer.Contracts.Requests
         public string UserName { get; set; }
 
         /// <summary>
+        /// Password
+        /// </summary>
+        [Required]
+        [StringLength(255)]
+        public string Password { get; set; }
+
+        /// <summary>
         /// Nome
         /// </summary>
         [Required]
         [StringLength(255)]
-        public string Nome { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Cognome
         /// </summary>
         [Required]
         [StringLength(255)]
-        public string Cognome { get; set; }
+        public string Surname { get; set; }
 
         /// <summary>
         /// Email
@@ -39,25 +46,24 @@ namespace Deathbringer.Contracts.Requests
         /// Indirizzo
         /// </summary>
         [StringLength(255)]
-        public string Indirizzo { get; set; }
+        public string Address { get; set; }
 
         /// <summary>
         /// Numero civico
         /// </summary>
         [StringLength(255)]
-        public string Civico { get; set; }
+        public string CivicNumber { get; set; }
 
         /// <summary>
         /// Codice avviamento postale
         /// </summary>
-        [StringLength(255)]
-        public int Cap { get; set; }
+        public int? ZipCode { get; set; }
 
         /// <summary>
         /// Città di residenza
         /// </summary>
         [StringLength(255)]
-        public string Citta { get; set; }
+        public string City { get; set; }
 
         /// <summary>
         /// Flag amministratore

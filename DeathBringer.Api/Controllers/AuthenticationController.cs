@@ -1,12 +1,9 @@
-﻿using DeathBringer.Api.Helpers;
-using DeathBringer.Api.Models;
+﻿using Deathbringer.Contracts.Results;
+using DeathBringer.Api.Controllers.Common;
+using DeathBringer.Api.Helpers;
 using DeathBringer.Api.Models.Requests;
-using DeathBringer.Core.ServiceLayers;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DeathBringer.Api.Controllers
 {
@@ -14,7 +11,7 @@ namespace DeathBringer.Api.Controllers
     /// Controller per l'autenticazione
     /// </summary>
     [Route("api/Authentication")]
-    public class AuthenticationController: Controller
+    public class AuthenticationController: ApiControllerBase
     {
         /// <summary>
         /// Esegue il sign-in alla piattaforma usando le credenziali
@@ -23,7 +20,7 @@ namespace DeathBringer.Api.Controllers
         /// <returns>Ritorna una response</returns>
         [HttpPost]
         [Route("SignIn")]
-        [ProducesResponseType(200, Type = typeof(UtenteContract))]
+        [ProducesResponseType(200, Type = typeof(Deathbringer.Contracts.Results.SignInResult))]
         public IActionResult SignIn([FromBody]SignInRequest request)
         {
             //Se la request è nulla, esci
@@ -35,16 +32,26 @@ namespace DeathBringer.Api.Controllers
                 return BadRequest(ModelState);
 
             //Interazione con il service layer
-            ApplicationServiceLayer layer = new ApplicationServiceLayer();
-            var utenteAutenticato = layer.SignIn(request.UserName, request.Password);
+            var utenteAutenticato = Layer.SignIn(request.UserName, request.Password);
 
             //Se non l'ho trovato, Unauthorized
             if (utenteAutenticato == null)
                 return Unauthorized();
 
-            //Generazione contratto e conferm
-            var contract = ContractUtils.GenerateContract(utenteAutenticato);
-            return Ok(contract);
+            //Creazione della risposta
+            var result = new Deathbringer.Contracts.Results.SignInResult
+            {
+                UserId = utenteAutenticato.Id, 
+                UserName = utenteAutenticato.UserName, 
+                Email = utenteAutenticato.Email, 
+                Name = utenteAutenticato.Nome, 
+                Surname = utenteAutenticato.Cognome, 
+                IsAdministrator = utenteAutenticato.IsAdministrator, 
+                LastAccessDate = DateTime.Now
+            };
+
+            //Conferma
+            return Ok(result);
         }
     }
 }

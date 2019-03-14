@@ -59,7 +59,7 @@ namespace DeathBringer.Mvc.Controllers
             //Creazione dell'utente
             var utente = new Utente
             {
-                Username = model.Username, 
+                UserName = model.Username, 
                 Password = model.Password, 
                 Nome = model.Nome, 
                 Cognome = model.Cognome, 
@@ -98,7 +98,7 @@ namespace DeathBringer.Mvc.Controllers
             {
                 var currentModel = new RigaUtentiModel
                 {
-                    Username = currentEntity.Username,
+                    Username = currentEntity.UserName,
                     Nome = currentEntity.Nome,
                     Cognome = currentEntity.Cognome,
                     Email = currentEntity.Email,

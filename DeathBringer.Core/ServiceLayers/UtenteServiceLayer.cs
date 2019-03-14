@@ -32,7 +32,7 @@ namespace DeathBringer.Core.ServiceLayers
                 Id = GeneratoreId.GeneraNuovoIdentificatore<Utente>(ApplicationStorage.Utenti),
                 Nome = name,
                 Cognome = surname,
-                Username = username,
+                UserName = username,
                 Password = password,
                 DataCreazioneRecord = DateTime.Now,
                 DataUltimaModifica = DateTime.Now,
@@ -95,7 +95,7 @@ namespace DeathBringer.Core.ServiceLayers
 
                 return validations;
             }
-            utenteEsistente.Username = username;
+            utenteEsistente.UserName = username;
             utenteEsistente.Password = password;
             utenteEsistente.Nome = nome;
             utenteEsistente.Cognome = cognome;

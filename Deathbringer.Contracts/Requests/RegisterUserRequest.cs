@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using DeathBringer.Terminal.BaseClasses;
 
-namespace DeathBringer.Terminal.Entities
+namespace Deathbringer.Contracts.Requests
 {
-    public class Utente: EntityBase
+    /// <summary>
+    /// Request for register user
+    /// </summary>
+    public class RegisterUserRequest
     {
         [Required]
         [StringLength(255)]
@@ -11,29 +13,22 @@ namespace DeathBringer.Terminal.Entities
 
         [Required]
         [StringLength(255)]
-        public string Nome { get; set; }
+        public string Name { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string Cognome { get; set; }
+        public string Surname { get; set; }
 
         [Required]
         [StringLength(255)]
         public string Email { get; set; }
-
-        public string Indirizzo { get; set; }
-
-        public string Civico { get; set; }
-
-        public int Cap { get; set; }
-
-        public string Citta { get; set; }
 
         [Required]
         [StringLength(255)]
         public string Password { get; set; }
 
         [Required]
-        public bool IsAdministrator { get; set; }
+        [StringLength(255)]
+        public string ConfirmPassword { get; set; }
     }
 }

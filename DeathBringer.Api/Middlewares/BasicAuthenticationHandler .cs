@@ -104,7 +104,7 @@ namespace iCubed.Ragnarok.Api.Middlewares
             }
 
             //Altrimenti creo un principal generico
-            var identity = new GenericIdentity(signedInUser.Username);
+            var identity = new GenericIdentity(signedInUser.UserName);
             var principal = new GenericPrincipal(identity, new string[] { });
 
             //Creo il ticket di autenticazione

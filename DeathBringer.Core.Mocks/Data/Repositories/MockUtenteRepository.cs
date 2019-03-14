@@ -19,33 +19,42 @@ namespace DeathBringer.Core.Mocks
             {
                 new Utente
                 {
-                    Username = "mario.rossi",
+                    Id = 1,
+                    UserName = "mario.rossi",
                     Email = "mario@icubed.it",
                     Password = "paperino",
                     Cognome ="Rossi",
-                    Nome = "Mario"
+                    Nome = "Mario", 
+                    IsAdministrator = true, 
                 },
                 new Utente
                 {
-                    Username = "giuseppe.verdi",
+                    Id = 2,
+                    UserName = "giuseppe.verdi",
                     Email = "giuseppe@icubed.it",
                     Password = "paperino",
                     Cognome = "Verdi", 
-                    Nome = "Giuseppe"
+                    Nome = "Giuseppe",
+                    IsAdministrator = false,
                 },
                 new Utente
                 {
-                    Username = "antonio.bianchi",
+                    Id = 3,
+                    UserName = "antonio.bianchi",
                     Email = "antonio@icubed.it",
                     Password = "paperino",
                     Cognome = "Antonio",
-                    Nome = "Bianchi"
+                    Nome = "Bianchi",
+                    IsAdministrator = true,
                 }
             };
         }
 
         public IList<ValidationResult> Crea(Utente utente)
         {
+            //creazione del nuovo id dell'utente
+            utente.Id = Utenti.Value.Max(e => e.Id) + 1;
+
             //Semplice aggiunta
             Utenti.Value.Add(utente);
 

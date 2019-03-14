@@ -9,21 +9,22 @@ namespace DeathBringer.Api.Helpers
     /// </summary>
     public static class ContractUtils
     {
-        public static UtenteContract GenerateContract(Utente entity)
+        public static UserContract GenerateContract(Utente entity)
         {
             //Validazione argomenti
             if (entity == null) throw new ArgumentNullException(nameof(entity));
 
             //Generazione contratto e mappatura
-            return new UtenteContract
+            return new UserContract
             {
-                Username = entity.Username,
-                Nome = entity.Nome,
-                Cognome = entity.Cognome,
-                Indirizzo = entity.Indirizzo,
-                Citta = entity.Citta,
-                Cap = entity.Cap,
-                Civico = entity.Civico,
+                UserId = entity.Id,
+                UserName = entity.UserName,
+                Name = entity.Nome,
+                Surname = entity.Cognome,
+                Address = entity.Indirizzo,
+                City = entity.Citta,
+                ZipCode = entity.Cap,
+                CivicNumber = entity.Civico,
                 Email = entity.Email,
                 IsAdministrator = entity.IsAdministrator
             };

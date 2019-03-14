@@ -5,12 +5,12 @@ namespace Deathbringer.Contracts.Requests
     /// <summary>
     /// Request per singolo utente
     /// </summary>
-    public class UtenteRequest
+    public class UserRequest
     {
         /// <summary>
         /// Id utente
         /// </summary>
         [Required]
-        public int? UtenteId { get; set; }
+        public int? UserId { get; set; }
     }
 }

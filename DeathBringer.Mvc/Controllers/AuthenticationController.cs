@@ -29,7 +29,7 @@ namespace DeathBringer.Mvc.Controllers
             //Recupero la lista dei prodotti dal database
             IList<Utente> utentiFromDatabase = layer.FetchUtenti();
 
-            var res = utentiFromDatabase.SingleOrDefault(r => r.Username == model.Username &&
+            var res = utentiFromDatabase.SingleOrDefault(r => r.UserName == model.Username &&
             r.Password == model.Password);
             if(res!=null)
             {
@@ -55,7 +55,7 @@ namespace DeathBringer.Mvc.Controllers
             IList<Utente> utentiFromDatabase = layer.FetchUtenti();
 
             //Prendo l'utente corrispondente
-            var utenteSelezionato = utentiFromDatabase.SingleOrDefault(u => u.Username == model.Username);
+            var utenteSelezionato = utentiFromDatabase.SingleOrDefault(u => u.UserName == model.Username);
 
             //Se non ho trovato l'utente, esco e non faccio nulla
             if (utenteSelezionato == null)

@@ -75,7 +75,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             {
                 for(int i = 0; i < ApplicationStorage.Utenti.Count; i++)
                 {
-                    if((ApplicationStorage.Utenti[i].Username == UserNameIn) && (ApplicationStorage.Utenti[i].Password == PasswordIn))
+                    if((ApplicationStorage.Utenti[i].UserName == UserNameIn) && (ApplicationStorage.Utenti[i].Password == PasswordIn))
                     {
                         Console.WriteLine("*** successo dell'autenticazione *****");
                         Console.ReadLine();
@@ -188,7 +188,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
                 var nuovaPassword = Console.ReadLine();
 
                 //Assegnamento ad oggetto esistente
-                utenteDaProcessare.Username = nuovoUsername;
+                utenteDaProcessare.UserName = nuovoUsername;
                 utenteDaProcessare.Nome = nuovoNome;
                 utenteDaProcessare.Cognome = nuovoCognome;
                 utenteDaProcessare.Email = nuovaEmail;

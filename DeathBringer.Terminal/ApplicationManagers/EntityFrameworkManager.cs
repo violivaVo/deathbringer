@@ -67,7 +67,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
             //Recupero solo gli utenti con username "mario.rossi"
             IList<Utente> result = context.Utenti
-                .Where(u => u.Username == usernameDaCercare)
+                .Where(u => u.UserName == usernameDaCercare)
                 .ToList();
             Console.WriteLine($" => trovati: {result.Count} elementi...");
             Console.WriteLine();
@@ -75,7 +75,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             //Visualizza risultato
             foreach (Utente currentUser in result)
             {
-                Console.WriteLine($"username : {currentUser.Username}");
+                Console.WriteLine($"username : {currentUser.UserName}");
                 Console.WriteLine($"id       : {currentUser.Id}");
                 Console.WriteLine($"nome     : {currentUser.Nome}");
                 Console.WriteLine($"cognome  : {currentUser.Cognome}");
@@ -104,8 +104,8 @@ namespace DeathBringer.Terminal.ApplicationManagers
             IList<Utente> result = context.Utenti
                 .Where(u => 
                     (
-                        u.Username != null && 
-                        u.Username.IndexOf(testoDaCercare, StringComparison.InvariantCultureIgnoreCase) >= 0
+                        u.UserName != null && 
+                        u.UserName.IndexOf(testoDaCercare, StringComparison.InvariantCultureIgnoreCase) >= 0
                     )
                     ||
                     (
@@ -140,7 +140,7 @@ namespace DeathBringer.Terminal.ApplicationManagers
             //Visualizza risultato
             foreach (Utente currentUser in result)
             {
-                Console.WriteLine($"username : {currentUser.Username}");
+                Console.WriteLine($"username : {currentUser.UserName}");
                 Console.WriteLine($"id       : {currentUser.Id}");
                 Console.WriteLine($"nome     : {currentUser.Nome}");
                 Console.WriteLine($"cognome  : {currentUser.Cognome}");
@@ -164,10 +164,10 @@ namespace DeathBringer.Terminal.ApplicationManagers
 
             //Recupero solo gli utenti con username "mario.rossi"
             var result = context.Utenti
-                .Where(u => u.Username == usernameDaCercare)
+                .Where(u => u.UserName == usernameDaCercare)
                 .Select(u => new
                 {
-                    NomeUtente = u.Username, 
+                    NomeUtente = u.UserName, 
                     NumeroDiScarpe = u.Cap + 10
                 })
                 .ToList();

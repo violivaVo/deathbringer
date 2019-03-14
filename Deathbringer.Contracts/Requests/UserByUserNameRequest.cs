@@ -5,7 +5,7 @@ namespace Deathbringer.Contracts.Requests
     /// <summary>
     /// Request per utente usando lo username
     /// </summary>
-    public class UtenteByUserNameRequest
+    public class UserByUserNameRequest
     {
         /// <summary>
         /// Username
